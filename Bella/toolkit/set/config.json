@@ -8,9 +8,9 @@
   "ownername": "Tomii",
   "locale": "id",
   "cfg": {
-    "public": false,
+    "public": true,
     "ai_interactive": {
-      "group": true,
+      "group": false,
       "private": true,
       "energy": false,
       "partResponse": true
