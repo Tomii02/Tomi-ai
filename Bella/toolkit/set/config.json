@@ -17,7 +17,7 @@
     },
     "autotyping": false,
     "autoreadpc": false,
-    "autoreadgc": true,
+    "autoreadgc": false,
     "welcome": "linkpreview",
     "first": {
       "energy": 200,
