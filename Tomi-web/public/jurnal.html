@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurnal Trading Interaktif</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            --primary-color: #4A90E2;
+            --secondary-color: #50E3C2;
+            --background-color: #F8F9FA;
+            --card-background: #FFFFFF;
+            --text-color: #333333;
+            --win-color: #2ECC71;
+            --loss-color: #E74C3C;
+            --tab-active-color: #4A90E2;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0f1c2c;
+            color: #e2e8f0;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        #user-info {
+            font-weight: 600;
+            color: #94a3b8;
+        }
+        #user-info span {
+            color: #4299e1;
+        }
+
+        .tab-nav {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            border-bottom: 2dpx solid #2d3748;
+            flex-wrap: wrap;
+        }
+        
+        .tab-nav button {
+            background: none;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 10px 15px;
+            cursor: pointer;
+            color: #a0aec0;
+            transition: color 0.3s, border-bottom 0.3s;
+        }
+        
+        .tab-nav button.active {
+            color: #4299e1;
+            border-bottom: 3px solid #4299e1;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+        
+        .card {
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #4299e1;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .summary-item {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .summary-item h3 {
+            margin: 0 0 10px;
+            font-size: 1.1rem;
+            color: #a0aec0;
+        }
+
+        .summary-item p {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin: 0;
+            color: #e2e8f0;
+        }
+
+        .win-count {
+            color: #48bb78;
+        }
+
+        .loss-count {
+            color: #f56565;
+        }
+        
+        .win-rate {
+            color: #63b3ed;
+        }
+        
+        .trading-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #a0aec0;
+        }
+
+        input, select {
+            padding: 12px;
+            border: 1px solid #4a5568;
+            border-radius: 6px;
+            font-size: 1rem;
+            background-color: #2d3748;
+            color: #e2e8f0;
+        }
+        
+        input::placeholder, select option {
+            color: #a0aec0;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #4299e1;
+            box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.4);
+        }
+
+        .form-full {
+            grid-column: 1 / -1;
+        }
+
+        button {
+            padding: 12px 25px;
+            background-color: #4299e1;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button.reset-btn {
+            background-color: #e74c3c;
+        }
+        button.reset-btn:hover {
+            background-color: #c0392b;
+        }
+
+        button:hover {
+            background-color: #3182ce;
+        }
+
+        .trading-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .trading-table th, .trading-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #2d3748;
+        }
+
+        .trading-table th {
+            background-color: #2d3748;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #cbd5e0;
+        }
+        
+        .trading-table tbody tr:hover {
+            background-color: #1a202c;
+        }
+
+        .status-win {
+            color: #48bb78;
+            font-weight: bold;
+        }
+
+        .status-loss {
+            color: #f56565;
+            font-weight: bold;
+        }
+        
+        #loading-message {
+            text-align: center;
+            font-style: italic;
+            color: #888;
+        }
+        
+        .currency-toggle, .time-filter {
+            text-align: center;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .currency-toggle button, .time-filter button {
+            background-color: #2d3748;
+            color: #a0aec0;
+            padding: 8px 15px;
+            border-radius: 5px;
+            border: 1px solid #4a5568;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .currency-toggle button.active, .time-filter button.active {
+            background-color: #4299e1;
+            color: white;
+            border-color: #4299e1;
+        }
+        
+        .chart-container {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .table-history-container {
+            max-height: 500px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+        
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header class="header">
+        <div id="user-info">Login sebagai: <span id="user-name"></span></div>
+    </header>
+    
+    <div class="tab-nav">
+        <button id="dashboard-tab" class="active">Dashboard</button>
+        <button id="journal-tab">Jurnal</button>
+        <button id="history-tab">History</button>
+        <button id="research-tab">Riset</button>
+    </div>
+
+    <div id="dashboard-content" class="tab-content active">
+        <div class="card">
+            <h1>Statistik Trading</h1>
+            <div class="time-filter">
+                <button id="daily-btn" class="active">Hari</button>
+                <button id="weekly-btn">Minggu</button>
+                <button id="monthly-btn">Bulan</button>
+                <button id="overall-btn">Keseluruhan</button>
+            </div>
+            <div class="currency-toggle">
+                <button id="idr-btn">IDR</button>
+                <button id="usd-btn">USD</button>
+                <button id="usdc-btn" class="active">USDC</button>
+            </div>
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <h3>Jumlah WIN</h3>
+                    <p class="win-count" id="winCount">0</p>
+                </div>
+                <div class="summary-item">
+                    <h3>Jumlah LOSS</h3>
+                    <p class="loss-count" id="lossCount">0</p>
+                </div>
+                <div class="summary-item">
+                    <h3>Win Rate</h3>
+                    <p class="win-rate" id="winRate">0%</p>
+                </div>
+                <div class="summary-item">
+                    <h3>Total P&L</h3>
+                    <p id="totalPnl">0</p>
+                </div>
+                <div class="summary-item">
+                    <h3>Profit Rata-rata</h3>
+                    <p id="avgProfit">0</p>
+                </div>
+                <div class="summary-item">
+                    <h3>Loss Rata-rata</h3>
+                    <p id="avgLoss">0</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="pnlChart"></canvas>
+        </div>
+        
+    </div>
+
+    <div id="journal-content" class="tab-content">
+        <div class="card">
+            <h2>Tambah Entri Trading</h2>
+            <form id="tradingForm">
+                <div class="trading-form">
+                    <div class="form-group">
+                        <label for="instrument">Instrumen:</label>
+                        <input type="text" id="instrument" name="instrument" placeholder="Contoh: XAU/USD" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lot">Ukuran Lot:</label>
+                        <input type="number" id="lot" name="lot" step="0.01" min="0.01" value="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="position">Posisi:</label>
+                        <select id="position" name="position" required>
+                            <option value="">Pilih</option>
+                            <option value="buy">BUY</option>
+                            <option value="sell">SELL</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="result">Hasil:</label>
+                        <select id="result" name="result" required>
+                            <option value="">Pilih</option>
+                            <option value="win">WIN</option>
+                            <option value="loss">LOSS</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="pnl">P&L (<span id="input-pnl-currency-symbol">Cen</span>):</label>
+                        <input type="number" id="pnl" name="pnl" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="notes">Catatan:</label>
+                        <input type="text" id="notes" name="notes" placeholder="Alasan masuk pasar...">
+                    </div>
+                    <button type="submit" class="form-full">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="history-content" class="tab-content">
+        <div class="card">
+            <h2>Riwayat Trading</h2>
+            <div id="loading-message">Memuat data...</div>
+            <div class="table-history-container">
+                <table class="trading-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Instrumen</th>
+                            <th>Lot</th>
+                            <th>Posisi</th>
+                            <th>Hasil</th>
+                            <th>P&L (<span id="history-pnl-currency-symbol">Cen</span>)</th>
+                            <th>Tanggal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tradingLogBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <div id="research-content" class="tab-content">
+        <div class="card">
+            <h2>Hapus Semua Data Trading</h2>
+            <p>Klik tombol di bawah ini untuk menghapus **semua** data trading yang tersimpan. Tindakan ini tidak dapat dibatalkan.</p>
+            <button id="reset-data-btn" class="reset-btn">Reset & Hapus Semua Data</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const dashboardTab = document.getElementById('dashboard-tab');
+        const journalTab = document.getElementById('journal-tab');
+        const historyTab = document.getElementById('history-tab');
+        const researchTab = document.getElementById('research-tab');
+        
+        const dashboardContent = document.getElementById('dashboard-content');
+        const journalContent = document.getElementById('journal-content');
+        const historyContent = document.getElementById('history-content');
+        const researchContent = document.getElementById('research-content');
+        
+        const tradingForm = document.getElementById('tradingForm');
+        const tradingLogBody = document.getElementById('tradingLogBody');
+        const winCountElement = document.getElementById('winCount');
+        const lossCountElement = document.getElementById('lossCount');
+        const winRateElement = document.getElementById('winRate');
+        const totalPnlElement = document.getElementById('totalPnl');
+        const avgProfitElement = document.getElementById('avgProfit');
+        const avgLossElement = document.getElementById('avgLoss');
+        const loadingMessage = document.getElementById('loading-message');
+        const userNameDisplay = document.getElementById('user-name');
+        
+        const idrBtn = document.getElementById('idr-btn');
+        const usdBtn = document.getElementById('usd-btn');
+        const usdcBtn = document.getElementById('usdc-btn');
+        const historyPnlCurrencySymbol = document.getElementById('history-pnl-currency-symbol');
+        const inputPnlCurrencySymbol = document.getElementById('input-pnl-currency-symbol');
+        
+        const timeFilterBtns = document.querySelectorAll('.time-filter button');
+        const resetButton = document.getElementById('reset-data-btn');
+        
+        let trades = [];
+        let userName = '';
+        let currentCurrency = 'USDC'; // Atur default ke USDC
+        let currentTimeframe = 'overall';
+        
+        let pnlChart = null;
+
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+            
+            document.querySelectorAll('.tab-nav button').forEach(button => {
+                button.classList.remove('active');
+            });
+            document.getElementById(tabId.replace('-content', '-tab')).classList.add('active');
+        }
+
+        dashboardTab.addEventListener('click', () => showTab('dashboard-content'));
+        journalTab.addEventListener('click', () => showTab('journal-content'));
+        historyTab.addEventListener('click', () => showTab('history-content'));
+        researchTab.addEventListener('click', () => showTab('research-content'));
+
+        function manageUserSession() {
+            const storedName = localStorage.getItem('userName');
+            if (storedName) {
+                userName = storedName;
+                userNameDisplay.textContent = userName;
+                fetchTrades();
+            } else {
+                const newName = prompt("Masukkan nama Anda untuk melanjutkan (data akan disimpan dengan nama ini):");
+                if (newName) {
+                    userName = newName;
+                    localStorage.setItem('userName', userName);
+                    userNameDisplay.textContent = userName;
+                    fetchTrades();
+                } else {
+                    alert("Nama tidak dimasukkan. Anda tidak bisa menyimpan data.");
+                    loadingMessage.textContent = "Masukkan nama untuk mulai mencatat trading.";
+                }
+            }
+        }
+        
+        async function fetchTrades() {
+            if (!userName) return;
+            loadingMessage.style.display = 'block';
+            try {
+                // Asumsi ada endpoint untuk mengambil data dari server
+                // Untuk contoh ini, kita simulasikan dengan data lokal
+                const storedTrades = JSON.parse(localStorage.getItem(`trades_${userName}`)) || [];
+                trades = storedTrades;
+                updateAllStats();
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            } finally {
+                loadingMessage.style.display = 'none';
+            }
+        }
+
+        async function saveTrades() {
+            localStorage.setItem(`trades_${userName}`, JSON.stringify(trades));
+        }
+
+        function updateAllStats() {
+            updateTable();
+            const filteredTrades = filterTradesByTime(trades, currentTimeframe);
+            updateSummary(filteredTrades);
+            updateChart(filteredTrades);
+        }
+
+        const exchangeRate = 16000;
+        const usdToUsdCentsRate = 100;
+
+        function convertCurrency(value, fromCurrency, toCurrency) {
+            let valueInUSD = 0;
+            if (fromCurrency === 'IDR') {
+                valueInUSD = value / exchangeRate;
+            } else if (fromCurrency === 'USD') {
+                valueInUSD = value;
+            } else if (fromCurrency === 'USDC') {
+                valueInUSD = value / usdToUsdCentsRate;
+            }
+
+            if (toCurrency === 'IDR') {
+                return valueInUSD * exchangeRate;
+            } else if (toCurrency === 'USD') {
+                return valueInUSD;
+            } else if (toCurrency === 'USDC') {
+                return valueInUSD * usdToUsdCentsRate;
+            }
+            return value;
+        }
+
+        function formatCurrency(value, currency) {
+            let symbol;
+            let formattedValue;
+            
+            if (currency === 'IDR') {
+                symbol = 'Rp';
+                formattedValue = value.toLocaleString('id-ID', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+            } else if (currency === 'USD') {
+                symbol = '$';
+                formattedValue = value.toFixed(2);
+            } else if (currency === 'USDC') {
+                symbol = 'Cen';
+                formattedValue = value.toFixed(2);
+            }
+            
+            const sign = value >= 0 ? '' : '-';
+            const absValue = Math.abs(value);
+            
+            if (currency === 'IDR') {
+                return `${symbol} ${sign}${absValue.toLocaleString('id-ID', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+            } else if (currency === 'USD') {
+                return `${symbol} ${sign}${absValue.toFixed(2)}`;
+            } else if (currency === 'USDC') {
+                return `${sign}${absValue.toFixed(2)} ${symbol}`;
+            }
+        }
+
+        function updateCurrencyDisplay(currency) {
+            currentCurrency = currency;
+            let symbol;
+            if (currency === 'IDR') {
+                symbol = 'Rp';
+                document.getElementById('pnl').step = "100";
+            } else if (currency === 'USD') {
+                symbol = '$';
+                document.getElementById('pnl').step = "0.01";
+            } else if (currency === 'USDC') {
+                symbol = 'Cen';
+                document.getElementById('pnl').step = "0.01";
+            }
+
+            historyPnlCurrencySymbol.textContent = symbol;
+            inputPnlCurrencySymbol.textContent = symbol;
+
+            idrBtn.classList.remove('active');
+            usdBtn.classList.remove('active');
+            usdcBtn.classList.remove('active');
+            
+            if (currency === 'IDR') {
+                idrBtn.classList.add('active');
+            } else if (currency === 'USD') {
+                usdBtn.classList.add('active');
+            } else if (currency === 'USDC') {
+                usdcBtn.classList.add('active');
+            }
+            updateAllStats();
+        }
+        
+        function filterTradesByTime(data, timeframe) {
+            const now = new Date();
+            let startDate;
+
+            switch(timeframe) {
+                case 'daily':
+                    startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                    break;
+                case 'weekly':
+                    const day = now.getDay();
+                    const diff = now.getDate() - day + (day === 0 ? -6 : 1);
+                    startDate = new Date(now.setDate(diff));
+                    startDate.setHours(0, 0, 0, 0);
+                    break;
+                case 'monthly':
+                    startDate = new Date(now.getFullYear(), now.getMonth(), 1);
+                    break;
+                case 'overall':
+                default:
+                    return data;
+            }
+            
+            return data.filter(trade => new Date(trade.date) >= startDate);
+        }
+
+        idrBtn.addEventListener('click', () => updateCurrencyDisplay('IDR'));
+        usdBtn.addEventListener('click', () => updateCurrencyDisplay('USD'));
+        usdcBtn.addEventListener('click', () => updateCurrencyDisplay('USDC'));
+        
+        timeFilterBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                currentTimeframe = e.target.id.replace('-btn', '');
+                timeFilterBtns.forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                updateAllStats();
+            });
+        });
+
+        manageUserSession();
+        updateCurrencyDisplay(currentCurrency);
+
+        tradingForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            if (!userName) {
+                alert("Harap masukkan nama Anda terlebih dahulu.");
+                return;
+            }
+
+            const instrument = document.getElementById('instrument').value.toUpperCase();
+            const lot = parseFloat(document.getElementById('lot').value);
+            const position = document.getElementById('position').value;
+            const result = document.getElementById('result').value;
+            let pnlInput = parseFloat(document.getElementById('pnl').value);
+            const notes = document.getElementById('notes').value;
+            
+            let pnlInUsd;
+            if (currentCurrency === 'IDR') {
+                pnlInUsd = pnlInput / exchangeRate;
+            } else if (currentCurrency === 'USDC') {
+                pnlInUsd = pnlInput / usdToUsdCentsRate;
+            } else { // currentCurrency is USD
+                pnlInUsd = pnlInput;
+            }
+
+            if (result === 'loss' && pnlInUsd > 0) {
+                pnlInUsd = -pnlInUsd;
+            }
+            
+            const tradeData = {
+                id: trades.length > 0 ? trades[trades.length - 1].id + 1 : 1,
+                instrument,
+                lot,
+                position,
+                result,
+                pnl: pnlInUsd, // Simpan P&L dalam USD untuk perhitungan konsisten
+                notes,
+                date: new Date().toISOString()
+            };
+
+            trades.push(tradeData);
+            await saveTrades();
+            updateAllStats();
+            tradingForm.reset();
+        });
+
+        function updateTable() {
+            tradingLogBody.innerHTML = '';
+            const tradesToShow = trades.slice().reverse();
+            if (tradesToShow.length === 0) {
+                const row = tradingLogBody.insertRow();
+                const cell = row.insertCell();
+                cell.colSpan = 7;
+                cell.textContent = "Belum ada entri trading yang tersimpan.";
+                cell.style.textAlign = "center";
+                cell.style.fontStyle = "italic";
+            } else {
+                tradesToShow.forEach(trade => {
+                    const pnlInCurrentCurrency = convertCurrency(trade.pnl, 'USD', currentCurrency);
+                    const pnlFormatted = formatCurrency(pnlInCurrentCurrency, currentCurrency);
+                    const dateFormatted = new Date(trade.date).toLocaleDateString('id-ID', { year: 'numeric', month: '2-digit', day: '2-digit' });
+                    
+                    const row = tradingLogBody.insertRow();
+                    row.innerHTML = `
+                        <td>${trade.id}</td>
+                        <td>${trade.instrument}</td>
+                        <td>${trade.lot.toFixed(2)}</td>
+                        <td>${trade.position.toUpperCase()}</td>
+                        <td class="status-${trade.result}">${trade.result.toUpperCase()}</td>
+                        <td>${pnlFormatted}</td>
+                        <td>${dateFormatted}</td>
+                    `;
+                });
+            }
+        }
+
+        function updateSummary(filteredTrades) {
+            const totalTrades = filteredTrades.length;
+            const winTrades = filteredTrades.filter(trade => trade.result === 'win');
+            const lossTrades = filteredTrades.filter(trade => trade.result === 'loss');
+
+            const winCount = winTrades.length;
+            const lossCount = lossTrades.length;
+            const winRate = totalTrades > 0 ? (winCount / totalTrades * 100).toFixed(2) : 0;
+            
+            const totalPnl = filteredTrades.reduce((sum, trade) => sum + trade.pnl, 0);
+            const avgProfit = winTrades.length > 0 ? winTrades.reduce((sum, trade) => sum + trade.pnl, 0) / winTrades.length : 0;
+            const avgLoss = lossTrades.length > 0 ? lossTrades.reduce((sum, trade) => sum + trade.pnl, 0) / lossTrades.length : 0;
+            
+            winCountElement.textContent = winCount;
+            lossCountElement.textContent = lossCount;
+            winRateElement.textContent = `${winRate}%`;
+            totalPnlElement.textContent = formatCurrency(convertCurrency(totalPnl, 'USD', currentCurrency), currentCurrency);
+            avgProfitElement.textContent = formatCurrency(convertCurrency(avgProfit, 'USD', currentCurrency), currentCurrency);
+            avgLossElement.textContent = formatCurrency(convertCurrency(avgLoss, 'USD', currentCurrency), currentCurrency);
+        }
+        
+        function updateChart(filteredTrades) {
+            const labels = filteredTrades.map(trade => new Date(trade.date).toLocaleDateString('id-ID', { day: '2-digit', month: 'short' }));
+            const pnlData = filteredTrades.map(trade => convertCurrency(trade.pnl, 'USD', currentCurrency));
+
+            const cumulativePnl = pnlData.reduce((acc, current, index) => {
+                if (index === 0) {
+                    acc.push(current);
+                } else {
+                    acc.push(acc[index - 1] + current);
+                }
+                return acc;
+            }, []);
+
+            if (pnlChart) {
+                pnlChart.data.labels = labels;
+                pnlChart.data.datasets[0].data = cumulativePnl;
+                pnlChart.data.datasets[0].label = `P&L Kumulatif (${currentCurrency})`;
+                pnlChart.options.scales.y.title.text = `P&L Kumulatif (${currentCurrency})`;
+                pnlChart.update();
+            } else {
+                const ctx = document.getElementById('pnlChart').getContext('2d');
+                pnlChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: `P&L Kumulatif (${currentCurrency})`,
+                            data: cumulativePnl,
+                            borderColor: '#4299e1',
+                            backgroundColor: 'rgba(66, 153, 225, 0.2)',
+                            fill: true,
+                            tension: 0.3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: false,
+                                title: {
+                                    display: true,
+                                    text: `P&L Kumulatif (${currentCurrency})`,
+                                    color: '#a0aec0'
+                                },
+                                ticks: {
+                                    color: '#a0aec0'
+                                },
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Tanggal',
+                                    color: '#a0aec0'
+                                },
+                                ticks: {
+                                    color: '#a0aec0'
+                                },
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+            }
+        }
+        
+        // Fungsi untuk menghapus semua data
+        resetButton.addEventListener('click', () => {
+            const confirmReset = confirm("Apakah Anda yakin ingin menghapus semua data trading? Tindakan ini tidak dapat dibatalkan.");
+            if (confirmReset) {
+                // Menghapus data dari localStorage
+                localStorage.removeItem(`trades_${userName}`);
+                localStorage.removeItem(`userName`);
+                
+                // Muat ulang halaman untuk reset total
+                window.location.reload();
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

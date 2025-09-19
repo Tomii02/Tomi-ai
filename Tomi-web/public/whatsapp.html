@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bella AI - WhatsApp Pairing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            max-width: 600px;
+            width: 100%;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            padding: 30px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .header i {
+            font-size: 60px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 16px;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .step {
+            display: none;
+            text-align: center;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        .step h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        /* Method Selection */
+        .method-selection {
+            display: flex;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .method-card {
+            flex: 1;
+            border: 3px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .method-card:hover {
+            border-color: #25D366;
+            background: rgba(37, 211, 102, 0.05);
+        }
+
+        .method-card.selected {
+            border-color: #25D366;
+            background: rgba(37, 211, 102, 0.1);
+        }
+
+        .method-card i {
+            font-size: 40px;
+            color: #25D366;
+            margin-bottom: 15px;
+        }
+
+        .method-card h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .method-card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        /* Form Elements */
+        .phone-input {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .country-code {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #495057;
+            width: 80px;
+            text-align: center;
+        }
+
+        .phone-number, .pin-input {
+            flex: 1;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 15px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .phone-number:focus, .pin-input:focus {
+            outline: none;
+            border-color: #25D366;
+            box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.1);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        /* Status Box */
+        .status-box {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .status-requesting {
+            border-left: 4px solid #007bff;
+            color: #007bff;
+        }
+
+        .status-waiting {
+            border-left: 4px solid #ffc107;
+            color: #856404;
+        }
+
+        .status-waiting_qr {
+            border-left: 4px solid #28a745;
+            color: #155724;
+        }
+
+        .status-connected {
+            border-left: 4px solid #28a745;
+            color: #155724;
+        }
+
+        .status-error {
+            border-left: 4px solid #dc3545;
+            color: #721c24;
+        }
+
+        /* Pairing Code Display */
+        .pairing-code {
+            font-size: 32px;
+            font-weight: 700;
+            color: #25D366;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            letter-spacing: 8px;
+            border: 3px dashed #25D366;
+        }
+
+        /* QR Code */
+        .qr-code {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            display: inline-block;
+        }
+
+        .qr-code canvas {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Instructions */
+        .instructions {
+            background: #e7f3ff;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #007bff;
+            text-align: left;
+        }
+
+        .instructions h3 {
+            color: #0056b3;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .instructions ol {
+            color: #495057;
+            padding-left: 20px;
+        }
+
+        .instructions li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #25D366;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-link a {
+            color: #6c757d;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-link a:hover {
+            color: #25D366;
+        }
+
+        /* Delete Session Section */
+        .delete-section {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 30px 0;
+            border-left: 4px solid #dc3545;
+        }
+
+        .delete-section h3 {
+            color: #dc3545;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .delete-section p {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .pin-input {
+            margin-bottom: 15px;
+            max-width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <i class="fab fa-whatsapp"></i>
+            <h1>Bella AI WhatsApp</h1>
+            <p>Hubungkan bot Anda dengan WhatsApp</p>
+        </div>
+
+        <div class="content">
+            <!-- Step 1: Method Selection -->
+            <div class="step active" id="step-method">
+                <h2>Pilih Method Pairing</h2>
+                <p style="color: #6c757d; margin-bottom: 30px;">Pilih cara yang Anda inginkan untuk menghubungkan bot dengan WhatsApp</p>
+                
+                <div class="method-selection">
+                    <div class="method-card" data-method="code" onclick="selectMethod('code')">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h3>Pairing Code</h3>
+                        <p>Masukkan nomor HP dan dapatkan kode pairing 8 digit untuk dimasukkan ke WhatsApp</p>
+                    </div>
+                    <div class="method-card" data-method="qr" onclick="selectMethod('qr')">
+                        <i class="fas fa-qrcode"></i>
+                        <h3>QR Code</h3>
+                        <p>Scan QR code langsung dari WhatsApp tanpa perlu memasukkan nomor HP</p>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" id="nextBtn" onclick="proceedWithMethod()" disabled>
+                    <i class="fas fa-arrow-right"></i> Lanjutkan
+                </button>
+
+                <!-- Delete Session Section -->
+                <div class="delete-section">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Hapus Session</h3>
+                    <p>Jika terjadi error atau ingin pairing ulang, hapus session WhatsApp dengan PIN admin.</p>
+                    
+                    <!-- Delete Status Box -->
+                    <div id="deleteStatusBox" class="status-box" style="display: none; margin: 15px 0;"></div>
+                    
+                    <input type="password" class="pin-input" id="deletePin" placeholder="Masukkan PIN" maxlength="4">
+                    <button class="btn btn-danger" id="deleteBtn" onclick="deleteSession()">
+                        <i class="fas fa-trash"></i> Hapus Session
+                    </button>
+                </div>
+
+                <div class="back-link">
+                    <a href="/"><i class="fas fa-arrow-left"></i> Kembali ke Menu Utama</a>
+                </div>
+            </div>
+
+            <!-- Step 2: Phone Number Input (for pairing code) -->
+            <div class="step" id="step-phone">
+                <h2>Masukkan Nomor WhatsApp</h2>
+                <p style="color: #6c757d; margin-bottom: 30px;">Masukkan nomor HP yang akan dihubungkan dengan bot</p>
+                
+                <div class="phone-input">
+                    <input type="tel" class="phone-number" id="phoneNumber" placeholder="Contoh: 6281234567890" maxlength="15" style="width: 100%;">
+                </div>
+
+                <button class="btn btn-primary" onclick="startPairingCode()">
+                    <i class="fas fa-mobile-alt"></i> Mulai Pairing Code
+                </button>
+
+                <button class="btn btn-secondary" onclick="goBack()">
+                    <i class="fas fa-arrow-left"></i> Kembali
+                </button>
+            </div>
+
+            <!-- Step 3: QR Code Display -->
+            <div class="step" id="step-qr">
+                <h2>Scan QR Code</h2>
+                
+                <div id="qrStatusBox" class="status-box">
+                    <div class="spinner"></div>
+                    <p>Meminta QR Code...</p>
+                </div>
+
+                <div id="qrCodeSection" style="display: none;">
+                    <div id="qrCodeDisplay" class="qr-code"></div>
+                    
+                    <div class="instructions">
+                        <h3><i class="fas fa-qrcode"></i> Cara Scan QR:</h3>
+                        <ol>
+                            <li>Buka WhatsApp di HP Anda</li>
+                            <li>Pilih <strong>Settings</strong> (Pengaturan)</li>
+                            <li>Pilih <strong>Linked Devices</strong> (Perangkat Tertaut)</li>
+                            <li>Tap <strong>Link a Device</strong></li>
+                            <li>Scan QR Code di atas</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <button class="btn btn-secondary" onclick="cancelPairing()">
+                    <i class="fas fa-times"></i> Batal
+                </button>
+            </div>
+
+            <!-- Step 4: Pairing Process (for pairing code) -->
+            <div class="step" id="step-pairing">
+                <h2>Proses Pairing</h2>
+                
+                <div id="statusBox" class="status-box">
+                    <div class="spinner"></div>
+                    <p>Meminta kode pairing...</p>
+                </div>
+
+                <div id="pairingCodeSection" style="display: none;">
+                    <div class="pairing-code" id="pairingCode">------</div>
+                    
+                    <div class="instructions">
+                        <h3><i class="fas fa-mobile-alt"></i> Cara Pairing:</h3>
+                        <ol>
+                            <li>Buka WhatsApp di HP Anda</li>
+                            <li>Pilih <strong>Settings</strong> (Pengaturan)</li>
+                            <li>Pilih <strong>Linked Devices</strong> (Perangkat Tertaut)</li>
+                            <li>Tap <strong>Link with phone number</strong></li>
+                            <li>Masukkan kode: <strong id="codeDisplay">------</strong></li>
+                            <li><strong>Pastikan ada notifikasi di HP!</strong></li>
+                        </ol>
+                    </div>
+                </div>
+
+                <button class="btn btn-secondary" onclick="cancelPairing()">
+                    <i class="fas fa-times"></i> Batal
+                </button>
+            </div>
+
+            <!-- Step 5: Success -->
+            <div class="step" id="step-success">
+                <h2><i class="fas fa-check-circle" style="color: #28a745;"></i> Berhasil Terhubung!</h2>
+                
+                <div class="status-box status-connected">
+                    <p><strong>WhatsApp Bot berhasil terhubung!</strong></p>
+                    <p>Bot Anda sekarang siap menerima dan mengirim pesan.</p>
+                </div>
+
+                <button class="btn btn-primary" onclick="location.href='/'">
+                    <i class="fas fa-home"></i> Kembali ke Menu Utama
+                </button>
+
+                <button class="btn btn-secondary" onclick="disconnectWhatsApp()">
+                    <i class="fas fa-unlink"></i> Putus Koneksi
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.5.3/qrcode.min.js"></script>
+    <script>
+        let selectedMethod = null;
+        let statusInterval = null;
+
+        function selectMethod(method) {
+            selectedMethod = method;
+            
+            // Update UI
+            document.querySelectorAll('.method-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            document.querySelector(`[data-method="${method}"]`).classList.add('selected');
+            
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        function proceedWithMethod() {
+            if (!selectedMethod) return;
+            
+            if (selectedMethod === 'code') {
+                showStep('step-phone');
+            } else {
+                startQRMode();
+            }
+        }
+
+        function startQRMode() {
+            showStep('step-qr');
+            updateQRStatus('requesting', 'Meminta QR Code...');
+
+            fetch('/whatsapp/start-qr', {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status) {
+                    statusInterval = setInterval(checkQRStatus, 2000);
+                } else {
+                    updateQRStatus('error', data.message || 'Gagal memulai QR mode');
+                }
+            })
+            .catch(error => {
+                updateQRStatus('error', 'Error: ' + error.message);
+            });
+        }
+
+        function startPairingCode() {
+            const phoneNumber = document.getElementById('phoneNumber').value.trim();
+            
+            if (!phoneNumber) {
+                alert('Masukkan nomor HP terlebih dahulu!');
+                return;
+            }
+
+            if (phoneNumber.length < 8) {
+                alert('Nomor HP tidak valid!');
+                return;
+            }
+
+            showStep('step-pairing');
+            updateStatus('requesting', 'Meminta kode pairing...');
+
+            fetch('/whatsapp/start-pairing', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    phoneNumber: phoneNumber
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status) {
+                    statusInterval = setInterval(checkStatus, 2000);
+                } else {
+                    updateStatus('error', data.message || 'Gagal memulai pairing');
+                }
+            })
+            .catch(error => {
+                updateStatus('error', 'Error: ' + error.message);
+            });
+        }
+
+        function checkStatus() {
+            fetch('/whatsapp/pairing-status')
+            .then(response => response.json())
+            .then(data => {
+                if (data.pairingStatus === 'waiting' && data.pairingCode) {
+                    updateStatus('waiting', 'Kode pairing siap!');
+                    showPairingCode(data.pairingCode);
+                } else if (data.pairingStatus === 'connected') {
+                    clearInterval(statusInterval);
+                    showStep('step-success');
+                } else if (data.pairingStatus === 'error') {
+                    clearInterval(statusInterval);
+                    updateStatus('error', 'Terjadi kesalahan dalam proses pairing');
+                }
+            })
+            .catch(error => {
+                console.error('Error checking status:', error);
+            });
+        }
+
+        function checkQRStatus() {
+            fetch('/whatsapp/qr-status')
+            .then(response => response.json())
+            .then(data => {
+                console.log('QR Status response:', data);
+                if (data.pairingStatus === 'waiting_qr' && data.qrCodeData) {
+                    updateQRStatus('waiting_qr', 'QR Code siap!');
+                    showQRCode(data.qrCodeData);
+                } else if (data.pairingStatus === 'connected') {
+                    clearInterval(statusInterval);
+                    showStep('step-success');
+                } else if (data.pairingStatus === 'error') {
+                    clearInterval(statusInterval);
+                    updateQRStatus('error', 'Terjadi kesalahan dalam proses QR');
+                } else {
+                    console.log('QR status not ready yet, status:', data.pairingStatus);
+                }
+            })
+            .catch(error => {
+                console.error('Error checking QR status:', error);
+            });
+        }
+
+        function showPairingCode(code) {
+            document.getElementById('pairingCode').textContent = code;
+                        document.getElementById('codeDisplay').textContent = code;
+            document.getElementById('pairingCodeSection').style.display = 'block';
+        }
+
+        function showQRCode(qrData) {
+            console.log('QR Data received:', qrData);
+            console.log('QR Data type:', typeof qrData);
+            
+            const qrContainer = document.getElementById('qrCodeDisplay');
+            qrContainer.innerHTML = '';
+            
+            // Check if QRCode library is loaded
+            if (typeof QRCode === 'undefined') {
+                console.error('QRCode library not loaded!');
+                updateQRStatus('error', 'QRCode library tidak ter-load. Refresh halaman dan coba lagi.');
+                return;
+            }
+            
+            console.log('QRCode library found, generating canvas...');
+            
+            // QRCode.toCanvas expects string data
+            QRCode.toCanvas(qrData, { width: 256, margin: 2 }, (error, canvas) => {
+                if (error) {
+                    console.error('QR Code generation error:', error);
+                    console.error('Failed QR data:', qrData);
+                    updateQRStatus('error', 'Gagal generate QR Code: ' + error.message);
+                } else {
+                    console.log('QR Canvas generated successfully');
+                    qrContainer.appendChild(canvas);
+                    document.getElementById('qrCodeSection').style.display = 'block';
+                }
+            });
+        }
+
+        function updateStatus(type, message) {
+            const statusBox = document.getElementById('statusBox');
+            statusBox.className = `status-box status-${type}`;
+            
+            if (type === 'requesting') {
+                statusBox.innerHTML = `
+                    <div class="spinner"></div>
+                    <p>${message}</p>
+                `;
+            } else {
+                statusBox.innerHTML = `<p><strong>${message}</strong></p>`;
+            }
+        }
+
+        function updateQRStatus(type, message) {
+            const statusBox = document.getElementById('qrStatusBox');
+            statusBox.className = `status-box status-${type}`;
+            
+            if (type === 'requesting') {
+                statusBox.innerHTML = `
+                    <div class="spinner"></div>
+                    <p>${message}</p>
+                `;
+            } else {
+                statusBox.innerHTML = `<p><strong>${message}</strong></p>`;
+            }
+        }
+
+        function deleteSession() {
+            const pin = document.getElementById('deletePin').value.trim();
+            const deleteBtn = document.getElementById('deleteBtn');
+            
+            // Hide previous status messages
+            hideDeleteStatus();
+            
+            if (!pin) {
+                showDeleteStatus('error', 'Masukkan PIN terlebih dahulu!');
+                return;
+            }
+
+            // Show confirmation and processing status
+            showDeleteStatus('requesting', 'Memproses permintaan hapus session...');
+            deleteBtn.disabled = true;
+            deleteBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses...';
+
+            fetch('/whatsapp/delete-session', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ pin: pin })
+            })
+            .then(response => response.json())
+            .then(data => {
+                deleteBtn.disabled = false;
+                deleteBtn.innerHTML = '<i class="fas fa-trash"></i> Hapus Session';
+                
+                if (data.status) {
+                    showDeleteStatus('connected', data.message);
+                    document.getElementById('deletePin').value = '';
+                    
+                    // Reload page after 2 seconds to show fresh state
+                    setTimeout(() => {
+                        location.reload();
+                    }, 2000);
+                } else {
+                    showDeleteStatus('error', data.message);
+                }
+            })
+            .catch(error => {
+                deleteBtn.disabled = false;
+                deleteBtn.innerHTML = '<i class="fas fa-trash"></i> Hapus Session';
+                showDeleteStatus('error', 'Terjadi kesalahan: ' + error.message);
+            });
+        }
+
+        function showDeleteStatus(type, message) {
+            const statusBox = document.getElementById('deleteStatusBox');
+            statusBox.className = `status-box status-${type}`;
+            statusBox.style.display = 'block';
+            
+            if (type === 'requesting') {
+                statusBox.innerHTML = `
+                    <div class="spinner"></div>
+                    <p>${message}</p>
+                `;
+            } else {
+                statusBox.innerHTML = `<p><strong>${message}</strong></p>`;
+            }
+        }
+
+        function hideDeleteStatus() {
+            const statusBox = document.getElementById('deleteStatusBox');
+            statusBox.style.display = 'none';
+        }
+
+        function cancelPairing() {
+            if (statusInterval) {
+                clearInterval(statusInterval);
+            }
+            showStep('step-method');
+            selectedMethod = null;
+            document.getElementById('nextBtn').disabled = true;
+            document.querySelectorAll('.method-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+        }
+
+        function goBack() {
+            showStep('step-method');
+        }
+
+        function disconnectWhatsApp() {
+            if (confirm('Yakin ingin memutus koneksi WhatsApp?')) {
+                fetch('/whatsapp/disconnect', {
+                    method: 'POST'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status) {
+                        alert('WhatsApp berhasil diputus');
+                        location.reload();
+                    } else {
+                        alert('Error: ' + data.message);
+                    }
+                });
+            }
+        }
+
+        function showStep(stepId) {
+            document.querySelectorAll('.step').forEach(step => {
+                step.classList.remove('active');
+            });
+            document.getElementById(stepId).classList.add('active');
+        }
+
+        // Check initial connection status
+        window.onload = function() {
+            fetch('/whatsapp/pairing-status')
+            .then(response => response.json())
+            .then(data => {
+                if (data.connected) {
+                    showStep('step-success');
+                }
+            })
+            .catch(error => {
+                console.log('Could not check initial status');
+            });
+        };
+    </script>
+</body>
+</html>

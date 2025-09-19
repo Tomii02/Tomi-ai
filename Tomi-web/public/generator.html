@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bikin Web Bucin !</title>
+    <style>
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+        @keyframes backgroundDance {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        body {
+            font-family: 'Verdana', sans-serif;
+            background: linear-gradient(135deg, #ffc0cb, #ffe4e1, #ffdab9);
+            background-size: 200% 200%;
+            animation: backgroundDance 15s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #8b0000;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+            overflow: hidden;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 45px;
+            border-radius: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+            max-width: 450px;
+            width: 100%;
+            border: 3px solid #ff69b4;
+            position: relative;
+            z-index: 2;
+        }
+        h1 {
+            color: #ff1493;
+            margin-bottom: 25px;
+            font-size: 2.2em;
+            text-shadow: 2px 2px #fff;
+        }
+        input {
+            width: 100%;
+            padding: 14px;
+            margin: 12px 0;
+            border: 2px solid #ff69b4;
+            border-radius: 10px;
+            box-sizing: border-box;
+            font-size: 1.1em;
+            color: #8b0000;
+            background-color: #fffaf0;
+        }
+        input::placeholder {
+            color: #ffb6c1;
+        }
+        .file-upload-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+            margin-top: 12px;
+            border: 2px solid #ff69b4;
+            border-radius: 10px;
+            background-color: #fffaf0;
+            cursor: pointer;
+        }
+        .file-upload-wrapper input[type="file"] {
+            font-size: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+        .file-upload-label {
+            padding: 14px;
+            font-size: 1.1em;
+            color: #ffb6c1;
+            display: block;
+            text-align: left;
+        }
+        button, #devLink {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin-top: 18px;
+            border: none;
+            border-radius: 10px;
+            background: #25D366;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        button:hover, #devLink:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            animation: pulse 0.8s infinite;
+        }
+        #devLink {
+            background: #007bff;
+            margin-bottom: 15px;
+        }
+        #linkBox {
+            margin-top: 25px;
+            word-wrap: break-word;
+            background: #fffafa;
+            padding: 20px;
+            border-radius: 15px;
+            display: none;
+            text-align: left;
+            position: relative;
+            border: 1px dashed #ff69b4;
+        }
+        #linkBox p {
+            color: #ff1493;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        #generatedLink {
+            font-family: 'Courier New', monospace;
+            background-color: #ffe0f0;
+            padding: 8px 12px;
+            border-radius: 5px;
+            display: block;
+            word-break: break-all;
+            color: #8b0000;
+        }
+        #copyButton {
+            background: #ff69b4;
+            color: white;
+            padding: 10px 15px;
+            font-size: 0.9em;
+            width: auto;
+            margin: 10px 0 0 auto;
+            display: block;
+            border-radius: 8px;
+            box-shadow: none;
+        }
+        #copyButton:hover {
+            background: #ff1493;
+            transform: scale(1.05);
+            animation: none;
+        }
+        .watermark {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 14px;
+            z-index: 10;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-family: 'Verdana', sans-serif;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .emoji {
+            position: absolute;
+            font-size: 3em;
+            animation: bounce 3s infinite ease-in-out;
+            opacity: 0.7;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .emoji:nth-child(1) { top: 10%; left: 15%; animation-delay: 0s; }
+        .emoji:nth-child(2) { top: 25%; right: 10%; animation-delay: 0.5s; }
+        .emoji:nth-child(3) { bottom: 20%; left: 5%; animation-delay: 1s; }
+        .emoji:nth-child(4) { bottom: 5%; right: 20%; animation-delay: 1.5s; }
+        .emoji:nth-child(5) { top: 5%; right: 30%; animation-delay: 2s; }
+        .custom-alert-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .custom-alert-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .custom-alert-box {
+            background: #fff0f5;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            font-family: 'Verdana', sans-serif;
+            color: #ff1493;
+            border: 2px solid #ff69b4;
+            max-width: 300px;
+            animation: bounce 0.5s ease-out;
+        }
+        .custom-alert-box button {
+            background: #ff69b4;
+            margin-top: 20px;
+            padding: 10px 20px;
+            border-radius: 10px;
+            width: auto;
+            display: inline-block;
+            font-size: 1em;
+        }
+        .custom-alert-box button:hover {
+            background: #ff1493;
+            transform: scale(1.05);
+            animation: none;
+        }
+        #backLink {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1em;
+            padding: 5px 10px;
+            background-color: #ff69b4;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+        #backLink:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <span class="emoji" style="left: 10%; top: 15%;"></span>
+    <span class="emoji" style="right: 12%; top: 25%;"></span>
+    <span class="emoji" style="left: 5%; bottom: 10%;"></span>
+    <span class="emoji" style="right: 8%; bottom: 20%;"></span>
+    <span class="emoji" style="left: 30%; top: 5%;"></span>
+    <div class="container">
+        <h1> Bikin Web Bucinmu Sendiri! </h1>
+        <input type="tel" id="waInput" placeholder="Nomor WhatsApp lu (contoh: +6285281555650)">
+        <div class="file-upload-wrapper">
+            <input type="file" id="musicInput" accept="audio/*">
+            <span class="file-upload-label" id="musicLabel"> Pilih lagu kesukaan kalian!</span>
+        </div>
+        <input type="text" id="bgUrlInput" placeholder="URL latar belakang (.jpg, .png, .gif, .mp4, .webm)">
+        <div class="file-upload-wrapper">
+            <input type="file" id="bgFileInput" accept="image/*,video/*">
+            <span class="file-upload-label" id="bgFileLabel"> Atau upload foto/video latar belakang!</span>
+        </div>
+        <button id="generateButton"> Buat Link! </button>
+        <a href="https://wa.me/+6285281555650" id="devLink" target="_blank">Hubungi Developer! </a>
+        <div id="linkBox">
+            <p>Link bucinmu sudah jadi! Salin & kirim ke doi yaaa! </p>
+            <span id="generatedLink"></span>
+            <button id="copyButton"> Salin Tautan Ini! </button>
+        </div>
+    </div>
+    <div class="watermark">
+        Developer: @Tomii 
+        <a href="index.html" id="backLink">Kembali</a>
+    </div>
+    <div id="customAlert" class="custom-alert-overlay">
+        <div class="custom-alert-box">
+            <p id="alertMessage"></p>
+            <button onclick="hideCustomAlert()">OK, siap! </button>
+        </div>
+    </div>
+    <script>
+        function showCustomAlert(message) {
+            document.getElementById('alertMessage').textContent = message;
+            document.getElementById('customAlert').classList.add('show');
+        }
+        function hideCustomAlert() {
+            document.getElementById('customAlert').classList.remove('show');
+        }
+
+        document.getElementById('musicInput').onchange = function(e) {
+            const fileName = e.target.files[0] ? e.target.files[0].name : ' Pilih lagu kesukaan kalian!';
+            document.getElementById('musicLabel').textContent = fileName;
+        };
+
+        document.getElementById('bgFileInput').onchange = function(e) {
+            const fileName = e.target.files[0] ? e.target.files[0].name : ' Atau upload foto/video latar belakang!';
+            document.getElementById('bgFileLabel').textContent = fileName;
+            // Clear URL input saat file diupload
+            document.getElementById('bgUrlInput').value = '';
+        };
+
+        document.getElementById('bgUrlInput').oninput = function() {
+            // Clear file input saat URL diketik
+            document.getElementById('bgFileInput').value = '';
+            document.getElementById('bgFileLabel').textContent = ' Atau upload foto/video latar belakang!';
+        };
+
+        document.getElementById('generateButton').onclick = async function() {
+            const waNumber = document.getElementById('waInput').value.trim();
+            const musicFile = document.getElementById('musicInput').files[0];
+            const bgUrl = document.getElementById('bgUrlInput').value.trim();
+            const bgFile = document.getElementById('bgFileInput').files[0];
+
+            if (waNumber === "") {
+                showCustomAlert("Ups! Nomor WhatsApp-nya jangan dikosongin ya, nanti doi bingung! ");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('wa', waNumber);
+
+            let musicUrl = '';
+            let bgSource = '';
+
+            // Handle music upload
+            if (musicFile) {
+                formData.append('music', musicFile);
+            }
+
+            // Handle background upload
+            if (bgFile) {
+                formData.append('background', bgFile);
+            }
+
+            try {
+                const response = await fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+
+                if (data.status) {
+                    musicUrl = data.musicUrl || '';
+                    bgSource = data.bgUrl || bgUrl || '';
+
+                    let generatedLink = `${window.location.origin}/bucinweb.html?wa=${encodeURIComponent(waNumber)}`;
+                    
+                    if (musicUrl) {
+                        generatedLink += `&music=${encodeURIComponent(musicUrl)}`;
+                    }
+
+                    if (bgSource) {
+                        generatedLink += `&bg=${encodeURIComponent(bgSource)}`;
+                    }
+                    
+                    document.getElementById('generatedLink').textContent = generatedLink;
+                    document.getElementById('linkBox').style.display = 'block';
+                    showCustomAlert("Link bucinmu sudah siap! Jangan lupa kirim ke doi yaaa! ");
+                } else {
+                    showCustomAlert("Gagal mengunggah file: " + data.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showCustomAlert("Terjadi kesalahan saat mengunggah file.");
+            }
+        };
+
+        document.getElementById('copyButton').onclick = function() {
+            const link = document.getElementById('generatedLink').textContent;
+            navigator.clipboard.writeText(link).then(() => {
+                showCustomAlert('Tautan berhasil disalin! Sekarang tinggal kirim ke si dia! ');
+            }).catch(err => {
+                console.error('Gagal menyalin tautan: ', err);
+                showCustomAlert('Yah, gagal menyalin tautan. Coba salin manual ya! ');
+            });
+        };
+    </script>
+</body>
+</html>

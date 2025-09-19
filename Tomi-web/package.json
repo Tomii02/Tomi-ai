@@ -1,0 +1,25 @@
+{
+  "name": "workspace",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@google/genai": "^1.19.0",
+    "@whiskeysockets/baileys": "^6.7.19",
+    "ajv": "^8.17.1",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "express-fileupload": "^1.5.2",
+    "lowdb": "^7.0.1",
+    "node-fetch": "^3.3.2",
+    "qrcode-terminal": "^0.12.0",
+    "tesseract.js": "^6.0.1"
+  }
+}

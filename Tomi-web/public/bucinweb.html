@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untukmu, Satu-satunya</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #fecfef;
+            font-family: 'Verdana', sans-serif;
+            color: #4a4a4a;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        #bg-media-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+        
+        #bg-media-container video, 
+        #bg-media-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .heart {
+            position: absolute;
+            background-color: #ff6b6b;
+            transform: rotate(-45deg);
+            animation: heart-fall 10s linear infinite;
+        }
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #ff6b6b;
+            border-radius: 50%;
+        }
+        .heart::before { top: -50%; left: 0; }
+        .heart::after { top: 0; left: 50%; }
+        .content {
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            max-width: 80%;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+            position: relative;
+        }
+        .typing-text {
+            font-size: 1.5em;
+            white-space: pre-wrap;
+            overflow: hidden;
+            border-right: .15em solid #ff6b6b;
+            margin: 0 auto;
+        }
+        .typing-text-2 {
+            font-size: 1.2em;
+            white-space: pre-wrap;
+            overflow: hidden;
+            margin-top: 15px;
+            opacity: 0;
+        }
+        .btn-wrapper {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .final-message {
+            font-size: 1.5em;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            animation: text-pop 1s forwards;
+        }
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-weight: bold;
+            font-size: 1em;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        button.whatsapp, #noButton, #yesButton, .start-btn {
+            background: #25D366;
+        }
+        button.whatsapp:hover, #noButton:hover, #yesButton:hover, .start-btn:hover {
+            transform: scale(1.05);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes heart-fall {
+            0% { top: -10%; transform: translateX(0) rotate(-45deg); opacity: 1; }
+            100% { top: 110%; transform: translateX(var(--x-end, 100px)) rotate(var(--rotate-end, 45deg)); opacity: 0; }
+        }
+        #noButton {
+            position: relative;
+            transition: transform 0.3s ease-out;
+        }
+        .love-question {
+            font-size: 1.5em;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        #name-prompt {
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 80%;
+            max-width: 350px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #name-prompt p {
+            margin-bottom: 10px;
+        }
+        #name-prompt input {
+            width: 90%;
+            padding: 10px;
+            margin-top: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            text-align: center;
+        }
+        #name-prompt button {
+            margin-top: 15px;
+            width: 100%;
+        }
+        .message-prompt {
+            position: absolute;
+            bottom: 25%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ff6b6b;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-size: 0.9em;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <div id="bg-media-container"></div>
+    <audio id="background-music" loop></audio>
+    <div id="name-prompt">
+        <p>Bisa tolong tulis namamu di sini? </p>
+        <input type="text" id="nama-input" placeholder="Tulis namamu...">
+        <button id="start-button" class="start-btn">Masuk </button>
+    </div>
+    <div id="main-content" class="content" style="display: none;">
+        <div id="first-message" class="typing-text"></div>
+        <div id="second-message" class="typing-text-2"></div>
+        <div id="love-proposal" style="display: none;">
+            <p class="love-question">Jadi, maukah kamu menjadi pacar aku, sekarang dan selamanya?</p>
+            <div class="btn-wrapper">
+                <button id="noButton">Gak mau</button>
+                <button id="yesButton">Mau</button>
+            </div>
+            <div id="no-message" class="message-prompt" style="display: none;">Yakin? Nanti nyesel loh ❤️</div>
+        </div>
+        <div id="final-step" style="display: none;">
+            <p class="final-message">YAY! Akhirnya kamu milikku! Terima kasih sudah mau jadi pacar aku! Aku janji akan buat kamu bahagia setiap hari. ❤️</p>
+            <div class="btn-wrapper">
+                <button id="whatsappButton" class="whatsapp">Chat di WhatsApp sekarang! ❤️</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const waNumber = params.get("wa") || "6285281555650"; 
+        const musicUrlFromUrl = params.get("music");
+        const bgUrlFromUrl = params.get("bg"); // Diperbaiki dari "bg_url" menjadi "bg"
+        
+        const namePromptDiv = document.getElementById("name-prompt");
+        const namaInput = document.getElementById("nama-input");
+        const startButton = document.getElementById("start-button");
+        const mainContent = document.getElementById("main-content");
+        const firstMessageElement = document.getElementById("first-message");
+        const secondMessageElement = document.getElementById("second-message");
+        const loveProposal = document.getElementById("love-proposal");
+        const noButton = document.getElementById("noButton");
+        const yesButton = document.getElementById("yesButton");
+        const finalStep = document.getElementById("final-step");
+        const whatsappButton = document.getElementById("whatsappButton");
+        const backgroundMusic = document.getElementById("background-music");
+        const noMessagePrompt = document.getElementById("no-message");
+        const bgMediaContainer = document.getElementById("bg-media-container");
+
+        let typingSpeed = 70;
+        let noButtonClicks = 0;
+        let heartInterval;
+        let namaDisplayed = "";
+
+        const noMessages = [
+            "Yakin? Nanti nyesel loh ❤️", "Serius nih? Sekali lagi mikir deh...",
+            "Duh, jangan sampai kesempatan ini hilang..", "Masa gak mau? Padahal aku udah sayang banget loh.. ❤️",
+            "Pikir baik-baik ya, ini kesempatan terakhir lho... ❤️", "Aduh, kamu tega banget sih.. ❤️",
+            "Aku gak akan nyerah lho... ❤️", "Aku janji, aku gak akan buat kamu kecewa. Please? ❤️"
+        ];
+        
+        function applyBackground() {
+            if (bgUrlFromUrl) {
+                // Periksa apakah URL berakhir dengan format video
+                if (bgUrlFromUrl.match(/\.(mp4|webm|ogg|m4v)$/i)) {
+                    const video = document.createElement('video');
+                    video.src = bgUrlFromUrl;
+                    video.autoplay = true;
+                    video.loop = true;
+                    video.muted = true;
+                    video.playsinline = true;
+                    bgMediaContainer.appendChild(video);
+                } else { // Jika bukan video, anggap sebagai gambar
+                    const img = document.createElement('img');
+                    img.src = bgUrlFromUrl;
+                    bgMediaContainer.appendChild(img);
+                }
+            }
+        }
+
+        function startLoveStory() {
+            if (musicUrlFromUrl) {
+                backgroundMusic.src = musicUrlFromUrl;
+            } else {
+                backgroundMusic.src = 'bucin.mp3';
+            }
+            backgroundMusic.play().catch(e => console.error("Gagal putar musik:", e));
+            heartInterval = setInterval(createHeart, 300);
+            
+            const firstMsg = `haii ${namaDisplayed} sayangg, hari ini berat banget ya? hari ini mungkin berat, tapi kamu lebih hebat bisa jalani hari ini dengan ikhlas dan semangat. semangat terus ya!!`;
+            const secondMsg = `kamu selalu yang terbaik dari yang terbaik. jadi dirimu sendiri dan jangan pantang menyerah, okee??! berkat kamu juga hari-hari ku cerah, secerah senyuman mu.`;
+
+            typeWriter(firstMessageElement, firstMsg, () => {
+                secondMessageElement.style.opacity = 1;
+                typeWriter(secondMessageElement, secondMsg, () => {
+                    setTimeout(() => { loveProposal.style.display = 'block'; }, 500);
+                });
+            });
+        }
+
+        function typeWriter(element, message, callback) {
+            let i = 0;
+            element.style.borderRight = '.15em solid #ff6b6b';
+            element.innerHTML = '';
+            function type() {
+                if (i < message.length) {
+                    element.innerHTML += message.charAt(i);
+                    i++;
+                    setTimeout(type, typingSpeed);
+                } else {
+                    element.style.borderRight = 'none';
+                    if (callback) callback();
+                }
+            }
+            type();
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            document.body.appendChild(heart);
+            const size = Math.random() * (40 - 15) + 15;
+            const left = Math.random() * 100;
+            const duration = Math.random() * (12 - 8) + 8;
+            const xEnd = (Math.random() - 0.5) * 200;
+            const rotateEnd = (Math.random() - 0.5) * 180;
+            heart.style.width = `${size}px`;
+            heart.style.height = `${size}px`;
+            heart.style.left = `${left}%`;
+            heart.style.animationDuration = `${duration}s`;
+            heart.style.setProperty('--x-end', `${xEnd}px`);
+            heart.style.setProperty('--rotate-end', `${rotateEnd}deg`);
+            setTimeout(() => { heart.remove(); }, duration * 1000);
+        }
+
+        namePromptDiv.style.display = 'flex';
+        mainContent.style.display = 'none';
+        applyBackground();
+
+        startButton.onclick = function() {
+            const nama = namaInput.value.trim();
+            if (nama === "") {
+                alert("Namanya jangan kosong, ya!");
+                return;
+            }
+            namaDisplayed = nama;
+            namePromptDiv.style.display = 'none';
+            mainContent.style.display = 'block';
+            startLoveStory();
+        };
+        
+        noButton.onclick = function() {
+            const message = noMessages[noButtonClicks % noMessages.length];
+            noMessagePrompt.textContent = message;
+            noMessagePrompt.style.opacity = 1;
+            noMessagePrompt.style.display = 'block';
+            setTimeout(() => { noMessagePrompt.style.opacity = 0; }, 3500);
+            noButtonClicks++;
+        };
+        
+        yesButton.onclick = function() {
+            loveProposal.style.display = 'none';
+            finalStep.style.display = 'block';
+            clearInterval(heartInterval);
+            let timer = 5;
+            whatsappButton.disabled = true;
+            whatsappButton.textContent = `Tunggu ${timer} detik...`;
+            const countdown = setInterval(() => {
+                timer--;
+                if (timer > 0) {
+                    whatsappButton.textContent = `Tunggu ${timer} detik...`;
+                } else {
+                    clearInterval(countdown);
+                    whatsappButton.disabled = false;
+                    whatsappButton.textContent = 'Chat di WhatsApp sekarang! ❤️';
+                }
+            }, 1000);
+        };
+
+        whatsappButton.onclick = function() {
+            const message = `Halo, aku mau jadi pacarmu. Terima kasih sudah buat halaman ini khusus untukku. ❤️❤️`;
+            const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
+            window.location.href = waUrl;
+        };
+    </script>
+</body>
+</html>

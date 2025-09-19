@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TomiShop - Layanan Hosting</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            background-color: #0f1c2c;
+            color: #e2e8f0;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            padding: 2rem;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .card {
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+            overflow: hidden;
+            text-align: left;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4);
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(49, 130, 206, 0.1) 0%, transparent 50%, rgba(49, 130, 206, 0.1) 100%);
+            z-index: -1;
+            transform: rotate(10deg);
+            opacity: 0.5;
+        }
+        .btn {
+            background-color: #3182ce;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+        .btn:hover {
+            background-color: #2c5282;
+            transform: scale(1.05);
+        }
+        .social-link {
+            color: #a0aec0;
+            transition: color 0.2s;
+        }
+        .social-link:hover {
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="mb-12">
+            <h1 class="text-5xl font-extrabold text-blue-400 mb-4 animate-pulse">TomiShop</h1>
+            <p class="text-xl text-gray-400">Penyedia layanan hosting dan AI untuk kebutuhan digitalmu.</p>
+        </header>
+
+        <main class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <div class="card flex items-center p-6">
+                <i class="fas fa-server text-4xl text-blue-300 mr-6"></i>
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-200 mb-2">Panel Layanan Hosting</h2>
+                    <p class="text-gray-400 text-sm">Kelola domain, hosting, dan layanan lainnya.</p>
+                    <a href="TomiShop.html" class="inline-block mt-4 text-sm font-semibold text-blue-400 hover:underline">
+                        Masuk ke Panel <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="card flex items-center p-6">
+                <i class="fas fa-robot text-4xl text-blue-300 mr-6"></i>
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-200 mb-2">Chat dengan Bella AI</h2>
+                    <p class="text-gray-400 text-sm">Tanyakan apa saja kepada AI kami yang ramah dan cerdas.</p>
+                    <a href="chat.html" class="inline-block mt-4 text-sm font-semibold text-blue-400 hover:underline">
+                        Mulai Chat <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+        </main>
+
+        <footer class="text-gray-500">
+            <p class="mb-4">&copy; 2025 TomiShop. Semua hak cipta dilindungi.</p>
+            <div class="flex justify-center space-x-6">
+                <a href="#" class="social-link"><i class="fab fa-facebook-f text-lg"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-twitter text-lg"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-instagram text-lg"></i></a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

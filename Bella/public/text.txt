@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riwayat Chat WhatsApp</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #f0f2f5; color: #1c1e21; margin: 0; padding: 20px; }
+        .container { max-width: 800px; margin: auto; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); padding: 20px; }
+        h1 { color: #008069; text-align: center; }
+        .chat-list { list-style: none; padding: 0; }
+        .message { padding: 15px; border-bottom: 1px solid #e0e0e0; display: flex; flex-direction: column; }
+        .message:last-child { border-bottom: none; }
+        .chat-info { font-size: 0.9em; color: #65676b; margin-bottom: 5px; }
+        .chat-info strong { color: #008069; }
+        .sender-info { font-weight: bold; }
+        .message-text { margin-top: 5px; background-color: #e4e6eb; padding: 10px; border-radius: 18px; line-height: 1.4; white-space: pre-wrap; word-wrap: break-word; }
+        .timestamp { font-size: 0.8em; color: #999; text-align: right; margin-top: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Riwayat Chat WhatsApp</h1>
+        <ul id="chat-history" class="chat-list"></ul>
+    </div>
+
+    <script>
+        const chatHistoryList = document.getElementById('chat-history');
+
+        fetch('/api/history')
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(msg => {
+                    const li = document.createElement('li');
+                    li.className = 'message';
+                    
+                    const chatInfo = document.createElement('div');
+                    chatInfo.className = 'chat-info';
+                    chatInfo.innerHTML = `<strong>${msg.chat_name}</strong>`;
+
+                    const senderInfo = document.createElement('div');
+                    senderInfo.className = 'sender-info';
+                    senderInfo.textContent = msg.sender_name;
+
+                    const messageText = document.createElement('div');
+                    messageText.className = 'message-text';
+                    messageText.textContent = msg.text;
+
+                    const timestamp = document.createElement('div');
+                    timestamp.className = 'timestamp';
+                    timestamp.textContent = new Date(msg.timestamp).toLocaleString('id-ID');
+
+                    li.appendChild(chatInfo);
+                    li.appendChild(senderInfo);
+                    li.appendChild(messageText);
+                    li.appendChild(timestamp);
+
+                    chatHistoryList.appendChild(li);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching chat history:', error);
+                const li = document.createElement('li');
+                li.textContent = 'Gagal memuat riwayat chat.';
+                chatHistoryList.appendChild(li);
+            });
+    </script>
+</body>
+</html>

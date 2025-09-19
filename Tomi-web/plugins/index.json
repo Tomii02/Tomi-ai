@@ -1,0 +1,3902 @@
+{
+  "plugins": [
+    {
+      "id": "_AutoBio",
+      "name": " AutoBio",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "_event/_AutoBio.js",
+      "type": "legacy"
+    },
+    {
+      "id": "_afkResponse",
+      "name": " AfkResponse",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "_event/_afkResponse.js",
+      "type": "legacy"
+    },
+    {
+      "id": "_antiImageResponse",
+      "name": " AntiImageResponse",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "_event/_antiImageResponse.js",
+      "type": "legacy"
+    },
+    {
+      "id": "_button-resp",
+      "name": " Button Resp",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "_event/_button-resp.js",
+      "type": "legacy"
+    },
+    {
+      "id": "_buttonResponse",
+      "name": " ButtonResponse",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "_event/_buttonResponse.js",
+      "type": "legacy"
+    },
+    {
+      "id": "_cmdWithMedia",
+      "name": " CmdWithMedia",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "_event/_cmdWithMedia.js",
+      "type": "legacy"
+    },
+    {
+      "id": "_detect",
+      "name": " Detect",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "_event/_detect.js",
+      "type": "legacy"
+    },
+    {
+      "id": "_didyoumean",
+      "name": " Didyoumean",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "_event/_didyoumean.js",
+      "type": "legacy"
+    },
+    {
+      "id": "_editResponse",
+      "name": " EditResponse",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "_event/_editResponse.js",
+      "type": "legacy"
+    },
+    {
+      "id": "_first-chat",
+      "name": " First Chat",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "_event/_first-chat.js",
+      "type": "legacy"
+    },
+    {
+      "id": "_jawabsalam",
+      "name": " Jawabsalam",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "_event/_jawabsalam.js",
+      "type": "legacy"
+    },
+    {
+      "id": "_main-bot",
+      "name": " Main Bot",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "_event/_main-bot.js",
+      "type": "legacy"
+    },
+    {
+      "id": "_ngetik",
+      "name": " Ngetik",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "_event/_ngetik.js",
+      "type": "legacy"
+    },
+    {
+      "id": "_resetlimit",
+      "name": " Resetlimit",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "_event/_resetlimit.js",
+      "type": "legacy"
+    },
+    {
+      "id": "_sapa",
+      "name": " Sapa",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "_event/_sapa.js",
+      "type": "legacy"
+    },
+    {
+      "id": "_waktusholat",
+      "name": " Waktusholat",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "_event/_waktusholat.js",
+      "type": "legacy"
+    },
+    {
+      "id": "antiChannel",
+      "name": "AntiChannel",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "_event/antiChannel.js",
+      "type": "legacy"
+    },
+    {
+      "id": "antiNsfw",
+      "name": "AntiNsfw",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "_event/antiNsfw.js",
+      "type": "legacy"
+    },
+    {
+      "id": "antitoxic",
+      "name": "Antitoxic",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "_event/antitoxic.js",
+      "type": "legacy"
+    },
+    {
+      "id": "evaled",
+      "name": "Evaled",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "_event/evaled.js",
+      "type": "legacy"
+    },
+    {
+      "id": "getMsg",
+      "name": "GetMsg",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "_event/getMsg.js",
+      "type": "legacy"
+    },
+    {
+      "id": "schedule",
+      "name": "Schedule",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "_event/schedule.js",
+      "type": "legacy"
+    },
+    {
+      "id": "ai-autoai",
+      "name": "Autoai",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "ai/ai-autoai.js",
+      "type": "legacy"
+    },
+    {
+      "id": "ai-bard",
+      "name": "Bard",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "ai/ai-bard.js",
+      "type": "legacy"
+    },
+    {
+      "id": "ai-bing",
+      "name": "Bing",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "ai/ai-bing.js",
+      "type": "legacy"
+    },
+    {
+      "id": "ai-bingchat",
+      "name": "Bingchat",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "ai/ai-bingchat.js",
+      "type": "legacy"
+    },
+    {
+      "id": "ai-blackbox",
+      "name": "Blackbox",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "ai/ai-blackbox.js",
+      "type": "legacy"
+    },
+    {
+      "id": "ai-cai",
+      "name": "Cai",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "ai/ai-cai.js",
+      "type": "legacy"
+    },
+    {
+      "id": "ai-diffusion",
+      "name": "Diffusion",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "ai/ai-diffusion.js",
+      "type": "legacy"
+    },
+    {
+      "id": "ai-emi",
+      "name": "Emi",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "ai/ai-emi.js",
+      "type": "legacy"
+    },
+    {
+      "id": "ai-gemini",
+      "name": "Gemini",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "ai/ai-gemini.js",
+      "type": "legacy"
+    },
+    {
+      "id": "ai-gpt4o",
+      "name": "Gpt4o",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "ai/ai-gpt4o.js",
+      "type": "legacy"
+    },
+    {
+      "id": "ai-gptweb",
+      "name": "Gptweb",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "ai/ai-gptweb.js",
+      "type": "legacy"
+    },
+    {
+      "id": "ai-hutao",
+      "name": "Hutao",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "ai/ai-hutao.js",
+      "type": "legacy"
+    },
+    {
+      "id": "ai-luminai",
+      "name": "Luminai",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "ai/ai-luminai.js",
+      "type": "legacy"
+    },
+    {
+      "id": "ai-openai",
+      "name": "Openai",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "ai/ai-openai.js",
+      "type": "legacy"
+    },
+    {
+      "id": "ai-seaart",
+      "name": "Seaart",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "ai/ai-seaart.js",
+      "type": "legacy"
+    },
+    {
+      "id": "ai-shirokoo",
+      "name": "Shirokoo",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "ai/ai-shirokoo.js",
+      "type": "legacy"
+    },
+    {
+      "id": "ai-thinkany",
+      "name": "Thinkany",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "ai/ai-thinkany.js",
+      "type": "legacy"
+    },
+    {
+      "id": "ai-txt2img",
+      "name": "Txt2img",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "ai/ai-txt2img.js",
+      "type": "legacy"
+    },
+    {
+      "id": "ai-voicevox",
+      "name": "Voicevox",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "ai/ai-voicevox.js",
+      "type": "legacy"
+    },
+    {
+      "id": "ai-yasa",
+      "name": "Yasa",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "ai/ai-yasa.js",
+      "type": "legacy"
+    },
+    {
+      "id": "ai-yousearch",
+      "name": "Yousearch",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "ai/ai-yousearch.js",
+      "type": "legacy"
+    },
+    {
+      "id": "ai-yuuka",
+      "name": "Yuuka",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "ai/ai-yuuka.js",
+      "type": "legacy"
+    },
+    {
+      "id": "aryagpt_js",
+      "name": "Aryagpt.Js",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "ai/aryagpt.js.js",
+      "type": "legacy"
+    },
+    {
+      "id": "chatbot-ans",
+      "name": "Chatbot Ans",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "ai/chatbot-ans.js",
+      "type": "legacy"
+    },
+    {
+      "id": "chatbot",
+      "name": "Chatbot",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "ai/chatbot.js",
+      "type": "legacy"
+    },
+    {
+      "id": "flux",
+      "name": "Flux",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "ai/flux.js",
+      "type": "legacy"
+    },
+    {
+      "id": "image",
+      "name": "Image",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "ai/image.js",
+      "type": "legacy"
+    },
+    {
+      "id": "img2prompt",
+      "name": "Img2prompt",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "ai/img2prompt.js",
+      "type": "legacy"
+    },
+    {
+      "id": "letmegpt",
+      "name": "Letmegpt",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "ai/letmegpt.js",
+      "type": "legacy"
+    },
+    {
+      "id": "lexica",
+      "name": "Lexica",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "ai/lexica.js",
+      "type": "legacy"
+    },
+    {
+      "id": "photoleap",
+      "name": "Photoleap",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "ai/photoleap.js",
+      "type": "legacy"
+    },
+    {
+      "id": "ragbot",
+      "name": "Ragbot",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "ai/ragbot.js",
+      "type": "legacy"
+    },
+    {
+      "id": "regemai",
+      "name": "Regemai",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "ai/regemai.js",
+      "type": "legacy"
+    },
+    {
+      "id": "simi",
+      "name": "Simi",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "ai/simi.js",
+      "type": "legacy"
+    },
+    {
+      "id": "txt2anime",
+      "name": "Txt2anime",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "ai/txt2anime.js",
+      "type": "legacy"
+    },
+    {
+      "id": "whisper",
+      "name": "Whisper",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "ai/whisper.js",
+      "type": "legacy"
+    },
+    {
+      "id": "anime-bluearchive",
+      "name": "Bluearchive",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "anime/anime-bluearchive.js",
+      "type": "legacy"
+    },
+    {
+      "id": "anime-chara",
+      "name": "Chara",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "anime/anime-chara.js",
+      "type": "legacy"
+    },
+    {
+      "id": "anime-fanart",
+      "name": "Fanart",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "anime/anime-fanart.js",
+      "type": "legacy"
+    },
+    {
+      "id": "anime-genshin",
+      "name": "Genshin",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "anime/anime-genshin.js",
+      "type": "legacy"
+    },
+    {
+      "id": "anime-kita",
+      "name": "Kita",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "anime/anime-kita.js",
+      "type": "legacy"
+    },
+    {
+      "id": "anime-ongoing",
+      "name": "Ongoing",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "anime/anime-ongoing.js",
+      "type": "legacy"
+    },
+    {
+      "id": "anime-random",
+      "name": "Random",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "anime/anime-random.js",
+      "type": "legacy"
+    },
+    {
+      "id": "anime-top",
+      "name": "Top",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "anime/anime-top.js",
+      "type": "legacy"
+    },
+    {
+      "id": "anime-waifu",
+      "name": "Waifu",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "anime/anime-waifu.js",
+      "type": "legacy"
+    },
+    {
+      "id": "anime-wuwa",
+      "name": "Wuwa",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "anime/anime-wuwa.js",
+      "type": "legacy"
+    },
+    {
+      "id": "fantox",
+      "name": "Fantox",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "anime/fantox.js",
+      "type": "legacy"
+    },
+    {
+      "id": "genshin-sheets",
+      "name": "Genshin Sheets",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "anime/genshin-sheets.js",
+      "type": "legacy"
+    },
+    {
+      "id": "genshin-stalk",
+      "name": "Genshin Stalk",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "anime/genshin-stalk.js",
+      "type": "legacy"
+    },
+    {
+      "id": "honkai-sheets",
+      "name": "Honkai Sheets",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "anime/honkai-sheets.js",
+      "type": "legacy"
+    },
+    {
+      "id": "info-anime",
+      "name": "Anime",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "anime/info-anime.js",
+      "type": "legacy"
+    },
+    {
+      "id": "info-manga",
+      "name": "Manga",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "anime/info-manga.js",
+      "type": "legacy"
+    },
+    {
+      "id": "internet-jjanime",
+      "name": "Internet Jjanime",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "anime/internet-jjanime.js",
+      "type": "legacy"
+    },
+    {
+      "id": "samehadaku",
+      "name": "Samehadaku",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "anime/samehadaku.js",
+      "type": "legacy"
+    },
+    {
+      "id": "simpown",
+      "name": "Simpown",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "anime/simpown.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tebakanime",
+      "name": "Tebakanime",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "anime/tebakanime.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tools-jadianime",
+      "name": "Jadianime",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "anime/tools-jadianime.js",
+      "type": "legacy"
+    },
+    {
+      "id": "wuwa-sheets",
+      "name": "Wuwa Sheets",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "anime/wuwa-sheets.js",
+      "type": "legacy"
+    },
+    {
+      "id": "group_kick",
+      "name": "Group Kick",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "core/kick",
+      "type": "folder"
+    },
+    {
+      "id": "ping",
+      "name": "Ping Test",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "core/ping",
+      "type": "folder"
+    },
+    {
+      "id": "cpanel-main",
+      "name": "Cpanel Main",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "cpanel/cpanel-main.js",
+      "type": "legacy"
+    },
+    {
+      "id": "capcut-search",
+      "name": "Capcut Search",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "downloader/capcut-search.js",
+      "type": "legacy"
+    },
+    {
+      "id": "dl-gore",
+      "name": "Dl Gore",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "downloader/dl-gore.js",
+      "type": "legacy"
+    },
+    {
+      "id": "download_anichin_detail",
+      "name": ".Anichin Detail",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "downloader/download.anichin_detail.js",
+      "type": "legacy"
+    },
+    {
+      "id": "downloader-Anichin_Search",
+      "name": "er Anichin Search",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "downloader/downloader-Anichin Search.js",
+      "type": "legacy"
+    },
+    {
+      "id": "downloader-capcut",
+      "name": "er Capcut",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "downloader/downloader-capcut.js",
+      "type": "legacy"
+    },
+    {
+      "id": "downloader-cocofun",
+      "name": "er Cocofun",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "downloader/downloader-cocofun.js",
+      "type": "legacy"
+    },
+    {
+      "id": "downloader-fb",
+      "name": "er Fb",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "downloader/downloader-fb.js",
+      "type": "legacy"
+    },
+    {
+      "id": "downloader-gitclone",
+      "name": "er Gitclone",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "downloader/downloader-gitclone.js",
+      "type": "legacy"
+    },
+    {
+      "id": "downloader-ig",
+      "name": "er Ig",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "downloader/downloader-ig.js",
+      "type": "legacy"
+    },
+    {
+      "id": "downloader-mediafire",
+      "name": "er Mediafire",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "downloader/downloader-mediafire.js",
+      "type": "legacy"
+    },
+    {
+      "id": "downloader-pindl",
+      "name": "er Pindl",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "downloader/downloader-pindl.js",
+      "type": "legacy"
+    },
+    {
+      "id": "downloader-spotify",
+      "name": "er Spotify",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "downloader/downloader-spotify.js",
+      "type": "legacy"
+    },
+    {
+      "id": "downloader-terabox",
+      "name": "er Terabox",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "downloader/downloader-terabox.js",
+      "type": "legacy"
+    },
+    {
+      "id": "downloader-tiktok",
+      "name": "er Tiktok",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "downloader/downloader-tiktok.js",
+      "type": "legacy"
+    },
+    {
+      "id": "downloader-tiktokstalk",
+      "name": "er Tiktokstalk",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "downloader/downloader-tiktokstalk.js",
+      "type": "legacy"
+    },
+    {
+      "id": "downloader-ttplay",
+      "name": "er Ttplay",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "downloader/downloader-ttplay.js",
+      "type": "legacy"
+    },
+    {
+      "id": "downloader-ttsearch",
+      "name": "er Ttsearch",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "downloader/downloader-ttsearch.js",
+      "type": "legacy"
+    },
+    {
+      "id": "downloader-videy",
+      "name": "er Videy",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "downloader/downloader-videy.js",
+      "type": "legacy"
+    },
+    {
+      "id": "downloader-yt",
+      "name": "er Yt",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "downloader/downloader-yt.js",
+      "type": "legacy"
+    },
+    {
+      "id": "downloader-ytc",
+      "name": "er Ytc",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "downloader/downloader-ytc.js",
+      "type": "legacy"
+    },
+    {
+      "id": "downloader-yts",
+      "name": "er Yts",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "downloader/downloader-yts.js",
+      "type": "legacy"
+    },
+    {
+      "id": "drive",
+      "name": "Drive",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "downloader/drive.js",
+      "type": "legacy"
+    },
+    {
+      "id": "play",
+      "name": "Play",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "downloader/play.js",
+      "type": "legacy"
+    },
+    {
+      "id": "playvideo",
+      "name": "Playvideo",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "downloader/playvideo.js",
+      "type": "legacy"
+    },
+    {
+      "id": "cariteman",
+      "name": "Cariteman",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "fun/cariteman.js",
+      "type": "legacy"
+    },
+    {
+      "id": "fun-artinama",
+      "name": "Artinama",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "fun/fun-artinama.js",
+      "type": "legacy"
+    },
+    {
+      "id": "fun-cekpenis",
+      "name": "Cekpenis",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "fun/fun-cekpenis.js",
+      "type": "legacy"
+    },
+    {
+      "id": "fun-ceksifat",
+      "name": "Ceksifat",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "fun/fun-ceksifat.js",
+      "type": "legacy"
+    },
+    {
+      "id": "fun-cerpen",
+      "name": "Cerpen",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "fun/fun-cerpen.js",
+      "type": "legacy"
+    },
+    {
+      "id": "fun-china",
+      "name": "China",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "fun/fun-china.js",
+      "type": "legacy"
+    },
+    {
+      "id": "fun-dare",
+      "name": "Dare",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "fun/fun-dare.js",
+      "type": "legacy"
+    },
+    {
+      "id": "fun-japan",
+      "name": "Japan",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "fun/fun-japan.js",
+      "type": "legacy"
+    },
+    {
+      "id": "fun-khodam",
+      "name": "Khodam",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "fun/fun-khodam.js",
+      "type": "legacy"
+    },
+    {
+      "id": "fun-korea",
+      "name": "Korea",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "fun/fun-korea.js",
+      "type": "legacy"
+    },
+    {
+      "id": "fun-menfess",
+      "name": "Menfess",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "fun/fun-menfess.js",
+      "type": "legacy"
+    },
+    {
+      "id": "fun-menfess_ans",
+      "name": "Menfess Ans",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "fun/fun-menfess_ans.js",
+      "type": "legacy"
+    },
+    {
+      "id": "fun-random",
+      "name": "Random",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "fun/fun-random.js",
+      "type": "legacy"
+    },
+    {
+      "id": "fun-sound",
+      "name": "Sound",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "fun/fun-sound.js",
+      "type": "legacy"
+    },
+    {
+      "id": "fun-tembak",
+      "name": "Tembak",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "fun/fun-tembak.js",
+      "type": "legacy"
+    },
+    {
+      "id": "fun-terima",
+      "name": "Terima",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "fun/fun-terima.js",
+      "type": "legacy"
+    },
+    {
+      "id": "fun-tolak",
+      "name": "Tolak",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "fun/fun-tolak.js",
+      "type": "legacy"
+    },
+    {
+      "id": "roasting",
+      "name": "Roasting",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "fun/roasting.js",
+      "type": "legacy"
+    },
+    {
+      "id": "game-blackjack",
+      "name": "Blackjack",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "game/game-blackjack.js",
+      "type": "legacy"
+    },
+    {
+      "id": "game-caklontong-hint",
+      "name": "Caklontong Hint",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "game/game-caklontong-hint.js",
+      "type": "legacy"
+    },
+    {
+      "id": "game-caklontong",
+      "name": "Caklontong",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "game/game-caklontong.js",
+      "type": "legacy"
+    },
+    {
+      "id": "game-chess",
+      "name": "Chess",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "game/game-chess.js",
+      "type": "legacy"
+    },
+    {
+      "id": "game-chess_ans",
+      "name": "Chess Ans",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "game/game-chess_ans.js",
+      "type": "legacy"
+    },
+    {
+      "id": "game-dadu",
+      "name": "Dadu",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "game/game-dadu.js",
+      "type": "legacy"
+    },
+    {
+      "id": "game-hangman",
+      "name": "Hangman",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "game/game-hangman.js",
+      "type": "legacy"
+    },
+    {
+      "id": "game-minesweeper",
+      "name": "Minesweeper",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "game/game-minesweeper.js",
+      "type": "legacy"
+    },
+    {
+      "id": "game-suitpvp",
+      "name": "Suitpvp",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "game/game-suitpvp.js",
+      "type": "legacy"
+    },
+    {
+      "id": "game-suitpvp_ans",
+      "name": "Suitpvp Ans",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "game/game-suitpvp_ans.js",
+      "type": "legacy"
+    },
+    {
+      "id": "game-susunkata",
+      "name": "Susunkata",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "game/game-susunkata.js",
+      "type": "legacy"
+    },
+    {
+      "id": "game-ulartangga",
+      "name": "Ulartangga",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "game/game-ulartangga.js",
+      "type": "legacy"
+    },
+    {
+      "id": "game-ww",
+      "name": "Ww",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "game/game-ww.js",
+      "type": "legacy"
+    },
+    {
+      "id": "game-wwpc",
+      "name": "Wwpc",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "game/game-wwpc.js",
+      "type": "legacy"
+    },
+    {
+      "id": "gams-chess_ans",
+      "name": "Gams Chess Ans",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "game/gams-chess_ans.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tebakanime",
+      "name": "Tebakanime",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "game/tebakanime.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tebakbendera",
+      "name": "Tebakbendera",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "game/tebakbendera.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tebakgame",
+      "name": "Tebakgame",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "game/tebakgame.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tebakkata",
+      "name": "Tebakkata",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "game/tebakkata.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tebakkimia",
+      "name": "Tebakkimia",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "game/tebakkimia.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tebakkimia_ans",
+      "name": "Tebakkimia Ans",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "game/tebakkimia_ans.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tebakkimia_hint",
+      "name": "Tebakkimia Hint",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "game/tebakkimia_hint.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tebaklagu",
+      "name": "Tebaklagu",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "game/tebaklagu.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tebaklirik",
+      "name": "Tebaklirik",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "game/tebaklirik.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tebaklirik_ans",
+      "name": "Tebaklirik Ans",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "game/tebaklirik_ans.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tebaklirik_hint",
+      "name": "Tebaklirik Hint",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "game/tebaklirik_hint.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tebaklogo",
+      "name": "Tebaklogo",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "game/tebaklogo.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tekateki",
+      "name": "Tekateki",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "game/tekateki.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tekateki_ans",
+      "name": "Tekateki Ans",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "game/tekateki_ans.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tekateki_hint",
+      "name": "Tekateki Hint",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "game/tekateki_hint.js",
+      "type": "legacy"
+    },
+    {
+      "id": "_getpp",
+      "name": " Getpp",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/_getpp.js",
+      "type": "legacy"
+    },
+    {
+      "id": "absen-absen",
+      "name": "Absen Absen",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/absen-absen.js",
+      "type": "legacy"
+    },
+    {
+      "id": "absen-cekabsen",
+      "name": "Absen Cekabsen",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/absen-cekabsen.js",
+      "type": "legacy"
+    },
+    {
+      "id": "absen-delete",
+      "name": "Absen Delete",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/absen-delete.js",
+      "type": "legacy"
+    },
+    {
+      "id": "absen-start",
+      "name": "Absen Start",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/absen-start.js",
+      "type": "legacy"
+    },
+    {
+      "id": "giveaway-cek",
+      "name": "Giveaway Cek",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/giveaway-cek.js",
+      "type": "legacy"
+    },
+    {
+      "id": "giveaway-delete",
+      "name": "Giveaway Delete",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/giveaway-delete.js",
+      "type": "legacy"
+    },
+    {
+      "id": "giveaway-event",
+      "name": "Giveaway Event",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/giveaway-event.js",
+      "type": "legacy"
+    },
+    {
+      "id": "giveaway-ikut",
+      "name": "Giveaway Ikut",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/giveaway-ikut.js",
+      "type": "legacy"
+    },
+    {
+      "id": "giveaway-mulai",
+      "name": "Giveaway Mulai",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/giveaway-mulai.js",
+      "type": "legacy"
+    },
+    {
+      "id": "giveaway-roll",
+      "name": "Giveaway Roll",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/giveaway-roll.js",
+      "type": "legacy"
+    },
+    {
+      "id": "group-acc",
+      "name": "Acc",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/group-acc.js",
+      "type": "legacy"
+    },
+    {
+      "id": "group-antibot",
+      "name": "Antibot",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/group-antibot.js",
+      "type": "legacy"
+    },
+    {
+      "id": "group-antiimage",
+      "name": "Antiimage",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/group-antiimage.js",
+      "type": "legacy"
+    },
+    {
+      "id": "group-antilink",
+      "name": "Antilink",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/group-antilink.js",
+      "type": "legacy"
+    },
+    {
+      "id": "group-delete",
+      "name": "Delete",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/group-delete.js",
+      "type": "legacy"
+    },
+    {
+      "id": "group-everyone",
+      "name": "Everyone",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/group-everyone.js",
+      "type": "legacy"
+    },
+    {
+      "id": "group-getbio",
+      "name": "Getbio",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/group-getbio.js",
+      "type": "legacy"
+    },
+    {
+      "id": "group-h",
+      "name": "H",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/group-h.js",
+      "type": "legacy"
+    },
+    {
+      "id": "group-hidetag",
+      "name": "Hidetag",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/group-hidetag.js",
+      "type": "legacy"
+    },
+    {
+      "id": "group-info",
+      "name": "Info",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/group-info.js",
+      "type": "legacy"
+    },
+    {
+      "id": "group-intro",
+      "name": "Intro",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/group-intro.js",
+      "type": "legacy"
+    },
+    {
+      "id": "group-kick",
+      "name": "Kick",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/group-kick.js",
+      "type": "legacy"
+    },
+    {
+      "id": "group-linkgc",
+      "name": "Linkgc",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/group-linkgc.js",
+      "type": "legacy"
+    },
+    {
+      "id": "group-listonline",
+      "name": "Listonline",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/group-listonline.js",
+      "type": "legacy"
+    },
+    {
+      "id": "group-poll",
+      "name": "Poll",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/group-poll.js",
+      "type": "legacy"
+    },
+    {
+      "id": "group-promote",
+      "name": "Promote",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/group-promote.js",
+      "type": "legacy"
+    },
+    {
+      "id": "group-revoke",
+      "name": "Revoke",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/group-revoke.js",
+      "type": "legacy"
+    },
+    {
+      "id": "group-setbye",
+      "name": "Setbye",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/group-setbye.js",
+      "type": "legacy"
+    },
+    {
+      "id": "group-setdemote",
+      "name": "Setdemote",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/group-setdemote.js",
+      "type": "legacy"
+    },
+    {
+      "id": "group-setpp",
+      "name": "Setpp",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/group-setpp.js",
+      "type": "legacy"
+    },
+    {
+      "id": "group-setpromote",
+      "name": "Setpromote",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/group-setpromote.js",
+      "type": "legacy"
+    },
+    {
+      "id": "group-settings",
+      "name": "Settings",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/group-settings.js",
+      "type": "legacy"
+    },
+    {
+      "id": "group-setwelcome",
+      "name": "Setwelcome",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/group-setwelcome.js",
+      "type": "legacy"
+    },
+    {
+      "id": "group-tagme",
+      "name": "Tagme",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/group-tagme.js",
+      "type": "legacy"
+    },
+    {
+      "id": "group-time",
+      "name": "Time",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/group-time.js",
+      "type": "legacy"
+    },
+    {
+      "id": "group-totalmember",
+      "name": "Totalmember",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/group-totalmember.js",
+      "type": "legacy"
+    },
+    {
+      "id": "group-votekick",
+      "name": "Votekick",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/group-votekick.js",
+      "type": "legacy"
+    },
+    {
+      "id": "group-welcome",
+      "name": "Welcome",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/group-welcome.js",
+      "type": "legacy"
+    },
+    {
+      "id": "ken-culik",
+      "name": "Ken Culik",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/ken-culik.js",
+      "type": "legacy"
+    },
+    {
+      "id": "listonline",
+      "name": "Listonline",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/listonline.js",
+      "type": "legacy"
+    },
+    {
+      "id": "schedule",
+      "name": "Schedule",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "group/schedule.js",
+      "type": "legacy"
+    },
+    {
+      "id": "chlist",
+      "name": "Chlist",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/chlist.js",
+      "type": "legacy"
+    },
+    {
+      "id": "ci",
+      "name": "Ci",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/ci.js",
+      "type": "legacy"
+    },
+    {
+      "id": "dash",
+      "name": "Dash",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/dash.js",
+      "type": "legacy"
+    },
+    {
+      "id": "getlid",
+      "name": "Getlid",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/getlid.js",
+      "type": "legacy"
+    },
+    {
+      "id": "info-about",
+      "name": "About",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/info-about.js",
+      "type": "legacy"
+    },
+    {
+      "id": "info-bot",
+      "name": "Bot",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/info-bot.js",
+      "type": "legacy"
+    },
+    {
+      "id": "info-buyprem",
+      "name": "Buyprem",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/info-buyprem.js",
+      "type": "legacy"
+    },
+    {
+      "id": "info-cariresep",
+      "name": "Cariresep",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/info-cariresep.js",
+      "type": "legacy"
+    },
+    {
+      "id": "info-daftar",
+      "name": "Daftar",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/info-daftar.js",
+      "type": "legacy"
+    },
+    {
+      "id": "info-disk",
+      "name": "Disk",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/info-disk.js",
+      "type": "legacy"
+    },
+    {
+      "id": "info-example",
+      "name": "Example",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/info-example.js",
+      "type": "legacy"
+    },
+    {
+      "id": "info-gcbot",
+      "name": "Gcbot",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/info-gcbot.js",
+      "type": "legacy"
+    },
+    {
+      "id": "info-gempa",
+      "name": "Gempa",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/info-gempa.js",
+      "type": "legacy"
+    },
+    {
+      "id": "info-listgc",
+      "name": "Listgc",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/info-listgc.js",
+      "type": "legacy"
+    },
+    {
+      "id": "info-listpc",
+      "name": "Listpc",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/info-listpc.js",
+      "type": "legacy"
+    },
+    {
+      "id": "info-owner",
+      "name": "Owner",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/info-owner.js",
+      "type": "legacy"
+    },
+    {
+      "id": "info-ping",
+      "name": "Ping",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/info-ping.js",
+      "type": "legacy"
+    },
+    {
+      "id": "info-profile",
+      "name": "Profile",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/info-profile.js",
+      "type": "legacy"
+    },
+    {
+      "id": "info-puasa",
+      "name": "Puasa",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/info-puasa.js",
+      "type": "legacy"
+    },
+    {
+      "id": "info-rules",
+      "name": "Rules",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/info-rules.js",
+      "type": "legacy"
+    },
+    {
+      "id": "info-runtime",
+      "name": "Runtime",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/info-runtime.js",
+      "type": "legacy"
+    },
+    {
+      "id": "info-script",
+      "name": "Script",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/info-script.js",
+      "type": "legacy"
+    },
+    {
+      "id": "info-server",
+      "name": "Server",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/info-server.js",
+      "type": "legacy"
+    },
+    {
+      "id": "info-status",
+      "name": "Status",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/info-status.js",
+      "type": "legacy"
+    },
+    {
+      "id": "info-totalchat",
+      "name": "Totalchat",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/info-totalchat.js",
+      "type": "legacy"
+    },
+    {
+      "id": "info-totalfitur",
+      "name": "Totalfitur",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/info-totalfitur.js",
+      "type": "legacy"
+    },
+    {
+      "id": "info-user",
+      "name": "User",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/info-user.js",
+      "type": "legacy"
+    },
+    {
+      "id": "kalender",
+      "name": "Kalender",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/kalender.js",
+      "type": "legacy"
+    },
+    {
+      "id": "limit",
+      "name": "Limit",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/limit.js",
+      "type": "legacy"
+    },
+    {
+      "id": "listpc",
+      "name": "Listpc",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/listpc.js",
+      "type": "legacy"
+    },
+    {
+      "id": "listprem",
+      "name": "Listprem",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/listprem.js",
+      "type": "legacy"
+    },
+    {
+      "id": "main-afk",
+      "name": "Main Afk",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/main-afk.js",
+      "type": "legacy"
+    },
+    {
+      "id": "main-buttonrespon",
+      "name": "Main Buttonrespon",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/main-buttonrespon.js",
+      "type": "legacy"
+    },
+    {
+      "id": "main-cekid",
+      "name": "Main Cekid",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/main-cekid.js",
+      "type": "legacy"
+    },
+    {
+      "id": "main-donasi",
+      "name": "Main Donasi",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/main-donasi.js",
+      "type": "legacy"
+    },
+    {
+      "id": "main-premiumbot",
+      "name": "Main Premiumbot",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/main-premiumbot.js",
+      "type": "legacy"
+    },
+    {
+      "id": "main-sewabot",
+      "name": "Main Sewabot",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/main-sewabot.js",
+      "type": "legacy"
+    },
+    {
+      "id": "main-unregister",
+      "name": "Main Unregister",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/main-unregister.js",
+      "type": "legacy"
+    },
+    {
+      "id": "menu",
+      "name": "Menu",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/menu.js",
+      "type": "legacy"
+    },
+    {
+      "id": "mode",
+      "name": "Mode",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/mode.js",
+      "type": "legacy"
+    },
+    {
+      "id": "profile",
+      "name": "Profile",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/profile.js",
+      "type": "legacy"
+    },
+    {
+      "id": "request",
+      "name": "Request",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/request.js",
+      "type": "legacy"
+    },
+    {
+      "id": "usr",
+      "name": "Usr",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "info/usr.js",
+      "type": "legacy"
+    },
+    {
+      "id": "internet-cariresep",
+      "name": "Internet Cariresep",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "internet/internet-cariresep.js",
+      "type": "legacy"
+    },
+    {
+      "id": "internet-ceritahoror",
+      "name": "Internet Ceritahoror",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "internet/internet-ceritahoror.js",
+      "type": "legacy"
+    },
+    {
+      "id": "internet-freepik",
+      "name": "Internet Freepik",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "internet/internet-freepik.js",
+      "type": "legacy"
+    },
+    {
+      "id": "internet-gore",
+      "name": "Internet Gore",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "internet/internet-gore.js",
+      "type": "legacy"
+    },
+    {
+      "id": "internet-happymod",
+      "name": "Internet Happymod",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "internet/internet-happymod.js",
+      "type": "legacy"
+    },
+    {
+      "id": "internet-igstalk",
+      "name": "Internet Igstalk",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "internet/internet-igstalk.js",
+      "type": "legacy"
+    },
+    {
+      "id": "internet-jadwaltv",
+      "name": "Internet Jadwaltv",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "internet/internet-jadwaltv.js",
+      "type": "legacy"
+    },
+    {
+      "id": "internet-jarak",
+      "name": "Internet Jarak",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "internet/internet-jarak.js",
+      "type": "legacy"
+    },
+    {
+      "id": "internet-jjanime",
+      "name": "Internet Jjanime",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "internet/internet-jjanime.js",
+      "type": "legacy"
+    },
+    {
+      "id": "internet-lirik",
+      "name": "Internet Lirik",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "internet/internet-lirik.js",
+      "type": "legacy"
+    },
+    {
+      "id": "internet-lk21",
+      "name": "Internet Lk21",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "internet/internet-lk21.js",
+      "type": "legacy"
+    },
+    {
+      "id": "internet-meme",
+      "name": "Internet Meme",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "internet/internet-meme.js",
+      "type": "legacy"
+    },
+    {
+      "id": "internet-pinterest",
+      "name": "Internet Pinterest",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "internet/internet-pinterest.js",
+      "type": "legacy"
+    },
+    {
+      "id": "internet-pixabay",
+      "name": "Internet Pixabay",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "internet/internet-pixabay.js",
+      "type": "legacy"
+    },
+    {
+      "id": "internet-pixiv",
+      "name": "Internet Pixiv",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "internet/internet-pixiv.js",
+      "type": "legacy"
+    },
+    {
+      "id": "ppcp",
+      "name": "Ppcp",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "internet/ppcp.js",
+      "type": "legacy"
+    },
+    {
+      "id": "quotes-galau",
+      "name": "Quotes Galau",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "internet/quotes-galau.js",
+      "type": "legacy"
+    },
+    {
+      "id": "quotes-senja",
+      "name": "Quotes Senja",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "internet/quotes-senja.js",
+      "type": "legacy"
+    },
+    {
+      "id": "jadibot",
+      "name": "Jadibot",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "jadibot/jadibot.js",
+      "type": "legacy"
+    },
+    {
+      "id": "listjadibot",
+      "name": "Listjadibot",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "jadibot/listjadibot.js",
+      "type": "legacy"
+    },
+    {
+      "id": "stopjadibot",
+      "name": "Stopjadibot",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "jadibot/stopjadibot.js",
+      "type": "legacy"
+    },
+    {
+      "id": "color",
+      "name": "Color",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "maker/color.js",
+      "type": "legacy"
+    },
+    {
+      "id": "commusism",
+      "name": "Commusism",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "maker/commusism.js",
+      "type": "legacy"
+    },
+    {
+      "id": "drake",
+      "name": "Drake",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "maker/drake.js",
+      "type": "legacy"
+    },
+    {
+      "id": "maker-anonim",
+      "name": "Maker Anonim",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "maker/maker-anonim.js",
+      "type": "legacy"
+    },
+    {
+      "id": "maker-text",
+      "name": "Maker Text",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "maker/maker-text.js",
+      "type": "legacy"
+    },
+    {
+      "id": "maker-wasted",
+      "name": "Maker Wasted",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "maker/maker-wasted.js",
+      "type": "legacy"
+    },
+    {
+      "id": "nokia",
+      "name": "Nokia",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "maker/nokia.js",
+      "type": "legacy"
+    },
+    {
+      "id": "pooh",
+      "name": "Pooh",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "maker/pooh.js",
+      "type": "legacy"
+    },
+    {
+      "id": "quotes",
+      "name": "Quotes",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "maker/quotes.js",
+      "type": "legacy"
+    },
+    {
+      "id": "sadcat",
+      "name": "Sadcat",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "maker/sadcat.js",
+      "type": "legacy"
+    },
+    {
+      "id": "wanted",
+      "name": "Wanted",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "maker/wanted.js",
+      "type": "legacy"
+    },
+    {
+      "id": "ceksewa",
+      "name": "Ceksewa",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "owner/ceksewa.js",
+      "type": "legacy"
+    },
+    {
+      "id": "delfitur",
+      "name": "Delfitur",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "owner/delfitur.js",
+      "type": "legacy"
+    },
+    {
+      "id": "dellimit",
+      "name": "Dellimit",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "owner/dellimit.js",
+      "type": "legacy"
+    },
+    {
+      "id": "delprem",
+      "name": "Delprem",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "owner/delprem.js",
+      "type": "legacy"
+    },
+    {
+      "id": "ken-addsaldo",
+      "name": "Ken Addsaldo",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "owner/ken-addsaldo.js",
+      "type": "legacy"
+    },
+    {
+      "id": "kudeta",
+      "name": "Kudeta",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "owner/kudeta.js",
+      "type": "legacy"
+    },
+    {
+      "id": "mute",
+      "name": "Mute",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "owner/mute.js",
+      "type": "legacy"
+    },
+    {
+      "id": "owner-addmoney",
+      "name": "Addmoney",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "owner/owner-addmoney.js",
+      "type": "legacy"
+    },
+    {
+      "id": "owner-addprem",
+      "name": "Addprem",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "owner/owner-addprem.js",
+      "type": "legacy"
+    },
+    {
+      "id": "owner-bcgc",
+      "name": "Bcgc",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "owner/owner-bcgc.js",
+      "type": "legacy"
+    },
+    {
+      "id": "owner-blockcmd",
+      "name": "Blockcmd",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "owner/owner-blockcmd.js",
+      "type": "legacy"
+    },
+    {
+      "id": "owner-broadcast",
+      "name": "Broadcast",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "owner/owner-broadcast.js",
+      "type": "legacy"
+    },
+    {
+      "id": "owner-clearchat",
+      "name": "Clearchat",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "owner/owner-clearchat.js",
+      "type": "legacy"
+    },
+    {
+      "id": "owner-csessi",
+      "name": "Csessi",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "owner/owner-csessi.js",
+      "type": "legacy"
+    },
+    {
+      "id": "owner-debug",
+      "name": "Debug",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "owner/owner-debug.js",
+      "type": "legacy"
+    },
+    {
+      "id": "owner-delprem",
+      "name": "Delprem",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "owner/owner-delprem.js",
+      "type": "legacy"
+    },
+    {
+      "id": "owner-gconly",
+      "name": "Gconly",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "owner/owner-gconly.js",
+      "type": "legacy"
+    },
+    {
+      "id": "owner-getip",
+      "name": "Getip",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "owner/owner-getip.js",
+      "type": "legacy"
+    },
+    {
+      "id": "owner-giveaway",
+      "name": "Giveaway",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "owner/owner-giveaway.js",
+      "type": "legacy"
+    },
+    {
+      "id": "owner-gp",
+      "name": "Gp",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "owner/owner-gp.js",
+      "type": "legacy"
+    },
+    {
+      "id": "owner-ip",
+      "name": "Ip",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "owner/owner-ip.js",
+      "type": "legacy"
+    },
+    {
+      "id": "owner-leavegc",
+      "name": "Leavegc",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "owner/owner-leavegc.js",
+      "type": "legacy"
+    },
+    {
+      "id": "owner-self_public",
+      "name": "Self Public",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "owner/owner-self_public.js",
+      "type": "legacy"
+    },
+    {
+      "id": "owner-setpp",
+      "name": "Setpp",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "owner/owner-setpp.js",
+      "type": "legacy"
+    },
+    {
+      "id": "owner-ssvefile",
+      "name": "Ssvefile",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "owner/owner-ssvefile.js",
+      "type": "legacy"
+    },
+    {
+      "id": "owner-sudo",
+      "name": "Sudo",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "owner/owner-sudo.js",
+      "type": "legacy"
+    },
+    {
+      "id": "owner-tf",
+      "name": "Tf",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "owner/owner-tf.js",
+      "type": "legacy"
+    },
+    {
+      "id": "owner-upsw",
+      "name": "Upsw",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "owner/owner-upsw.js",
+      "type": "legacy"
+    },
+    {
+      "id": "owner-warn",
+      "name": "Warn",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "owner/owner-warn.js",
+      "type": "legacy"
+    },
+    {
+      "id": "owner-whitelist",
+      "name": "Whitelist",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "owner/owner-whitelist.js",
+      "type": "legacy"
+    },
+    {
+      "id": "restart",
+      "name": "Restart",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "owner/restart.js",
+      "type": "legacy"
+    },
+    {
+      "id": "savefile",
+      "name": "Savefile",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "owner/savefile.js",
+      "type": "legacy"
+    },
+    {
+      "id": "setmenu",
+      "name": "Setmenu",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "owner/setmenu.js",
+      "type": "legacy"
+    },
+    {
+      "id": "nsfw-hentaivid",
+      "name": "Nsfw Hentaivid",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "premium/nsfw-hentaivid.js",
+      "type": "legacy"
+    },
+    {
+      "id": "nsfw-ometv",
+      "name": "Nsfw Ometv",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "premium/nsfw-ometv.js",
+      "type": "legacy"
+    },
+    {
+      "id": "nsfw-onlyfans",
+      "name": "Nsfw Onlyfans",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "premium/nsfw-onlyfans.js",
+      "type": "legacy"
+    },
+    {
+      "id": "nsfw2",
+      "name": "Nsfw2",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "premium/nsfw2.js",
+      "type": "legacy"
+    },
+    {
+      "id": "premium-delcmd",
+      "name": "Delcmd",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "premium/premium-delcmd.js",
+      "type": "legacy"
+    },
+    {
+      "id": "premium-hentaivid",
+      "name": "Hentaivid",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "premium/premium-hentaivid.js",
+      "type": "legacy"
+    },
+    {
+      "id": "premium-join",
+      "name": "Join",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "premium/premium-join.js",
+      "type": "legacy"
+    },
+    {
+      "id": "premium-listcmd",
+      "name": "Listcmd",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "premium/premium-listcmd.js",
+      "type": "legacy"
+    },
+    {
+      "id": "premium-setcmd",
+      "name": "Setcmd",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "premium/premium-setcmd.js",
+      "type": "legacy"
+    },
+    {
+      "id": "premium-xnxx",
+      "name": "Xnxx",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "premium/premium-xnxx.js",
+      "type": "legacy"
+    },
+    {
+      "id": "xnxx",
+      "name": "Xnxx",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "premium/xnxx.js",
+      "type": "legacy"
+    },
+    {
+      "id": "xnxxdl",
+      "name": "Xnxxdl",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "premium/xnxxdl.js",
+      "type": "legacy"
+    },
+    {
+      "id": "akun_yt",
+      "name": "Akun Yt",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/akun_yt.js",
+      "type": "legacy"
+    },
+    {
+      "id": "buat_akun",
+      "name": "Buat Akun",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/buat_akun.js",
+      "type": "legacy"
+    },
+    {
+      "id": "life-agama",
+      "name": "Life Agama",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/life-agama.js",
+      "type": "legacy"
+    },
+    {
+      "id": "life-bebaskan",
+      "name": "Life Bebaskan",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/life-bebaskan.js",
+      "type": "legacy"
+    },
+    {
+      "id": "life-checkjail",
+      "name": "Life Checkjail",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/life-checkjail.js",
+      "type": "legacy"
+    },
+    {
+      "id": "life-follow",
+      "name": "Life Follow",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/life-follow.js",
+      "type": "legacy"
+    },
+    {
+      "id": "life-followers",
+      "name": "Life Followers",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/life-followers.js",
+      "type": "legacy"
+    },
+    {
+      "id": "life-job",
+      "name": "Life Job",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/life-job.js",
+      "type": "legacy"
+    },
+    {
+      "id": "life-jobkerja",
+      "name": "Life Jobkerja",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/life-jobkerja.js",
+      "type": "legacy"
+    },
+    {
+      "id": "life-penjara",
+      "name": "Life Penjara",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/life-penjara.js",
+      "type": "legacy"
+    },
+    {
+      "id": "life-setage",
+      "name": "Life Setage",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/life-setage.js",
+      "type": "legacy"
+    },
+    {
+      "id": "life-setkota",
+      "name": "Life Setkota",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/life-setkota.js",
+      "type": "legacy"
+    },
+    {
+      "id": "life-setnama",
+      "name": "Life Setnama",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/life-setnama.js",
+      "type": "legacy"
+    },
+    {
+      "id": "life-setprofile",
+      "name": "Life Setprofile",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/life-setprofile.js",
+      "type": "legacy"
+    },
+    {
+      "id": "life-unfollow",
+      "name": "Life Unfollow",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/life-unfollow.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-adventure",
+      "name": "Adventure",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-adventure.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-airdrop",
+      "name": "Airdrop",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-airdrop.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-aot_copy",
+      "name": "Aot Copy",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-aot copy.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-aot",
+      "name": "Aot",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-aot.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-atm",
+      "name": "Atm",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-atm.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-bank",
+      "name": "Bank",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-bank.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-bansos",
+      "name": "Bansos",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-bansos.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-berdagang",
+      "name": "Berdagang",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-berdagang.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-berkebon",
+      "name": "Berkebon",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-berkebon.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-berkenon",
+      "name": "Berkenon",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-berkenon.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-bonus",
+      "name": "Bonus",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-bonus.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-buah",
+      "name": "Buah",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-buah.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-buylimit",
+      "name": "Buylimit",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-buylimit.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-claim",
+      "name": "Claim",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-claim.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-collect",
+      "name": "Collect",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-collect.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-copet",
+      "name": "Copet",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-copet.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-craft",
+      "name": "Craft",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-craft.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-daily",
+      "name": "Daily",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-daily.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-demonslayer",
+      "name": "Demonslayer",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-demonslayer.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-demoonblood",
+      "name": "Demoonblood",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-demoonblood.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-dompet",
+      "name": "Dompet",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-dompet.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-dungeon",
+      "name": "Dungeon",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-dungeon.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-eat",
+      "name": "Eat",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-eat.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-feed",
+      "name": "Feed",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-feed.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-fishshoop",
+      "name": "Fishshoop",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-fishshoop.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-heal",
+      "name": "Heal",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-heal.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-inventory",
+      "name": "Inventory",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-inventory.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-jackpot",
+      "name": "Jackpot",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-jackpot.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-judi",
+      "name": "Judi",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-judi.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-kandang",
+      "name": "Kandang",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-kandang.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-kencan",
+      "name": "Kencan",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-kencan.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-kerja",
+      "name": "Kerja",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-kerja.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-koboy",
+      "name": "Koboy",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-koboy.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-listslayer",
+      "name": "Listslayer",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-listslayer.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-mancing",
+      "name": "Mancing",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-mancing.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-marketstall",
+      "name": "Marketstall",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-marketstall.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-membunuh",
+      "name": "Membunuh",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-membunuh.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-merampok",
+      "name": "Merampok",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-merampok.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-mulung",
+      "name": "Mulung",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-mulung.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-nabung",
+      "name": "Nabung",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-nabung.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-ngaji",
+      "name": "Ngaji",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-ngaji.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-ngelont",
+      "name": "Ngelont",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-ngelont.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-ngepet",
+      "name": "Ngepet",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-ngepet.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-ngewe",
+      "name": "Ngewe",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-ngewe.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-nguli",
+      "name": "Nguli",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-nguli.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-ojek",
+      "name": "Ojek",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-ojek.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-opebo",
+      "name": "Opebo",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-opebo.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-open",
+      "name": "Open",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-open.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-paksa",
+      "name": "Paksa",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-paksa.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-pasar",
+      "name": "Pasar",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-pasar.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-petshop",
+      "name": "Petshop",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-petshop.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-polisi",
+      "name": "Polisi",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-polisi.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-roket",
+      "name": "Roket",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-roket.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-selectdemon",
+      "name": "Selectdemon",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-selectdemon.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-setslayer",
+      "name": "Setslayer",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-setslayer.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-shop",
+      "name": "Shop",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-shop.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-transfer",
+      "name": "Transfer",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-transfer.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-weekly",
+      "name": "Weekly",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-weekly.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpg-wikwik",
+      "name": "Wikwik",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpg-wikwik.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpgG-guild",
+      "name": "G Guild",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpgG-guild.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpgG-staff",
+      "name": "G Staff",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpgG-staff.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpgG_accept",
+      "name": "G Accept",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpgG_accept.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpgG_acceptinvite",
+      "name": "G Acceptinvite",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpgG_acceptinvite.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpgG_attactrandom",
+      "name": "G Attactrandom",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpgG_attactrandom.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpgG_create",
+      "name": "G Create",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpgG_create.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpgG_decline",
+      "name": "G Decline",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpgG_decline.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpgG_delguild",
+      "name": "G Delguild",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpgG_delguild.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpgG_demote",
+      "name": "G Demote",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpgG_demote.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpgG_info",
+      "name": "G Info",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpgG_info.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpgG_infoacc",
+      "name": "G Infoacc",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpgG_infoacc.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpgG_invite",
+      "name": "G Invite",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpgG_invite.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpgG_join",
+      "name": "G Join",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpgG_join.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpgG_left",
+      "name": "G Left",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpgG_left.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpgG_list",
+      "name": "G List",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpgG_list.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpgG_listacc",
+      "name": "G Listacc",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpgG_listacc.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpgG_my",
+      "name": "G My",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpgG_my.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpgG_promote",
+      "name": "G Promote",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpgG_promote.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpgG_tutotial",
+      "name": "G Tutotial",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpgG_tutotial.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpgG_upgrade",
+      "name": "G Upgrade",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpgG_upgrade.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpgG_war",
+      "name": "G War",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpgG_war.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpgG_waracc",
+      "name": "G Waracc",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpgG_waracc.js",
+      "type": "legacy"
+    },
+    {
+      "id": "rpgG_warpause",
+      "name": "G Warpause",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/rpgG_warpause.js",
+      "type": "legacy"
+    },
+    {
+      "id": "taxy",
+      "name": "Taxy",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/taxy.js",
+      "type": "legacy"
+    },
+    {
+      "id": "werewolf-gc",
+      "name": "Werewolf Gc",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/werewolf-gc.js",
+      "type": "legacy"
+    },
+    {
+      "id": "werewolf-pc",
+      "name": "Werewolf Pc",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/werewolf-pc.js",
+      "type": "legacy"
+    },
+    {
+      "id": "yt_live",
+      "name": "Yt Live",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "rpg/yt_live.js",
+      "type": "legacy"
+    },
+    {
+      "id": "blush",
+      "name": "Blush",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "sticker/blush.js",
+      "type": "legacy"
+    },
+    {
+      "id": "dance",
+      "name": "Dance",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "sticker/dance.js",
+      "type": "legacy"
+    },
+    {
+      "id": "handhold",
+      "name": "Handhold",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "sticker/handhold.js",
+      "type": "legacy"
+    },
+    {
+      "id": "happy",
+      "name": "Happy",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "sticker/happy.js",
+      "type": "legacy"
+    },
+    {
+      "id": "slap",
+      "name": "Slap",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "sticker/slap.js",
+      "type": "legacy"
+    },
+    {
+      "id": "sticker-brat",
+      "name": "Brat",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "sticker/sticker-brat.js",
+      "type": "legacy"
+    },
+    {
+      "id": "sticker-bratvid",
+      "name": "Bratvid",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "sticker/sticker-bratvid.js",
+      "type": "legacy"
+    },
+    {
+      "id": "sticker-emoji",
+      "name": "Emoji",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "sticker/sticker-emoji.js",
+      "type": "legacy"
+    },
+    {
+      "id": "sticker-emojimix",
+      "name": "Emojimix",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "sticker/sticker-emojimix.js",
+      "type": "legacy"
+    },
+    {
+      "id": "sticker-exif",
+      "name": "Exif",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "sticker/sticker-exif.js",
+      "type": "legacy"
+    },
+    {
+      "id": "sticker-meme",
+      "name": "Meme",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "sticker/sticker-meme.js",
+      "type": "legacy"
+    },
+    {
+      "id": "sticker-qc",
+      "name": "Qc",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "sticker/sticker-qc.js",
+      "type": "legacy"
+    },
+    {
+      "id": "sticker-sticker",
+      "name": "Sticker",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "sticker/sticker-sticker.js",
+      "type": "legacy"
+    },
+    {
+      "id": "sticker-tts",
+      "name": "Tts",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "sticker/sticker-tts.js",
+      "type": "legacy"
+    },
+    {
+      "id": "wm",
+      "name": "Wm",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "sticker/wm.js",
+      "type": "legacy"
+    },
+    {
+      "id": "cekstatus",
+      "name": "Cekstatus",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "store/cekstatus.js",
+      "type": "legacy"
+    },
+    {
+      "id": "deposit",
+      "name": "Deposit",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "store/deposit.js",
+      "type": "legacy"
+    },
+    {
+      "id": "donasii",
+      "name": "Donasii",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "store/donasii.js",
+      "type": "legacy"
+    },
+    {
+      "id": "mutasi-qris",
+      "name": "Mutasi Qris",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "store/mutasi-qris.js",
+      "type": "legacy"
+    },
+    {
+      "id": "saldo",
+      "name": "Saldo",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "store/saldo.js",
+      "type": "legacy"
+    },
+    {
+      "id": "store-done",
+      "name": "Done",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "store/store-done.js",
+      "type": "legacy"
+    },
+    {
+      "id": "store-main",
+      "name": "Main",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "store/store-main.js",
+      "type": "legacy"
+    },
+    {
+      "id": "beautify",
+      "name": "Beautify",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/beautify.js",
+      "type": "legacy"
+    },
+    {
+      "id": "d",
+      "name": "D",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/d.js",
+      "type": "legacy"
+    },
+    {
+      "id": "database",
+      "name": "Database",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/database.js",
+      "type": "legacy"
+    },
+    {
+      "id": "ephoto",
+      "name": "Ephoto",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/ephoto.js",
+      "type": "legacy"
+    },
+    {
+      "id": "grep",
+      "name": "Grep",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/grep.js",
+      "type": "legacy"
+    },
+    {
+      "id": "hdvideo",
+      "name": "Hdvideo",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/hdvideo.js",
+      "type": "legacy"
+    },
+    {
+      "id": "hololive",
+      "name": "Hololive",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/hololive.js",
+      "type": "legacy"
+    },
+    {
+      "id": "lacakip",
+      "name": "Lacakip",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/lacakip.js",
+      "type": "legacy"
+    },
+    {
+      "id": "quoted",
+      "name": "Quoted",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/quoted.js",
+      "type": "legacy"
+    },
+    {
+      "id": "readqr",
+      "name": "Readqr",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/readqr.js",
+      "type": "legacy"
+    },
+    {
+      "id": "readviewonce",
+      "name": "Readviewonce",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/readviewonce.js",
+      "type": "legacy"
+    },
+    {
+      "id": "toanime",
+      "name": "Toanime",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/toanime.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tobotak",
+      "name": "Tobotak",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/tobotak.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tool-furbrat",
+      "name": "Tool Furbrat",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/tool-furbrat.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tools-addimg",
+      "name": "Addimg",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/tools-addimg.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tools-carbon",
+      "name": "Carbon",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/tools-carbon.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tools-denc",
+      "name": "Denc",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/tools-denc.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tools-edit",
+      "name": "Edit",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/tools-edit.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tools-enc",
+      "name": "Enc",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/tools-enc.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tools-fakesize",
+      "name": "Fakesize",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/tools-fakesize.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tools-get",
+      "name": "Get",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/tools-get.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tools-getimg",
+      "name": "Getimg",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/tools-getimg.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tools-githubsearch",
+      "name": "Githubsearch",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/tools-githubsearch.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tools-hdr",
+      "name": "Hdr",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/tools-hdr.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tools-html",
+      "name": "Html",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/tools-html.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tools-jadianime",
+      "name": "Jadianime",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/tools-jadianime.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tools-listimg",
+      "name": "Listimg",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/tools-listimg.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tools-logo",
+      "name": "Logo",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/tools-logo.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tools-mp3",
+      "name": "Mp3",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/tools-mp3.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tools-npm",
+      "name": "Npm",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/tools-npm.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tools-npmstalk",
+      "name": "Npmstalk",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/tools-npmstalk.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tools-ptv",
+      "name": "Ptv",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/tools-ptv.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tools-qr",
+      "name": "Qr",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/tools-qr.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tools-readmore",
+      "name": "Readmore",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/tools-readmore.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tools-removebg",
+      "name": "Removebg",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/tools-removebg.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tools-ssweb",
+      "name": "Ssweb",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/tools-ssweb.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tools-toimg",
+      "name": "Toimg",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/tools-toimg.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tools-tovideo",
+      "name": "Tovideo",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/tools-tovideo.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tools-translate",
+      "name": "Translate",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/tools-translate.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tools-uploader",
+      "name": "Uploader",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/tools-uploader.js",
+      "type": "legacy"
+    },
+    {
+      "id": "tools-whatmusic",
+      "name": "Whatmusic",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/tools-whatmusic.js",
+      "type": "legacy"
+    },
+    {
+      "id": "trackip",
+      "name": "Trackip",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/trackip.js",
+      "type": "legacy"
+    },
+    {
+      "id": "whois",
+      "name": "Whois",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/whois.js",
+      "type": "legacy"
+    },
+    {
+      "id": "zetavoice",
+      "name": "Zetavoice",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "tools/zetavoice.js",
+      "type": "legacy"
+    },
+    {
+      "id": "upload-msgch",
+      "name": "Upload Msgch",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "upload/upload-msgch.js",
+      "type": "legacy"
+    },
+    {
+      "id": "upload-tovnsaluran",
+      "name": "Upload Tovnsaluran",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "upload/upload-tovnsaluran.js",
+      "type": "legacy"
+    },
+    {
+      "id": "upsw-group",
+      "name": "Upsw Group",
+      "version": "1.0.0",
+      "enabled": true,
+      "path": "upload/upsw-group.js",
+      "type": "legacy"
+    }
+  ],
+  "lastScan": "2025-09-13T07:51:39.957Z",
+  "version": "1.0.0"
+}

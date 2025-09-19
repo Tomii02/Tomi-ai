@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tomi - Panel Layanan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: #fff;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #bg-media-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      background-color: #0f1c2c;
+    }
+
+    #bg-media-container video, 
+    #bg-media-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    
+    .main-box {
+      width: 360px; /* Lebar box lebih besar */
+      padding: 35px; /* Padding lebih besar */
+      border-radius: 20px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      transition: transform 0.3s ease-in-out;
+      animation: fadeIn 1s ease-in-out;
+      z-index: 1;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .profile-img {
+      width: 110px; /* Ukuran gambar profil lebih besar */
+      height: 110px;
+      border-radius: 50%;
+      border: 4px solid #4299e1; /* Border lebih tebal */
+      margin-bottom: 25px; /* Jarak bawah lebih besar */
+      object-fit: cover;
+      box-shadow: 0 0 20px #4299e1; /* Shadow lebih jelas */
+    }
+
+    h2 {
+      margin-top: 0;
+      margin-bottom: 30px; /* Jarak bawah lebih besar */
+      font-size: 28px; /* Ukuran font lebih besar */
+      font-weight: 700; /* Font lebih tebal */
+      text-shadow: 0 0 8px #fff; /* Shadow lebih jelas */
+    }
+    
+    input {
+      width: calc(100% - 24px); /* Ukuran input disesuaikan */
+      padding: 15px 12px; /* Padding lebih besar */
+      margin-bottom: 25px; /* Jarak bawah lebih besar */
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px; /* Radius lebih besar */
+      background: rgba(0, 0, 0, 0.2);
+      color: #fff;
+      text-align: center;
+      transition: all 0.3s ease;
+      font-size: 16px;
+    }
+    
+    input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+    
+    input:focus {
+      outline: none;
+      border-color: #4299e1;
+      box-shadow: 0 0 10px #4299e1; /* Shadow lebih jelas */
+    }
+
+    .button-container {
+      display: grid; /* Menggunakan grid untuk tata letak */
+      grid-template-columns: 1fr 1fr; /* 2 kolom per baris */
+      gap: 15px; /* Jarak antar tombol */
+    }
+
+    .button-full {
+      grid-column: span 2; /* Tombol ini akan menempati 2 kolom */
+    }
+
+    button {
+      padding: 18px; /* Padding lebih besar */
+      border: none;
+      border-radius: 15px; /* Radius lebih besar */
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.3s ease, background 0.3s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px; /* Jarak antar icon dan teks */
+      font-size: 15px;
+      text-transform: uppercase;
+      opacity: 0.95; /* Sedikit lebih solid */
+    }
+    
+    button:hover {
+      transform: translateY(-5px); /* Efek hover lebih kentara */
+      opacity: 1;
+    }
+
+    .wa { background: #25D366; color: #fff; }
+    .wa:hover { background: #1eaa59; }
+
+    .ai { background: #4299e1; color: #fff; }
+    .ai:hover { background: #3182ce; }
+
+    .trap { background: #805ad5; color: #fff; }
+    .trap:hover { background: #6b46c1; }
+    
+    .shop-btn { background: #38b2ac; color: #fff; }
+    .shop-btn:hover { background: #319795; }
+    
+    .generator-btn { background: #ed8936; color: #fff; }
+    .generator-btn:hover { background: #dd6b20; }
+    
+    .jurnal-btn { background: #90cdf4; color: #0f1c2c; }
+    .jurnal-btn:hover { background: #63b3ed; }
+    
+    .keuangan-btn { background: #68d391; color: #fff; }
+    .keuangan-btn:hover { background: #48bb78; }
+
+    .history-btn { background: #00bfff; color: #fff; }
+    .history-btn:hover { background: #00a4d4; }
+    
+    .admin-btn { background: #e53e3e; color: #fff; }
+    .admin-btn:hover { background: #c53030; }
+
+    .whatsapp-pairing { background: #075E54; color: #fff; }
+    .whatsapp-pairing:hover { background: #054a42; }
+
+    .watermark {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 14px;
+      font-weight: 300;
+      z-index: 1;
+    }
+
+    .admin-login-box {
+      background: rgba(0, 0, 0, 0.4);
+      padding: 25px; /* Padding lebih besar */
+      border-radius: 12px;
+      margin-top: 25px; /* Jarak atas lebih besar */
+      display: none;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    .admin-login-box input {
+      width: calc(100% - 24px);
+    }
+    .admin-login-box button {
+      background: #4299e1;
+      color: #fff;
+    }
+    
+    .admin-menu {
+      display: grid; /* Menggunakan grid juga */
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 25px;
+    }
+  </style>
+</head>
+<body>
+  
+  <div id="bg-media-container">
+    <video src="https://c.termai.cc/v27/vKp.mp4" autoplay loop muted playsinline></video>
+  </div>
+
+  <div class="main-box">
+    <img src="https://c.termai.cc/i39/mLLz.jpg" alt="Bella AI" class="profile-img" id="bella-logo">
+    <h2> Bella AI </h2>
+    <input id="nama" type="text" placeholder="Masukkan nama kamu">
+    <div class="button-container">
+      <button class="ai" onclick="gotoAI()">
+        <i class="fas fa-robot"></i> Tanya Bella
+      </button>
+      <button class="trap" onclick="gotoTrap()">
+        <i class="fas fa-heart"></i> Buat Kamu
+      </button>
+      <button class="shop-btn" onclick="gotoTomiShop()">
+        <i class="fas fa-shopping-cart"></i> TomiShop
+      </button>
+      <button class="jurnal-btn" onclick="gotoJurnal()">
+        <i class="fas fa-chart-line"></i> Jurnal Trading
+      </button>
+      <button class="keuangan-btn" onclick="gotoKeuangan()">
+        <i class="fas fa-file-invoice-dollar"></i> Laporan Keuangan
+      </button>
+      <button class="history-btn" onclick="gotoHistoryChat()">
+        <i class="fas fa-history"></i> History Chat WA
+      </button>
+      <button class="generator-btn" onclick="gotoGenerator()">
+        <i class="fas fa-file-code"></i> Buat Web
+      </button>
+      <button class="wa button-full" onclick="balikWA()">
+        <i class="fab fa-whatsapp"></i> Tomii-Dev
+      </button>
+    </div>
+    
+    <div id="admin-login-form" class="admin-login-box">
+        <input type="email" id="adminEmail" placeholder="Email Admin">
+        <input type="password" id="adminPassword" placeholder="Kata Sandi Admin">
+        <button onclick="loginAdmin()">
+            <i class="fas fa-sign-in-alt"></i> Login
+        </button>
+    </div>
+    
+    <div id="admin-menu" class="admin-menu" style="display: none;">
+      <button class="admin-btn" onclick="createVoucher()">
+        <i class="fas fa-ticket-alt"></i> Buat Voucher
+      </button>
+      <button class="admin-btn" onclick="refillVoucher()">
+        <i class="fas fa-redo-alt"></i> Isi Ulang Voucher
+      </button>
+    </div>
+  </div>
+  
+  <div class="watermark">
+    Developer: @Tomii
+  </div>
+
+  <script>
+    function balikWA() {
+      const nama = document.getElementById("nama").value.trim() || "Pengguna";
+      const text = `Halo, nama saya ${nama}. Salam kenal.`;
+      window.location.href = "https://wa.me/6285281555650?text=" + encodeURIComponent(text);
+    }
+    
+    function gotoTrap() {
+      const nama = document.getElementById("nama").value.trim() || "Sayang";
+      localStorage.setItem('playMusic', 'true');
+      window.location.href = `bucinweb.html?nama=${encodeURIComponent(nama)}`;
+    }
+    
+    function gotoAI() {
+      const nama = document.getElementById("nama").value.trim() || "Pengguna";
+      window.location.href = "chat.html?nama=" + encodeURIComponent(nama);
+    }
+    
+    function gotoJurnal() {
+      const nama = document.getElementById("nama").value.trim() || "Pengguna";
+      window.location.href = "jurnal.html?nama=" + encodeURIComponent(nama);
+    }
+    
+    function gotoKeuangan() {
+      const nama = document.getElementById("nama").value.trim() || "Pengguna";
+      window.location.href = "jurnal2.html?nama=" + encodeURIComponent(nama);
+    }
+    
+    function gotoHistoryChat() {
+      window.location.href = "chat_viewer.html";
+    }
+    
+    function gotoGenerator() {
+      window.location.href = "generator.html";
+    }
+    
+    function gotoTomiShop() {
+      window.location.href = "TomiShop.html";
+    }
+
+    const API_URL = 'http://localhost:3000/api';
+    
+    const bellaLogo = document.getElementById('bella-logo');
+    let clickCount = 0;
+    let clickTimeout;
+
+    bellaLogo.addEventListener('click', () => {
+        clickCount++;
+        clearTimeout(clickTimeout);
+        clickTimeout = setTimeout(() => {
+            clickCount = 0;
+        }, 1000);
+
+        if (clickCount === 5) {
+            document.getElementById('admin-login-form').style.display = 'block';
+            alert("Silakan masukkan email dan kata sandi admin.");
+            clickCount = 0;
+        }
+    });
+
+    const adminEmailInput = document.getElementById('adminEmail');
+    const adminPasswordInput = document.getElementById('adminPassword');
+
+    function allowTextDeletion(event) {
+        if (event.key === 'Backspace' || event.key === 'Delete') {
+            return true;
+        }
+    }
+
+    if (adminEmailInput) {
+        adminEmailInput.addEventListener('keydown', allowTextDeletion);
+    }
+    if (adminPasswordInput) {
+        adminPasswordInput.addEventListener('keydown', allowTextDeletion);
+    }
+
+    async function loginAdmin() {
+        const email = document.getElementById('adminEmail').value;
+        const password = document.getElementById('adminPassword').value;
+
+        if (!email || !password) {
+            alert('Email dan kata sandi harus diisi.');
+            return;
+        }
+
+        try {
+            const response = await fetch(`${API_URL}/auth/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+
+            const data = await response.json();
+            if (data.status) {
+                localStorage.setItem('token', data.token);
+                alert('Login Admin Berhasil!');
+                checkAdminStatus();
+                document.getElementById('admin-login-form').style.display = 'none';
+            } else {
+                alert('Login Gagal: ' + data.message);
+            }
+        } catch (error) {
+            console.error('Login error:', error);
+            alert('Terjadi kesalahan saat login.');
+        }
+    }
+
+    async function checkAdminStatus() {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            console.log('Tidak ada token, menu admin tidak ditampilkan.');
+            return;
+        }
+
+        try {
+            const response = await fetch(`${API_URL}/auth/admin-status`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}` 
+                }
+            });
+            
+            const data = await response.json();
+
+            if (data.isAdmin) {
+                const adminMenu = document.getElementById('admin-menu');
+                if (adminMenu) {
+                    adminMenu.style.display = 'grid';
+                    console.log('Pengguna adalah admin, menu rahasia ditampilkan.');
+                }
+            } else {
+                console.log('Pengguna bukan admin atau token tidak valid.');
+                localStorage.removeItem('token');
+            }
+        } catch (error) {
+            console.error('Gagal memvalidasi token:', error);
+            localStorage.removeItem('token');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', checkAdminStatus);
+    
+    // Add WhatsApp pairing button
+    document.addEventListener('DOMContentLoaded', function() {
+        const buttonContainer = document.querySelector('.button-container');
+        if (buttonContainer) {
+            const whatsappPairingButton = document.createElement('button');
+            whatsappPairingButton.className = 'whatsapp-pairing button-full';
+            whatsappPairingButton.onclick = function() {
+                window.location.href = 'whatsapp.html';
+            };
+            whatsappPairingButton.innerHTML = '<i class="fab fa-whatsapp"></i> Pairing WhatsApp Bot';
+            buttonContainer.appendChild(whatsappPairingButton);
+        }
+    });
+
+    function createVoucher() {
+      const code = prompt("Masukkan kode voucher:");
+      const type = prompt("Masukkan tipe (domain/service):");
+      const value = prompt("Masukkan nilai diskon (angka):");
+      
+      if (code && type && value) {
+        alert(`Membuat voucher:\nKode: ${code}\nTipe: ${type}\nNilai: Rp${value}`);
+      }
+    }
+
+    function refillVoucher() {
+      const code = prompt("Masukkan kode voucher yang akan diisi ulang:");
+      if (code) {
+        alert(`Mengisi ulang voucher:\nKode: ${code}`);
+      }
+    }
+  </script>
+</body>
+</html>

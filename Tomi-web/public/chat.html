@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bella AI Chat</title>
+  <script src="https://js.puter.com/v2/"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0d1117;
+      color: #c9d1d9;
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+    }
+    
+    .sidebar {
+      width: 250px;
+      background: #161b22;
+      border-right: 1px solid #30363d;
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+    }
+    .sidebar h2 {
+      padding: 15px 10px;
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+      color: #58a6ff;
+      text-align: center;
+      border-bottom: 1px solid #30363d;
+    }
+    .session-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px 0;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: #30363d #161b22;
+    }
+    .session-list::-webkit-scrollbar {
+      width: 8px;
+    }
+    .session-list::-webkit-scrollbar-track {
+      background: #161b22;
+    }
+    .session-list::-webkit-scrollbar-thumb {
+      background-color: #30363d;
+      border-radius: 4px;
+      border: 2px solid #161b22;
+    }
+    .session-item {
+      padding: 12px;
+      margin-bottom: 8px;
+      background: #21262d;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.2s ease, transform 0.2s ease;
+      font-size: 14px;
+      color: #c9d1d9;
+    }
+    .session-item:hover {
+      background: #30363d;
+      transform: translateY(-2px);
+    }
+    .session-item.active {
+      background: #58a6ff;
+      color: #0d1117;
+      font-weight: 600;
+    }
+    .session-item-text {
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .delete-btn {
+      color: #c9d1d9;
+      font-size: 18px;
+      margin-left: 10px;
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.2s ease;
+    }
+    .delete-btn:hover {
+      color: #f85149;
+    }
+    .new-session {
+      margin: 10px 0;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      background: #58a6ff;
+      color: #0d1117;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.2s ease;
+    }
+    .new-session:hover {
+      background: #4a90d9;
+    }
+
+    .chat-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .top-bar {
+      padding: 15px;
+      background: #161b22;
+      color: #58a6ff;
+      text-align: center;
+      font-size: 18px;
+      font-weight: 600;
+      border-bottom: 1px solid #30363d;
+    }
+    .chat-box {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: #30363d #0d1117;
+    }
+    .chat-box::-webkit-scrollbar {
+      width: 8px;
+    }
+    .chat-box::-webkit-scrollbar-track {
+      background: #0d1117;
+    }
+    .chat-box::-webkit-scrollbar-thumb {
+      background-color: #30363d;
+      border-radius: 4px;
+      border: 2px solid #0d1117;
+    }
+    
+    .msg {
+      max-width: 80%;
+      padding: 12px 16px;
+      border-radius: 18px;
+      line-height: 1.4;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .user {
+      align-self: flex-end;
+      background: #58a6ff;
+      color: #0d1117;
+      border-bottom-right-radius: 4px;
+    }
+    .ai {
+      align-self: flex-start;
+      background: #21262d;
+      color: #c9d1d9;
+      border: 1px solid #30363d;
+      border-bottom-left-radius: 4px;
+    }
+    .msg img.thumbnail {
+        max-width: 150px;
+        max-height: 150px;
+        border-radius: 8px;
+        object-fit: cover;
+        cursor: pointer;
+        display: block;
+        transition: transform 0.2s ease;
+    }
+    .msg img.thumbnail:hover {
+        transform: scale(1.05);
+    }
+
+    .input-area {
+      display: flex;
+      flex-direction: column;
+      padding: 15px;
+      background: #161b22;
+      border-top: 1px solid #30363d;
+      position: sticky;
+      bottom: 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    #previewArea {
+        display: none;
+        align-items: center;
+        gap: 10px;
+        padding-bottom: 10px;
+    }
+    #previewArea img {
+        max-width: 80px;
+        max-height: 80px;
+        border-radius: 10px;
+        object-fit: cover;
+    }
+    .remove-photo-btn {
+      color: #c9d1d9;
+      background: #f85149;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      transition: background 0.2s ease;
+    }
+    .remove-photo-btn:hover {
+      background: #d73a49;
+    }
+    #input-group {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+    input#msgInput {
+      flex: 1;
+      padding: 12px 20px;
+      border: 1px solid #30363d;
+      border-radius: 25px;
+      background: #0d1117;
+      color: #c9d1d9;
+      font-size: 15px;
+      transition: border-color 0.2s ease;
+    }
+    input#msgInput:focus {
+      outline: none;
+      border-color: #58a6ff;
+    }
+    .upload-btn {
+        background: #9047ff;
+        color: #fff;
+        padding: 12px;
+        border-radius: 50%;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: background 0.2s ease;
+    }
+    .upload-btn:hover {
+        background: #7a3ed1;
+    }
+    button {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 25px;
+      background: #58a6ff;
+      color: #0d1117;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    button:hover {
+      background: #4a90d9;
+      transform: translateY(-1px);
+    }
+    .btn-dev {
+      background: #25D366;
+      color: #fff;
+    }
+    .btn-dev:hover {
+      background: #1eaa59;
+    }
+
+    #imageViewer {
+        display: none;
+        position: fixed;
+        z-index: 2000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.95);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    #imageViewer img#fullImage {
+        max-width: 95%;
+        max-height: 95%;
+        border-radius: 10px;
+        object-fit: contain;
+    }
+    #imageViewer .close-btn {
+        position: absolute;
+        top: 25px;
+        right: 40px;
+        color: #fff;
+        font-size: 50px;
+        font-weight: bold;
+        transition: 0.3s;
+        cursor: pointer;
+    }
+    #imageViewer .close-btn:hover,
+    #imageViewer .close-btn:focus {
+        color: #bbb;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>Sesi Chat</h2>
+    <div id="sessionList" class="session-list"></div>
+    <button class="new-session" onclick="newSession()">+ Sesi Baru</button>
+  </div>
+
+  <div class="chat-area">
+    <div class="top-bar"> Bella AI Chat </div>
+    <div id="chatBox" class="chat-box"></div>
+    <div class="input-area">
+      <div id="previewArea"></div>
+      <div id="input-group">
+        <input id="msgInput" type="text" placeholder="Tulis pesan atau kirim foto...">
+        <input type="file" id="photoInput" accept="image/*" style="display:none;">
+        <button class="upload-btn" onclick="document.getElementById('photoInput').click()"></button>
+        <button onclick="sendMsg()">Kirim</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="imageViewer">
+    <span class="close-btn" onclick="closeImageViewer()">&times;</span>
+    <img id="fullImage">
+  </div>
+
+  <script>
+    const chatBox = document.getElementById("chatBox");
+    const msgInput = document.getElementById("msgInput");
+    const sessionList = document.getElementById("sessionList");
+    const photoInput = document.getElementById("photoInput");
+    const previewArea = document.getElementById("previewArea");
+    const imageViewer = document.getElementById("imageViewer");
+    const fullImage = document.getElementById("fullImage");
+
+    const params = new URLSearchParams(window.location.search);
+    let nama = params.get("nama") || localStorage.getItem("bella_nama") || "Anonim";
+    localStorage.setItem("bella_nama", nama);
+
+    const sessionsKey = `bella_sessions_${nama}`;
+    const sessionKey = `bella_session_${nama}`;
+    let sessions = JSON.parse(localStorage.getItem(sessionsKey) || "[]");
+    let sessionId = localStorage.getItem(sessionKey);
+    if (!sessionId || !sessions.find(s => s.id === sessionId)) {
+      sessionId = Date.now().toString();
+      sessions.push({ id: sessionId, name: "Sesi Baru" });
+      localStorage.setItem(sessionsKey, JSON.stringify(sessions));
+      localStorage.setItem(sessionKey, sessionId);
+    }
+
+    photoInput.addEventListener("change", function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewArea.innerHTML = `
+                    <img src="${e.target.result}" alt="Pratinjau Foto">
+                    <span class="remove-photo-btn" onclick="removePhoto()">X</span>
+                `;
+                previewArea.style.display = 'flex';
+            };
+            reader.readAsDataURL(file);
+        } else {
+            previewArea.innerHTML = '';
+            previewArea.style.display = 'none';
+        }
+    });
+
+    function removePhoto() {
+      photoInput.value = '';
+      previewArea.innerHTML = '';
+      previewArea.style.display = 'none';
+    }
+
+    function addMsg(content, sender, isImage = false, isNsfw = false) {
+      const div = document.createElement("div");
+      div.classList.add("msg", sender);
+      if (isImage) {
+        if (isNsfw) {
+            div.innerText = " Konten NSFW tidak bisa ditampilkan.";
+            div.style.background = "#ff5555";
+            div.style.color = "white";
+        } else {
+            const img = document.createElement("img");
+            img.src = content;
+            img.classList.add("thumbnail");
+            div.appendChild(img);
+        }
+      } else {
+          div.innerText = content;
+      }
+      chatBox.appendChild(div);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function openImageViewer(src) {
+        fullImage.src = src;
+        imageViewer.style.display = "flex";
+    }
+
+    function closeImageViewer() {
+        imageViewer.style.display = "none";
+        fullImage.src = "";
+    }
+
+    chatBox.addEventListener('click', function(event) {
+        if (event.target.tagName === 'IMG' && event.target.classList.contains('thumbnail')) {
+            openImageViewer(event.target.src);
+        }
+    });
+
+    imageViewer.addEventListener('click', function(event) {
+        if (event.target === imageViewer) {
+            closeImageViewer();
+        }
+    });
+
+    async function loadHistory() {
+      chatBox.innerHTML = "";
+      addMsg(" Memuat riwayat...", "ai");
+      try {
+        const res = await fetch(`/history?nama=${encodeURIComponent(nama)}&session=${sessionId}`);
+        const data = await res.json();
+        
+        chatBox.lastChild.remove();
+
+        if (data.status && data.history.length > 0) {
+          data.history.forEach(h => {
+            const isImage = h.isImage || (h.tanya && h.tanya.startsWith('/uploads/'));
+            addMsg(h.tanya, "user", isImage, h.isNsfw);
+            addMsg(h.jawab, "ai");
+          });
+        } else {
+          addMsg(`Hai ${nama}! Aku Bella, AI buatan Tomii. Ada yang bisa aku bantu? `, "ai");
+        }
+      } catch (err) {
+        chatBox.lastChild.remove();
+        addMsg(" Gagal load history: " + err.message, "ai");
+      }
+    }
+
+    async function sendMsg() {
+      const text = msgInput.value.trim();
+      const photo = photoInput.files[0];
+      
+      if (!text && !photo) return;
+
+      const currentSessionIndex = sessions.findIndex(s => s.id === sessionId);
+      if (currentSessionIndex !== -1 && sessions[currentSessionIndex].name === "Sesi Baru") {
+        sessions[currentSessionIndex].name = text ? text.substring(0, 20) : "Foto ";
+        localStorage.setItem(sessionsKey, JSON.stringify(sessions));
+        renderSessions();
+      }
+
+      const userMessageDiv = document.createElement('div');
+      userMessageDiv.classList.add('msg', 'user');
+
+      if (photo) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+              const img = document.createElement('img');
+              img.src = e.target.result;
+              img.classList.add('thumbnail');
+              userMessageDiv.appendChild(img);
+              chatBox.appendChild(userMessageDiv);
+              chatBox.scrollTop = chatBox.scrollHeight;
+              sendToBackend(text, photo);
+          };
+          reader.readAsDataURL(photo);
+      } else {
+          userMessageDiv.innerText = text;
+          chatBox.appendChild(userMessageDiv);
+          chatBox.scrollTop = chatBox.scrollHeight;
+          sendToBackend(text);
+      }
+      
+      msgInput.value = "";
+      removePhoto();
+    }
+
+    async function sendToBackend(text, photo = null) {
+        const formData = new FormData();
+        formData.append("nama", nama);
+        formData.append("session", sessionId);
+        if (text) formData.append("content", text);
+        
+        if (photo) {
+            addMsg(" Memproses foto...", "ai");
+            let visionDescription = null;
+
+            try {
+                // Konversi foto ke base64
+                const base64 = await new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onload = (e) => resolve(e.target.result);
+                    reader.onerror = reject;
+                    reader.readAsDataURL(photo);
+                });
+
+                // Gunakan Puter.js
+                const visionResponse = await puter.ai.chat("Lihat foto ini dan deskripsikan apa yang kamu lihat dengan detail. Gunakan bahasa Indonesia dan gaya casual.", {
+                    model: "gpt-4o",
+                    image: base64
+                });
+                visionDescription = visionResponse.message;
+
+                if (visionDescription) {
+                    chatBox.lastChild.innerText = " Foto dianalisis dengan AI Vision!";
+                    formData.append("visionDescription", visionDescription);
+                }
+            } catch (error) {
+                console.error(" Error vision analysis:", error);
+                chatBox.lastChild.innerText = " Membaca teks di foto (fallback)...";
+            }
+            
+            formData.append("photo", photo);
+        } else {
+            addMsg("...Mengetik...", "ai");
+        }
+
+        try {
+            const res = await fetch(`/ai`, {
+                method: 'POST',
+                body: formData
+            });
+            const data = await res.json();
+            
+            chatBox.lastChild.remove();
+            
+            if (data.status) {
+                loadHistory(); 
+            } else {
+                addMsg(" " + (data.message || "Gagal ambil jawaban AI"), "ai");
+            }
+        } catch (err) {
+            chatBox.lastChild.remove();
+            addMsg(" Error koneksi: " + err.message, "ai");
+        }
+    }
+
+    msgInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        sendMsg();
+      }
+    });
+
+    function newSession() {
+      sessionId = Date.now().toString();
+      sessions.push({ id: sessionId, name: "Sesi Baru" });
+      localStorage.setItem(sessionsKey, JSON.stringify(sessions));
+      localStorage.setItem(sessionKey, sessionId);
+      renderSessions();
+      loadHistory();
+    }
+
+    function switchSession(id) {
+      sessionId = id;
+      localStorage.setItem(sessionKey, sessionId);
+      renderSessions();
+      loadHistory();
+    }
+
+    function renderSessions() {
+      sessionList.innerHTML = "";
+      sessions.forEach(s => {
+        const div = document.createElement("div");
+        div.className = "session-item" + (s.id === sessionId ? " active" : "");
+        
+        const textSpan = document.createElement("span");
+        textSpan.className = "session-item-text";
+        textSpan.innerText = s.name;
+        textSpan.onclick = (e) => {
+          e.stopPropagation();
+          switchSession(s.id);
+        };
+
+        const deleteBtn = document.createElement("span");
+        deleteBtn.className = "delete-btn";
+        deleteBtn.innerText = "";
+        deleteBtn.onclick = (e) => {
+          e.stopPropagation();
+          deleteSession(s.id);
+        };
+
+        div.appendChild(textSpan);
+        div.appendChild(deleteBtn);
+        sessionList.appendChild(div);
+      });
+    }
+
+    function deleteSession(id) {
+      if (sessions.length <= 1) {
+        alert("Tidak bisa menghapus sesi terakhir.");
+        return;
+      }
+      if (!confirm("Yakin ingin menghapus sesi ini?")) {
+        return;
+      }
+
+      const indexToDelete = sessions.findIndex(s => s.id === id);
+      if (indexToDelete > -1) {
+        sessions.splice(indexToDelete, 1);
+        localStorage.setItem(sessionsKey, JSON.stringify(sessions));
+
+        if (sessionId === id) {
+          sessionId = sessions[0].id;
+          localStorage.setItem(sessionKey, sessionId);
+        }
+        
+        fetch(`/deletesession?nama=${encodeURIComponent(nama)}&session=${id}`);
+
+        renderSessions();
+        loadHistory();
+      }
+    }
+
+    renderSessions();
+    loadHistory();
+  </script>
+</body>
+</html>

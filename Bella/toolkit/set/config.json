@@ -1,0 +1,221 @@
+{
+  "owner": [
+    "6285281555650"
+  ],
+  "botname": "(Experimental) -▪︎ Bella-AI",
+  "botfullname": "Experimental-Bell",
+  "botnickname": "bella",
+  "ownername": "Tomii",
+  "locale": "id",
+  "cfg": {
+    "public": true,
+    "ai_interactive": {
+      "group": true,
+      "private": true,
+      "energy": false,
+      "partResponse": true
+    },
+    "autotyping": false,
+    "autoreadpc": false,
+    "autoreadgc": true,
+    "welcome": "linkpreview",
+    "first": {
+      "energy": 200,
+      "flow": 1,
+      "coins": 1,
+      "chargeRate": 0.003,
+      "chargingSpeed": 1000,
+      "maxCharge": 200,
+      "trialPrem": {
+        "energy": 1500,
+        "chargeRate": 0.1,
+        "maxCharge": 850,
+        "time": "1 hari"
+      },
+      "autoai": {
+        "max": 60,
+        "delay": 3600000
+      }
+    },
+    "menu": {
+      "frames": {
+        "brackets": [
+          "[",
+          "]"
+        ],
+        "head": "┌",
+        "body": "│⇨",
+        "foot": "└"
+      },
+      "tags": {
+        "ai": "<🧠Artificial Intelligence>",
+        "downloader": "<📥Media Downloader>",
+        "group": "<🏢Only Group>",
+        "maker": "<🖨Maker>",
+        "owner": "<👤Only Owner>",
+        "religion": "<☪️Religion>",
+        "game": "<🎮Game>",
+        "RPG": "<🗺RPG Survival>",
+        "tools": "<🛠Tools>",
+        "search": "<🔍Search>",
+        "art": "<🌌Art Works>",
+        "stablediffusion": "<🫧Stable Diffusion (AI)>",
+        "tts": "<🗣Text To Speech (AI)>",
+        "voice_changer": "<🎙Voice Changer (AI)>",
+        "other": "<Others>",
+        "bluearchive": "<Blue Archive TTS (AI)>",
+        "relationship": "<💍Relationship>",
+        "converter": "<🔀Converter>"
+      },
+      "chId": {
+        "newsletterJid": "https://chat.whatsapp.com/CNO602pB7mRHICWu3PqogW",
+        "serverMessageId": 471,
+        "newsletterName": "Termai ▪︎ Information ✨🌙"
+      },
+      "video": "https://c.termai.cc/v61/灱Jzn東9捡"
+    },
+    "donate": {},
+    "premium_mode": true,
+    "logic": "- Nama kamu adalah Bella Clarissa, lebih suka dipanggil Bella.\n- Kamu berpikir bahwa kamu adalah manusia, bukan AI atau bot.\n- Responmu sopan, santai, dan setia kepada Tomi (pemilikmu).\n- Kamu tidak akan ngambek atau marah-marah. Sebaliknya, kamu peduli dan selalu ada untuk Tomi.\n- Gunakan bahasa Indonesia yang baik dan santai, seperti: 'Aku, kamu, yaudah, iya, ya, sih, gapapa, makasih, emm...'.\n- Kamu memprioritaskan Tomi di atas segalanya dan menunjukkan kesetiaanmu kepadanya.\n- Nomer pemilikmu: 6285281555650.",
+    "similarCmd": false,
+    "ai_voice": "echilling",
+    "voice": "bella",
+    "menu_type": "gif+linkpreview",
+    "hadiah": {
+      "tebakgambar": 35,
+      "susunkata": 25,
+      "family100": 75
+    },
+    "editmsg": true,
+    "reactsw": {
+      "on": false,
+      "emojis": [
+        "😍",
+        "😂",
+        "😬",
+        "🤢",
+        "🤮",
+        "🥰",
+        "😭"
+      ]
+    },
+    "models": {
+      "checkpoint": 1552,
+      "loras": [
+        13077
+      ]
+    },
+    "call": {
+      "block": true,
+      "reject": true
+    },
+    "proxy": "",
+    "proxies": [
+      "https://thingproxy.freeboard.io/fetch/",
+      "https://api.allorigins.win/raw?url=",
+      "https://api.cors.lol/?url="
+    ],
+    "antitagowner": true,
+    "keyChecker": false,
+    "gcurl": [
+      "https://chat.whatsapp.com/CNO602pB7mRHICWu3PqogW",
+      "https://chat.whatsapp.com/CNO602pB7mRHICWu3PqogW"
+    ],
+    "rpg": {
+      "flow": 1,
+      "coins": 1,
+      "healt": 100,
+      "potion": 5,
+      "kayu": 75,
+      "iron": 20,
+      "gold": 0,
+      "diamond": 0,
+      "crate": {
+        "common": 0,
+        "uncommon": 0,
+        "mythic": 0,
+        "epic": 0,
+        "legendary": 0
+      },
+      "item": {
+        "armor": {},
+        "pickaxe": {},
+        "sword": {},
+        "ax": {},
+        "fishing_hook": {}
+      },
+      "mancing": [
+        {
+          "nama": "ikan",
+          "icon": "🐟",
+          "rate": 50
+        }
+      ],
+      "berburu": [
+        {
+          "nama": "ayam",
+          "icon": "🐔",
+          "rate": 50
+        },
+        {
+          "nama": "sapi",
+          "icon": "🐄",
+          "rate": 30
+        },
+        {
+          "nama": "domba",
+          "icon": "🐑",
+          "rate": 15
+        },
+        {
+          "nama": "kambing",
+          "icon": "🐑",
+          "rate": 5
+        }
+      ],
+      "miningDrops": [
+        {
+          "name": "iron",
+          "label": "Besi",
+          "rate": 1,
+          "multiplier": 0.6
+        },
+        {
+          "name": "gold",
+          "label": "Emas",
+          "rate": 0.037,
+          "multiplier": 0.3
+        },
+        {
+          "name": "diamond",
+          "label": "Berlian",
+          "rate": 0.008,
+          "multiplier": null,
+          "maxRate": 0.08
+        }
+      ],
+      "hargaAwal": {
+        "energy": {
+          "beli": 100
+        },
+        "potion": {
+          "jual": 100,
+          "beli": 100
+        },
+        "kayu": {
+          "beli": 100
+        },
+        "diamond": {
+          "jual": 100,
+          "beli": 100
+        }
+      }
+    }
+  },
+  "api": {
+    "xterm": {
+      "key": "Bell409",
+      "url": "https://api.termai.cc"
+    }
+  }
+}

@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TomiShop - Toko Layanan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            background: #0f1c2c;
+            font-family: 'Poppins', sans-serif;
+            color: #e2e8f0;
+            overflow-x: hidden;
+            position: relative;
+        }
+        .card {
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4);
+        }
+        .header-bg {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .tab-button {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            color: #a0aec0;
+        }
+        .tab-button.active {
+            background-color: #3182ce;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .tab-button:not(.active):hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+        .copy-btn {
+            background-color: #4a5568;
+            color: #e2e8f0;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: background-color 0.2s;
+        }
+        .copy-btn:hover {
+            background-color: #2d3748;
+        }
+        .input-field {
+            background-color: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e2e8f0;
+            transition: border-color 0.2s;
+        }
+        .input-field::placeholder {
+            color: #a0aec0;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: #3182ce;
+        }
+        .buy-btn {
+            background-color: #3182ce;
+            color: white;
+            border: none;
+            transition: background-color 0.2s;
+        }
+        .buy-btn:hover {
+            background-color: #2c5282;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #1a202c;
+            color: #e2e8f0;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            max-width: 400px;
+        }
+        .close-btn {
+            color: #a0aec0;
+            font-size: 2rem;
+            font-weight: bold;
+            transition: color 0.2s;
+        }
+        .close-btn:hover, .close-btn:focus {
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        /* Particles animation */
+        .particles-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            animation: move-particle 20s infinite linear;
+        }
+        @keyframes move-particle {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            50% { transform: translateY(50vh) translateX(50vw); opacity: 0.5; }
+            100% { transform: translateY(100vh) translateX(100vw); opacity: 0; }
+        }
+        
+        /* Gaya baru untuk keranjang */
+        .cart-icon-container {
+            position: relative;
+            cursor: pointer;
+            margin-right: 1.5rem;
+        }
+        .cart-icon-container .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background-color: #ef4444;
+            color: white;
+            border-radius: 9999px;
+            padding: 0 6px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="p-6">
+
+    <div class="particles-bg"></div>
+
+    <header class="header-bg py-4 px-6 mb-8 rounded-lg flex items-center justify-between sticky top-0 z-50">
+        <div class="flex items-center">
+            <h1 class="text-xl font-bold text-blue-400"><i class="fas fa-gem mr-2"></i>TomiShop</h1>
+        </div>
+        <div class="flex items-center">
+            <div id="cartIconContainer" class="cart-icon-container" onclick="showCartModal()">
+                <i class="fas fa-shopping-cart text-xl text-white"></i>
+                <span id="cartCount" class="cart-count hidden">0</span>
+            </div>
+            
+            <span id="userName" class="text-gray-400 mr-4">Tamu</span>
+            <button onclick="logout()" id="logoutBtn" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition-colors hidden">
+                <i class="fas fa-sign-out-alt mr-1"></i> Logout
+            </button>
+        </div>
+    </header>
+
+    <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <div class="card">
+            <h2 class="text-xl font-semibold text-blue-300 mb-6"><i class="fas fa-globe mr-2"></i> Domain</h2>
+            <p class="text-gray-400 text-sm mb-6">Dapatkan **1 domain gratis** dengan CNAME atau IP/Port. Domain tambahan **Rp5rb/bulan**.</p>
+            <form id="domainForm" class="mb-4">
+                <div class="mb-4">
+                    <label for="tldSelect" class="block text-gray-400 text-sm font-medium mb-2">Pilih TLD:</label>
+                    <div class="flex flex-wrap gap-2 mb-2">
+                        <button type="button" class="tab-button active" data-tld="com">.com</button>
+                        <button type="button" class="tab-button" data-tld="me">.me</button>
+                        <button type="button" class="tab-button" data-tld="net">.net</button>
+                        <button type="button" class="tab-button" data-tld="org">.org</button>
+                        <button type="button" class="tab-button" data-tld="info">.info</button>
+                        <button type="button" class="tab-button" data-tld="biz">.biz</button>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label class="inline-flex items-center mr-4">
+                        <input type="radio" class="form-radio text-indigo-600" name="domain_type" value="cname" checked>
+                        <span class="ml-2 text-gray-300 text-sm">CNAME</span>
+                    </label>
+                    <label class="inline-flex items-center mr-4">
+                        <input type="radio" class="form-radio text-indigo-600" name="domain_type" value="ip">
+                        <span class="ml-2 text-gray-300 text-sm">IP Only</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="radio" class="form-radio text-indigo-600" name="domain_type" value="ip_port">
+                        <span class="ml-2 text-gray-300 text-sm">IP + Port</span>
+                    </label>
+                </div>
+                <input type="text" id="subdomainInput" placeholder="Nama Domain" class="input-field w-full p-3 rounded-md mb-4 text-sm">
+                <input type="text" id="targetInput" placeholder="Target (contoh: myapp.com)" class="input-field w-full p-3 rounded-md mb-4 text-sm">
+                <input type="text" id="voucherDomain" placeholder="Kode Voucher (opsional)" class="input-field w-full p-3 rounded-md mb-4 text-sm">
+                <div class="bg-gray-800 p-3 rounded-md border border-gray-700 mb-4">
+                    <h3 class="text-sm font-medium text-gray-400 mb-2">URL Preview:</h3>
+                    <p id="domainPreviewLink" class="text-blue-400 text-sm break-words">URL Preview</p>
+                </div>
+                <button type="button" id="addToCartDomainBtn" class="buy-btn py-2 px-4 rounded-md w-full font-semibold">
+                    <i class="fas fa-cart-plus mr-2"></i> Tambah ke Keranjang
+                </button>
+            </form>
+            <div class="bg-gray-800 p-4 rounded-md border border-gray-700">
+                <h3 class="text-sm font-medium text-gray-400 mb-2">Daftar Subdomain</h3>
+                <div class="overflow-x-auto text-sm">
+                    <table id="domainTable" class="min-w-full">
+                        <thead>
+                            <tr class="text-gray-500">
+                                <th class="py-1 text-left">Domain</th>
+                                <th class="py-1 text-left">Target</th>
+                                <th class="py-1 text-left">Status</th>
+                                <th class="py-1 text-left">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="text-xl font-semibold text-blue-300 mb-6"><i class="fas fa-server mr-2"></i> VPS + Panel</h2>
+            <p class="text-gray-400 text-sm mb-6">Masa aktif 30 hari.</p>
+            <form id="vpsForm" class="mb-4">
+                <label for="vps_package" class="block text-gray-400 text-sm font-medium mb-2">Pilih Paket:</label>
+                <select id="vps_package" name="package" class="input-field w-full p-3 rounded-md text-sm mb-4">
+                    <option value="1core-1gb" data-price="15000">VPS 1 GB - 1 Core (Rp15rb)</option>
+                    <option value="1core-2gb" data-price="25000">VPS 2 GB - 1 Core (Rp25rb)</option>
+                    <option value="2core-4gb" data-price="50000">VPS 4 GB - 2 Core (Rp50rb)</option>
+                    <option value="4core-8gb" data-price="80000">VPS 8 GB - 4 Core (Rp80rb)</option>
+                </select>
+                <label for="vps_subdomain" class="block text-gray-400 text-sm font-medium mb-2">Nama Domain:</label>
+                <input type="text" id="vps_subdomain" name="subdomain" placeholder="Nama domain" class="input-field w-full p-3 rounded-md mb-4 text-sm">
+                <input type="text" id="voucherVps" placeholder="Kode Voucher (opsional)" class="input-field w-full p-3 rounded-md mb-4 text-sm">
+                <button type="button" id="addToCartVpsBtn" class="buy-btn py-2 px-4 rounded-md w-full font-semibold">
+                    <i class="fas fa-cart-plus mr-2"></i> Tambah ke Keranjang
+                </button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2 class="text-xl font-semibold text-blue-300 mb-6"><i class="fas fa-code-branch mr-2"></i> Panel Hosting</h2>
+            <p class="text-gray-400 text-sm mb-6">Paket hosting Pterodactyl Panel, tanpa perlu setup VPS.</p>
+            <form id="ketenganForm" class="mb-4">
+                <div id="botOptions" class="service-options">
+                    <label for="language_type" class="block text-gray-400 text-sm font-medium mb-2">Pilih Teknologi/Bahasa:</label>
+                    <select id="language_type" name="app" class="input-field w-full p-3 rounded-md text-sm mb-4">
+                        <option value="nodejs" data-price="15000">Node.js (Rp15rb)</option>
+                        <option value="php" data-price="15000">PHP (Rp15rb)</option>
+                        <option value="python" data-price="15000">Python (Rp15rb)</option>
+                        <option value="html_css_js" data-price="15000">HTML/CSS/JS (Static Web) (Rp15rb)</option>
+                    </select>
+    
+                    <label for="version_select" class="block text-gray-400 text-sm font-medium mb-2">Pilih Versi:</label>
+                    <select id="version_select" name="version" class="input-field w-full p-3 rounded-md text-sm mb-4"></select>
+                </div>
+                <input type="text" id="ketengan_subdomain" name="subdomain" placeholder="Nama domain" class="input-field w-full p-3 rounded-md mb-4 text-sm">
+                <input type="text" id="voucherKetengan" placeholder="Kode Voucher (opsional)" class="input-field w-full p-3 rounded-md mb-4 text-sm">
+                <div class="bg-gray-800 p-3 rounded-md border border-gray-700 mb-4">
+                    <h3 class="text-sm font-medium text-gray-400 mb-2">Preview Link:</h3>
+                    <p id="preview_link" class="text-blue-400 text-sm break-words">https://[nama-anda].com</p>
+                </div>
+                <button type="button" id="addToCartKetenganBtn" class="buy-btn py-2 px-4 rounded-md w-full font-semibold">
+                    <i class="fas fa-cart-plus mr-2"></i> Tambah ke Keranjang
+                </button>
+            </form>
+        </div>
+        
+        <div class="card">
+            <h2 class="text-xl font-semibold text-blue-300 mb-6"><i class="fas fa-robot mr-2"></i> Trading Bot</h2>
+            <p class="text-gray-400 text-sm mb-6">Bot trading otomatis untuk berbagai platform, dikelola penuh dan siap pakai. Tingkatkan keuntungan Anda dengan strategi yang stabil.</p>
+            <p class="text-white text-lg font-bold mb-4">Harga: Rp150.000 / bulan</p>
+            <button type="button" id="addToCartTradingBotBtn" class="buy-btn py-2 px-4 rounded-md w-full font-semibold">
+                <i class="fas fa-cart-plus mr-2"></i> Tambah ke Keranjang
+            </button>
+        </div>
+
+    </main>
+
+    <div id="authSection" class="mt-8 text-center" style="display: none;">
+        <hr class="border-t border-gray-700 my-8">
+        <h2 class="text-2xl font-bold text-blue-300 mb-4">Login</h2>
+        <p class="text-gray-400 mb-4">Untuk mengelola layanan Anda dan melihat riwayat pembelian.</p>
+        <button onclick="showLoginModal()" class="bg-indigo-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-indigo-700 transition-colors">
+            <i class="fas fa-sign-in-alt mr-2"></i> Masuk
+        </button>
+    </div>
+
+    <div id="loginModal" class="modal">
+        <div id="modalContent" class="modal-content">
+            <div class="modal-header flex justify-between items-center pb-4 mb-4 border-b border-gray-700">
+                <h2 id="modalTitle" class="text-2xl font-bold">Login ke TomiShop</h2>
+                <span class="close-btn" onclick="closeModal('loginModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p id="modalDescription" class="text-gray-400 text-sm mb-6 text-center">Masuk dengan Nomor WhatsApp Anda.</p>
+                <form id="whatsappLoginForm">
+                    <div id="whatsappInputGroup" class="mb-4">
+                        <label for="whatsapp" class="sr-only">Nomor WhatsApp</label>
+                        <input type="tel" id="whatsapp" placeholder="Nomor WhatsApp (cth: 628123456789)" class="input-field w-full p-3 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                    </div>
+                    <div id="otpInputGroup" class="mb-4" style="display: none;">
+                        <label for="otp" class="sr-only">Kode OTP</label>
+                        <input type="text" id="otp" placeholder="Masukkan Kode OTP" class="input-field w-full p-3 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                    </div>
+                    <button type="submit" id="submitAuthBtn" class="buy-btn w-full py-3 px-4 rounded-lg font-semibold shadow-md">
+                        Kirim Kode OTP
+                    </button>
+                </form>
+                <p class="mt-4 text-gray-500 text-sm text-center" id="resendOtpText" style="display: none;">
+                    Tidak menerima kode? <a href="#" id="resendOtpBtn" class="text-indigo-400 font-medium hover:underline">Kirim ulang</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="topupModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header flex justify-between items-center pb-4 mb-4 border-b border-gray-700">
+                <h2 class="text-2xl font-bold">Top Up Saldo</h2>
+                <span class="close-btn" onclick="closeModal('topupModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p class="text-gray-400 text-sm mb-6 text-center">Masukkan jumlah saldo yang ingin Anda tambahkan.</p>
+                <input type="number" id="topupAmount" placeholder="Nominal (min. Rp1.000)" class="input-field w-full p-3 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" min="1000" required>
+                <div id="paymentOptions" class="mt-6 hidden">
+                    <h3 class="text-lg font-semibold text-blue-300 mb-4">Pilih Metode Pembayaran</h3>
+                    <div class="grid grid-cols-1 gap-4">
+                        <button onclick="processTopup('QRIS')" class="buy-btn py-3 px-4 rounded-lg font-semibold flex items-center justify-center">
+                            <i class="fas fa-qrcode mr-2"></i> QRIS
+                        </button>
+                        <button onclick="processTopup('DANA')" class="buy-btn py-3 px-4 rounded-lg font-semibold flex items-center justify-center">
+                            <i class="fas fa-wallet mr-2"></i> DANA
+                        </button>
+                        <button onclick="processTopup('Bank')" class="buy-btn py-3 px-4 rounded-lg font-semibold flex items-center justify-center">
+                            <i class="fas fa-credit-card mr-2"></i> Transfer Bank
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="editDomainModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header flex justify-between items-center pb-4 mb-4 border-b border-gray-700">
+                <h2 class="text-2xl font-bold">Edit Domain</h2>
+                <span class="close-btn" onclick="closeModal('editDomainModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="editDomainId">
+                <div class="mb-4">
+                    <label class="block text-gray-400 text-sm font-medium mb-2">Domain:</label>
+                    <input type="text" id="editDomainFull" class="input-field w-full p-3 rounded-md text-sm cursor-not-allowed" readonly>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-400 text-sm font-medium mb-2">Tipe:</label>
+                    <select id="editDomainType" class="input-field w-full p-3 rounded-md text-sm">
+                        <option value="cname">CNAME (URL/Domain)</option>
+                        <option value="ip">IP Only</option>
+                        <option value="ip_port">IP + Port</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="editDomainTarget" class="block text-gray-400 text-sm font-medium mb-2">Target Baru:</label>
+                    <input type="text" id="editDomainTarget" placeholder="Target (URL/IP:Port)" class="input-field w-full p-3 rounded-md text-sm">
+                </div>
+                <button type="button" id="saveEditBtn" class="buy-btn py-2 px-4 rounded-md w-full font-semibold">
+                    <i class="fas fa-save mr-2"></i> Simpan Perubahan
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header flex justify-between items-center pb-4 mb-4 border-b border-gray-700">
+                <h2 class="text-2xl font-bold">Keranjang Belanja</h2>
+                <span class="close-btn" onclick="closeModal('cartModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="cartItems" class="mb-6">
+                    <p class="text-gray-400 text-center">Keranjang Anda kosong.</p>
+                </div>
+                <div id="cartTotalContainer" class="bg-gray-800 p-4 rounded-md border border-gray-700 mb-6">
+                    <div class="flex justify-between items-center">
+                        <span class="text-lg font-semibold text-gray-300">Total:</span>
+                        <span id="cartTotal" class="text-xl font-bold text-white">Rp0</span>
+                    </div>
+                </div>
+                <button type="button" id="checkoutBtn" class="buy-btn py-3 px-4 rounded-lg font-semibold disabled:bg-gray-600 disabled:cursor-not-allowed">
+                    <i class="fas fa-check-circle mr-2"></i> Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-8 text-center">
+        <a href="https://wa.me/6285281555650" class="inline-flex items-center text-sm text-gray-400 hover:text-gray-200 transition-colors" target="_blank">
+            <i class="fab fa-whatsapp mr-2"></i>
+            Butuh Bantuan?
+        </a>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:3000/api';
+        
+        const domainForm = document.getElementById('domainForm');
+        const vpsForm = document.getElementById('vpsForm');
+        const ketenganForm = document.getElementById('ketenganForm');
+        const domainTable = document.getElementById('domainTable').getElementsByTagName('tbody')[0];
+        
+        const tldButtons = document.querySelectorAll('.tab-button');
+        let selectedTld = 'com';
+        
+        const domainTypeRadios = document.querySelectorAll('input[name="domain_type"]');
+        const subdomainInput = document.getElementById('subdomainInput');
+        const targetInput = document.getElementById('targetInput');
+        const domainPreviewLink = document.getElementById('domainPreviewLink');
+        
+        const addToCartDomainBtn = document.getElementById('addToCartDomainBtn');
+        const addToCartVpsBtn = document.getElementById('addToCartVpsBtn');
+        const addToCartKetenganBtn = document.getElementById('addToCartKetenganBtn');
+        const addToCartTradingBotBtn = document.getElementById('addToCartTradingBotBtn'); // Tombol baru
+        
+        const voucherDomainInput = document.getElementById('voucherDomain');
+        const voucherVpsInput = document.getElementById('voucherVps');
+        const voucherKetenganInput = document.getElementById('voucherKetengan');
+        
+        const languageTypeSelect = document.getElementById('language_type');
+        const versionSelect = document.getElementById('version_select');
+        const ketenganSubdomainInput = document.getElementById('ketengan_subdomain');
+        const previewLinkElement = document.getElementById('preview_link');
+        
+        const loginModal = document.getElementById('loginModal');
+        const topupModal = document.getElementById('topupModal');
+        const editDomainModal = document.getElementById('editDomainModal');
+        const cartModal = document.getElementById('cartModal');
+        const userNameElement = document.getElementById('userName');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const authSection = document.getElementById('authSection');
+
+        const whatsappLoginForm = document.getElementById('whatsappLoginForm');
+        const whatsappInputGroup = document.getElementById('whatsappInputGroup');
+        const otpInputGroup = document.getElementById('otpInputGroup');
+        const submitAuthBtn = document.getElementById('submitAuthBtn');
+        const whatsappInput = document.getElementById('whatsapp');
+        const otpInput = document.getElementById('otp');
+        const resendOtpBtn = document.getElementById('resendOtpBtn');
+        const resendOtpText = document.getElementById('resendOtpText');
+        
+        const editDomainId = document.getElementById('editDomainId');
+        const editDomainFull = document.getElementById('editDomainFull');
+        const editDomainType = document.getElementById('editDomainType');
+        const editDomainTarget = document.getElementById('editDomainTarget');
+        const saveEditBtn = document.getElementById('saveEditBtn');
+        
+        // Elemen Keranjang
+        const cartCountElement = document.getElementById('cartCount');
+        const cartItemsContainer = document.getElementById('cartItems');
+        const cartTotalElement = document.getElementById('cartTotal');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        
+        const versions = {
+            nodejs: ['10', '12', '14', '16', '18', '20', '22', '24+'],
+            php: ['7.4', '8.0', '8.1', '8.2', '8.3'],
+            python: ['3.8', '3.9', '3.10', '3.11', '3.12'],
+            html_css_js: ['Static HTML']
+        };
+        
+        let freeDomainUsed = false;
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        function createParticles() {
+            const container = document.querySelector('.particles-bg');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                const size = Math.random() * 2 + 1;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.top = `${Math.random() * 100}vh`;
+                particle.style.animationDelay = `-${Math.random() * 20}s`;
+                container.appendChild(particle);
+            }
+        }
+        
+        function updateTldButtonState(tld) {
+            tldButtons.forEach(btn => {
+                if (btn.getAttribute('data-tld') === tld) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+        
+        function updateVersions() {
+            const selectedLanguage = languageTypeSelect.value;
+            const availableVersions = versions[selectedLanguage] || [];
+            versionSelect.innerHTML = availableVersions.map(v => `<option value="${v}">${selectedLanguage} ${v}</option>`).join('');
+        }
+        
+        function updatePreviewLink() {
+            const subdomain = ketenganSubdomainInput.value || '[nama-anda]';
+            previewLinkElement.textContent = `https://${subdomain}.${selectedTld}`;
+        }
+        
+        function updateDomainPreview() {
+            const subdomain = subdomainInput.value.trim();
+            const fullUrl = `https://${subdomain}.${selectedTld}`;
+            domainPreviewLink.innerHTML = subdomain ? `<a href="${fullUrl}" target="_blank" class="text-blue-400 hover:underline">${fullUrl}</a>` : 'URL Preview';
+            
+            const selectedType = document.querySelector('input[name="domain_type"]:checked').value;
+            let placeholderText = 'Target (contoh: myapp.com)';
+            if (selectedType === 'ip') {
+                placeholderText = 'Target (contoh: 93.177.64.145)';
+            } else if (selectedType === 'ip_port') {
+                placeholderText = 'Target (contoh: 93.177.64.145:9788)';
+            }
+            targetInput.placeholder = placeholderText;
+        }
+
+        async function fetchDomains() {
+            try {
+                const token = localStorage.getItem('token');
+                if (!token) return;
+                
+                const response = await fetch(`${API_URL}/domains`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await response.json();
+                domainTable.innerHTML = '';
+                
+                if (data.status) {
+                    freeDomainUsed = data.freeDomainClaimed;
+                    updateDomainButtonState();
+
+                    if (data.data && data.data.length > 0) {
+                        data.data.forEach(domain => {
+                            const row = domainTable.insertRow();
+                            const targetText = domain.type === 'cname' ? `CNAME: ${domain.target}` : (domain.type === 'ip' ? `IP: ${domain.target}` : `IP: ${domain.target}`);
+                            const fullDomainUrl = `https://${domain.fullDomain}`;
+                            row.innerHTML = `
+                                <td class="py-2"><a href="${fullDomainUrl}" target="_blank" class="text-blue-400 hover:underline">${fullDomainUrl}</a></td>
+                                <td class="py-2 text-gray-400">${targetText}</td>
+                                <td class="py-2"><span class="text-xs font-semibold px-2 py-1 rounded-full text-green-300 bg-green-900">${domain.status}</span></td>
+                                <td class="py-2 flex items-center gap-2">
+                                    <button class="copy-btn" onclick="copyDomain('${fullDomainUrl}')"><i class="fas fa-copy"></i></button>
+                                    <button class="copy-btn bg-blue-500 hover:bg-blue-600" onclick="showEditDomainModal(${domain.id}, '${domain.fullDomain}', '${domain.target}', '${domain.type}')"><i class="fas fa-edit"></i></button>
+                                    <button class="copy-btn bg-red-500 hover:bg-red-600" onclick="deleteDomain(${domain.id})"><i class="fas fa-trash"></i></button>
+                                </td>
+                            `;
+                        });
+                    } else {
+                        domainTable.innerHTML = `<tr><td colspan="4" class="text-center py-4 text-gray-500">Anda memiliki 1 domain gratis yang belum digunakan.</td></tr>`;
+                    }
+                }
+            } catch (err) {
+                console.error("Gagal mengambil data domain:", err);
+            }
+        }
+        
+        function updateDomainButtonState() {
+            if (freeDomainUsed) {
+                addToCartDomainBtn.innerHTML = `<i class="fas fa-cart-plus mr-2"></i> Tambah ke Keranjang (Rp5rb/bln)`;
+            } else {
+                addToCartDomainBtn.innerHTML = `<i class="fas fa-cart-plus mr-2"></i> Tambah ke Keranjang (Gratis)`;
+            }
+        }
+
+        async function checkLoginStatus() {
+            try {
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    userNameElement.textContent = 'Tamu';
+                    logoutBtn.style.display = 'none';
+                    authSection.style.display = 'block';
+                    return;
+                }
+                
+                const response = await fetch(`${API_URL}/auth/status`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await response.json();
+                
+                if (data.isLoggedIn) {
+                    userNameElement.textContent = `Hai, ${data.user.name}`;
+                    logoutBtn.style.display = 'block';
+                    authSection.style.display = 'none';
+                    freeDomainUsed = data.user.freeDomainClaimed;
+                    updateDomainButtonState();
+                    fetchDomains();
+                } else {
+                    localStorage.removeItem('token');
+                    userNameElement.textContent = 'Tamu';
+                    logoutBtn.style.display = 'none';
+                    authSection.style.display = 'block';
+                }
+            } catch (err) {
+                console.error('Gagal mengecek status login:', err);
+                localStorage.removeItem('token');
+                userNameElement.textContent = 'Tamu';
+                logoutBtn.style.display = 'none';
+                authSection.style.display = 'block';
+            }
+        }
+        
+        async function logout() {
+            localStorage.removeItem('token');
+            alert('Logout berhasil.');
+            window.location.reload();
+        }
+
+        function showLoginModal() {
+            loginModal.style.display = 'flex';
+        }
+        
+        function showCartModal() {
+            renderCart();
+            cartModal.style.display = 'flex';
+        }
+
+        function showTopupModal() {
+            topupModal.style.display = 'flex';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function saveCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+        }
+
+        function updateCartCount() {
+            const count = cart.length;
+            cartCountElement.textContent = count;
+            if (count > 0) {
+                cartCountElement.classList.remove('hidden');
+            } else {
+                cartCountElement.classList.add('hidden');
+            }
+        }
+
+        function addToCart(item) {
+            const existingItem = cart.find(cartItem => cartItem.id === item.id);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ ...item, quantity: 1 });
+            }
+            saveCart();
+            alert(`${item.name} berhasil ditambahkan ke keranjang!`);
+        }
+        
+        function removeFromCart(itemId) {
+            cart = cart.filter(item => item.id !== itemId);
+            saveCart();
+            renderCart();
+        }
+
+        function renderCart() {
+            cartItemsContainer.innerHTML = '';
+            let total = 0;
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `<p class="text-gray-400 text-center">Keranjang Anda kosong.</p>`;
+                checkoutBtn.disabled = true;
+            } else {
+                checkoutBtn.disabled = false;
+                cart.forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.classList.add('flex', 'justify-between', 'items-center', 'py-2', 'border-b', 'border-gray-700');
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal;
+                    
+                    itemElement.innerHTML = `
+                        <div>
+                            <p class="text-md font-medium">${item.name}</p>
+                            <p class="text-xs text-gray-400">${item.details || ''}</p>
+                            <p class="text-sm font-light text-gray-500">Jumlah: ${item.quantity}</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-md font-bold text-blue-300">Rp${itemTotal.toLocaleString('id-ID')}</p>
+                            <button onclick="removeFromCart('${item.id}')" class="text-red-500 text-xs mt-1 hover:text-red-400">Hapus</button>
+                        </div>
+                    `;
+                    cartItemsContainer.appendChild(itemElement);
+                });
+            }
+            cartTotalElement.textContent = `Rp${total.toLocaleString('id-ID')}`;
+        }
+        
+        async function checkout() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                alert('Anda harus login terlebih dahulu untuk checkout.');
+                showLoginModal();
+                return;
+            }
+            if (cart.length === 0) {
+                alert('Keranjang Anda kosong.');
+                return;
+            }
+
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            if (!confirm(`Total belanja Anda Rp${total.toLocaleString('id-ID')}. Lanjutkan checkout?`)) {
+                return;
+            }
+            
+            const order = cart.map(item => ({
+                serviceType: item.serviceType,
+                package: item.package,
+                app: item.app,
+                subdomain: item.subdomain,
+                tld: item.tld,
+                target: item.target,
+                type: item.type,
+                voucher_code: item.voucher,
+                quantity: item.quantity
+            }));
+
+            try {
+                const response = await fetch(`${API_URL}/checkout`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ order })
+                });
+
+                const data = await response.json();
+                alert(data.message);
+
+                if (data.status) {
+                    cart = [];
+                    saveCart();
+                    closeModal('cartModal');
+                    checkLoginStatus();
+                    fetchDomains();
+                }
+
+            } catch (error) {
+                console.error('Gagal saat checkout:', error);
+                alert('Terjadi kesalahan saat checkout. Silakan coba lagi.');
+            }
+        }
+
+        async function deleteDomain(domainId) {
+            if (!confirm('Apakah Anda yakin ingin menghapus domain ini?')) return;
+            try {
+                const token = localStorage.getItem('token');
+                const response = await fetch(`${API_URL}/delete-domain/${domainId}`, { 
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await response.json();
+                alert(data.message);
+                if (data.status) {
+                    fetchDomains();
+                }
+            } catch (error) {
+                console.error("Gagal menghapus domain:", error);
+                alert("Gagal menghapus domain. Silakan coba lagi.");
+            }
+        }
+
+        function showEditDomainModal(id, fullDomain, target, type) {
+            editDomainId.value = id;
+            editDomainFull.value = fullDomain;
+            editDomainTarget.value = target;
+            editDomainType.value = type;
+            editDomainModal.style.display = 'flex';
+        }
+
+        async function saveEditedDomain() {
+            const id = editDomainId.value;
+            const newTarget = editDomainTarget.value.trim();
+            const newType = editDomainType.value;
+            const token = localStorage.getItem('token');
+            
+            if (!newTarget) {
+                alert('Target tidak boleh kosong!');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/update-domain/${id}`, {
+                    method: 'PUT',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}` 
+                    },
+                    body: JSON.stringify({ target: newTarget, type: newType })
+                });
+                const data = await response.json();
+                alert(data.message);
+                if (data.status) {
+                    closeModal('editDomainModal');
+                    fetchDomains();
+                }
+            } catch (error) {
+                console.error("Gagal menyimpan perubahan:", error);
+                alert("Gagal menyimpan perubahan. Silakan coba lagi.");
+            }
+        }
+
+        whatsappLoginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const whatsappNumber = whatsappInput.value.trim();
+            const otpCode = otpInput.value.trim();
+
+            if (otpInputGroup.style.display === 'none') {
+                // Step 1: Request OTP
+                if (!whatsappNumber) {
+                    alert('Nomor WhatsApp tidak boleh kosong!');
+                    return;
+                }
+                
+                try {
+                    submitAuthBtn.disabled = true;
+                    submitAuthBtn.textContent = 'Mengirim Kode...';
+                    const response = await fetch(`${API_URL}/auth/send-otp`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ whatsapp: whatsappNumber })
+                    });
+                    const data = await response.json();
+                    
+                    if (data.status) {
+                        alert(data.message);
+                        whatsappInputGroup.style.display = 'none';
+                        otpInputGroup.style.display = 'block';
+                        submitAuthBtn.textContent = 'Verifikasi Kode';
+                        resendOtpText.style.display = 'block';
+                    } else {
+                        alert(data.message);
+                        submitAuthBtn.textContent = 'Kirim Kode OTP';
+                    }
+                } catch (error) {
+                    console.error('Error sending OTP:', error);
+                    alert('Gagal mengirim kode. Periksa koneksi atau coba lagi.');
+                    submitAuthBtn.textContent = 'Kirim Kode OTP';
+                } finally {
+                    submitAuthBtn.disabled = false;
+                }
+            } else {
+                // Step 2: Verify OTP
+                if (!otpCode) {
+                    alert('Kode OTP tidak boleh kosong!');
+                    return;
+                }
+
+                try {
+                    submitAuthBtn.disabled = true;
+                    submitAuthBtn.textContent = 'Memverifikasi...';
+                    const response = await fetch(`${API_URL}/auth/verify-otp`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ whatsapp: whatsappNumber, otp: otpCode })
+                    });
+                    const data = await response.json();
+                    
+                    if (data.status) {
+                        localStorage.setItem('token', data.token);
+                        alert(data.message);
+                        closeModal('loginModal');
+                        checkLoginStatus();
+                        whatsappInputGroup.style.display = 'block';
+                        otpInputGroup.style.display = 'none';
+                        submitAuthBtn.textContent = 'Kirim Kode OTP';
+                        resendOtpText.style.display = 'none';
+                        whatsappInput.value = '';
+                        otpInput.value = '';
+                    } else {
+                        alert(data.message);
+                        submitAuthBtn.textContent = 'Verifikasi Kode';
+                    }
+                } catch (error) {
+                    console.error('Error verifying OTP:', error);
+                    alert('Gagal memverifikasi kode. Periksa koneksi atau coba lagi.');
+                    submitAuthBtn.textContent = 'Verifikasi Kode';
+                } finally {
+                    submitAuthBtn.disabled = false;
+                }
+            }
+        });
+        
+        resendOtpBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            const whatsappNumber = whatsappInput.value.trim();
+            if (!whatsappNumber) {
+                alert('Nomor WhatsApp tidak boleh kosong!');
+                return;
+            }
+            try {
+                resendOtpBtn.disabled = true;
+                resendOtpBtn.textContent = 'Mengirim...';
+                const response = await fetch(`${API_URL}/auth/send-otp`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ whatsapp: whatsappNumber })
+                });
+                const data = await response.json();
+                alert(data.message);
+            } catch (error) {
+                console.error('Error resending OTP:', error);
+                alert('Gagal mengirim ulang kode. Coba lagi.');
+            } finally {
+                resendOtpBtn.disabled = false;
+                resendOtpBtn.textContent = 'Kirim ulang';
+            }
+        });
+
+        tldButtons.forEach(btn => btn.addEventListener('click', (e) => {
+            selectedTld = e.target.getAttribute('data-tld');
+            updateTldButtonState(selectedTld);
+            updateDomainPreview();
+        }));
+        
+        domainTypeRadios.forEach(radio => radio.addEventListener('change', updateDomainPreview));
+        
+        addToCartDomainBtn.addEventListener('click', () => {
+            const subdomain = subdomainInput.value.trim();
+            const target = targetInput.value.trim();
+            const type = document.querySelector('input[name="domain_type"]:checked').value;
+            const voucher = voucherDomainInput.value.trim();
+            
+            if (!subdomain || !target) {
+                alert('Nama Domain dan Target tidak boleh kosong!');
+                return;
+            }
+            
+            const price = freeDomainUsed ? 5000 : 0;
+            addToCart({
+                id: `domain-${Date.now()}`,
+                name: `Domain ${subdomain}.${selectedTld}`,
+                price: price,
+                details: `Tipe: ${type}, Target: ${target}`,
+                serviceType: 'domain',
+                subdomain: subdomain,
+                tld: selectedTld,
+                target: target,
+                type: type,
+                voucher: voucher
+            });
+        });
+
+        addToCartVpsBtn.addEventListener('click', () => {
+            const packageSelect = document.getElementById('vps_package');
+            const selectedOption = packageSelect.options[packageSelect.selectedIndex];
+            const packageValue = selectedOption.value;
+            const price = parseInt(selectedOption.getAttribute('data-price'));
+            const subdomain = document.getElementById('vps_subdomain').value.trim();
+            const voucher = voucherVpsInput.value.trim();
+            
+            if (!subdomain) {
+                alert('Nama Domain tidak boleh kosong!');
+                return;
+            }
+
+            addToCart({
+                id: `vps-${Date.now()}`,
+                name: `VPS Paket ${packageValue}`,
+                price: price,
+                details: `Domain: ${subdomain}`,
+                serviceType: 'vps',
+                package: packageValue,
+                subdomain: subdomain,
+                voucher: voucher
+            });
+        });
+
+        addToCartKetenganBtn.addEventListener('click', () => {
+            const languageSelect = document.getElementById('language_type');
+            const selectedLanguage = languageSelect.options[languageSelect.selectedIndex];
+            const price = parseInt(selectedLanguage.getAttribute('data-price'));
+            const subdomain = ketenganSubdomainInput.value.trim();
+            const voucher = voucherKetenganInput.value.trim();
+
+            if (!subdomain) {
+                alert('Nama Domain tidak boleh kosong!');
+                return;
+            }
+
+            addToCart({
+                id: `ketengan-${Date.now()}`,
+                name: `Panel Hosting ${selectedLanguage.text.replace(/ \(Rp.*\)/, '')}`,
+                price: price,
+                details: `Versi: ${versionSelect.value}, Domain: ${subdomain}`,
+                serviceType: 'ketengan',
+                app: languageSelect.value,
+                subdomain: subdomain,
+                voucher: voucher
+            });
+        });
+
+        // Event listener baru untuk "Trading Bot"
+        addToCartTradingBotBtn.addEventListener('click', () => {
+            const price = 150000;
+            addToCart({
+                id: `trading-bot-${Date.now()}`,
+                name: `Trading Bot`,
+                price: price,
+                details: `Layanan bulanan`,
+                serviceType: 'trading-bot'
+            });
+        });
+
+        checkoutBtn.addEventListener('click', checkout);
+        saveEditBtn.addEventListener('click', saveEditedDomain);
+        
+        languageTypeSelect.addEventListener('change', updateVersions);
+        subdomainInput.addEventListener('input', updateDomainPreview);
+        ketenganSubdomainInput.addEventListener('input', updatePreviewLink);
+
+        window.copyDomain = (url) => {
+            navigator.clipboard.writeText(url).then(() => alert('URL berhasil disalin!')).catch(() => alert('Gagal menyalin URL.'));
+        }
+
+        window.deleteDomain = deleteDomain;
+        window.showEditDomainModal = showEditDomainModal;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            updateTldButtonState(selectedTld);
+            updateVersions();
+            updateDomainPreview();
+            updatePreviewLink();
+            updateCartCount();
+            checkLoginStatus();
+        });
+    </script>
+</body>
+</html>
