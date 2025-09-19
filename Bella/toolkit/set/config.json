@@ -8,7 +8,7 @@
   "ownername": "Tomii",
   "locale": "id",
   "cfg": {
-    "public": true,
+    "public": false,
     "ai_interactive": {
       "group": true,
       "private": true,
