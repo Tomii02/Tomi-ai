@@ -206,8 +206,8 @@ export default async function on({ cht, Exp, store, ev, is }) {
       cmd: ["rvome", "rvo", "getviewonce"],
       listmenu: ["getviewonce", "rvome"],
       tag: "others",
-      premium: true,
-      isAdmin: true,
+      
+     
       isMention: true,
       energy: 25,
     },
