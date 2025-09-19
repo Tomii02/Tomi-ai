@@ -11,7 +11,7 @@
     "public": true,
     "ai_interactive": {
       "group": false,
-      "private": true,
+      "private": false,
       "energy": false,
       "partResponse": true
     },
