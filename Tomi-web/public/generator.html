@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Bucin & Uploader</title>
+    <title>Toolbox Web Tomi</title>
     <style>
         @keyframes pulse {
             0% { transform: scale(1); }
@@ -41,7 +41,7 @@
             padding: 45px;
             border-radius: 30px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
-            max-width: 450px;
+            max-width: 600px;
             width: 100%;
             border: 3px solid #ff69b4;
             position: relative;
@@ -66,6 +66,19 @@
         }
         input::placeholder {
             color: #ffb6c1;
+        }
+        textarea {
+            width: 100%;
+            height: 250px;
+            padding: 15px;
+            margin: 15px 0;
+            border: 2px solid #ff69b4;
+            border-radius: 10px;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+            font-size: 1em;
+            background-color: #fffaf0;
+            resize: vertical;
         }
         .file-upload-wrapper {
             position: relative;
@@ -95,7 +108,7 @@
             display: block;
             text-align: left;
         }
-        button, #devLink, .menu-btn {
+        button, #devLink, .menu-btn, #backLink {
             display: block;
             width: 100%;
             padding: 15px;
@@ -111,7 +124,7 @@
             text-decoration: none;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
-        button:hover, #devLink:hover, .menu-btn:hover {
+        button:hover, #devLink:hover, .menu-btn:hover, #backLink:hover {
             transform: translateY(-3px) scale(1.02);
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
             animation: pulse 0.8s infinite;
@@ -119,6 +132,9 @@
         #devLink, .menu-btn.blue {
             background: #007bff;
             margin-bottom: 15px;
+        }
+        .menu-btn.red {
+            background: #dc3545;
         }
         #linkBox {
             margin-top: 25px;
@@ -238,17 +254,7 @@
             animation: none;
         }
         #backLink {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1em;
-            padding: 5px 10px;
-            background-color: #ff69b4;
-            border-radius: 15px;
-            transition: transform 0.3s ease;
-        }
-        #backLink:hover {
-            transform: scale(1.1);
+            background: #ff69b4;
         }
         .menu-content {
             display: none;
@@ -269,6 +275,7 @@
             <h1>Pilih Opsi Web</h1>
             <button class="menu-btn" onclick="showMenu('bucinMenu')">Bikin Web Bucin</button>
             <button class="menu-btn blue" onclick="showMenu('uploadMenu')">Upload File HTML</button>
+            <button class="menu-btn red" onclick="showMenu('textMenu')">Ketik & Render HTML</button>
         </div>
 
         <div id="bucinMenu" class="menu-content">
@@ -296,10 +303,17 @@
         <div id="uploadMenu" class="menu-content">
             <h1>Upload File HTML</h1>
             <div class="file-upload-wrapper">
-                <input type="file" id="htmlFileInput" accept=".html">
-                <span class="file-upload-label" id="htmlFileLabel">Pilih file HTML yang mau di-upload</span>
+                <input type="file" id="htmlFileInput" accept=".html,.txt">
+                <span class="file-upload-label" id="htmlFileLabel">Pilih file HTML atau TXT</span>
             </div>
             <button id="openButton">Buka Web!</button>
+            <a href="#" id="backLink" onclick="showMenu('mainMenu'); return false;">Kembali</a>
+        </div>
+        
+        <div id="textMenu" class="menu-content">
+            <h1>Ketik & Render HTML</h1>
+            <textarea id="htmlCode" placeholder="Tempel atau ketik kode HTML di sini..."></textarea>
+            <button id="renderButton">Lihat Hasilnya!</button>
             <a href="#" id="backLink" onclick="showMenu('mainMenu'); return false;">Kembali</a>
         </div>
     </div>
@@ -329,76 +343,23 @@
             document.getElementById('customAlert').classList.remove('show');
         }
 
+        // Script untuk menu Bucin
         document.getElementById('musicInput').onchange = function(e) {
             const fileName = e.target.files[0] ? e.target.files[0].name : '🎵 Pilih lagu kesukaan kalian!';
             document.getElementById('musicLabel').textContent = fileName;
         };
-
         document.getElementById('bgFileInput').onchange = function(e) {
             const fileName = e.target.files[0] ? e.target.files[0].name : '🖼️ Atau upload foto/video latar belakang!';
             document.getElementById('bgFileLabel').textContent = fileName;
             document.getElementById('bgUrlInput').value = '';
         };
-
         document.getElementById('bgUrlInput').oninput = function() {
             document.getElementById('bgFileInput').value = '';
             document.getElementById('bgFileLabel').textContent = '🖼️ Atau upload foto/video latar belakang!';
         };
-
         document.getElementById('generateButton').onclick = async function() {
-            const waNumber = document.getElementById('waInput').value.trim();
-            const musicFile = document.getElementById('musicInput').files[0];
-            const bgUrl = document.getElementById('bgUrlInput').value.trim();
-            const bgFile = document.getElementById('bgFileInput').files[0];
-
-            if (waNumber === "") {
-                showCustomAlert("Ups! Nomor WhatsApp-nya jangan dikosongin ya, nanti doi bingung! ❤️");
-                return;
-            }
-
-            const formData = new FormData();
-            formData.append('wa', waNumber);
-
-            if (musicFile) {
-                formData.append('music', musicFile);
-            }
-            if (bgFile) {
-                formData.append('background', bgFile);
-            }
-
-            try {
-                const response = await fetch('/upload', {
-                    method: 'POST',
-                    body: formData
-                });
-                const data = await response.json();
-
-                if (data.status) {
-                    const musicUrl = data.musicUrl || '';
-                    const bgSource = data.bgUrl || bgUrl || '';
-
-                    let generatedLink = `${window.location.origin}/bucinweb.html?wa=${encodeURIComponent(waNumber)}`;
-                    
-                    if (musicUrl) {
-                        generatedLink += `&music=${encodeURIComponent(musicUrl)}`;
-                    }
-
-                    if (bgSource) {
-                        generatedLink += `&bg=${encodeURIComponent(bgSource)}`;
-                    }
-                    
-                    document.getElementById('generatedLink').textContent = generatedLink;
-                    document.getElementById('linkBox').style.display = 'block';
-                    showCustomAlert("Link bucinmu sudah siap! Jangan lupa kirim ke doi yaaa! ❤️");
-                } else {
-                    showCustomAlert("Gagal mengunggah file: " + data.message);
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                showCustomAlert("Terjadi kesalahan saat mengunggah file. Pastikan server kamu sudah berjalan!");
-            }
+            showCustomAlert("Maaf, fitur ini tidak bisa berjalan tanpa server. Fitur ini hanya bisa berfungsi jika kamu mengunggahnya ke hosting atau VPS yang mendukung script backend!");
         };
-
         document.getElementById('copyButton').onclick = function() {
             const link = document.getElementById('generatedLink').textContent;
             navigator.clipboard.writeText(link).then(() => {
@@ -409,16 +370,19 @@
             });
         };
         
-        // Halaman Upload HTML
+        // Script untuk menu Upload
         document.getElementById('htmlFileInput').onchange = function(e) {
-            const fileName = e.target.files[0] ? e.target.files[0].name : 'Pilih file HTML yang mau di-upload';
+            const fileName = e.target.files[0] ? e.target.files[0].name : 'Pilih file HTML atau TXT';
             document.getElementById('htmlFileLabel').textContent = fileName;
         };
-
         document.getElementById('openButton').onclick = function() {
             const file = document.getElementById('htmlFileInput').files[0];
             if (!file) {
                 showCustomAlert("Pilih file HTML dulu ya!");
+                return;
+            }
+            if (file.size === 0) {
+                showCustomAlert("File kosong, tidak bisa dibuka.");
                 return;
             }
             const reader = new FileReader();
@@ -434,6 +398,23 @@
                 newTab.document.close();
             };
             reader.readAsText(file);
+        };
+        
+        // Script untuk menu Ketik & Render
+        document.getElementById('renderButton').onclick = function() {
+            const htmlContent = document.getElementById('htmlCode').value;
+            if (htmlContent.trim() === '') {
+                showCustomAlert("Tolong masukkan kode HTML dulu ya!");
+                return;
+            }
+            const newTab = window.open();
+            if (!newTab) {
+                showCustomAlert("Tolong izinkan pop-up di browser kamu untuk membuka web ini! ❤️");
+                return;
+            }
+            newTab.document.open();
+            newTab.document.write(htmlContent);
+            newTab.document.close();
         };
     </script>
 </body>
