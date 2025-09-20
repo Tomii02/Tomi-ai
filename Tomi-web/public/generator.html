@@ -11,9 +11,15 @@
             100% { transform: scale(1); }
         }
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
         }
         @keyframes backgroundDance {
             0% { background-position: 0% 50%; }
@@ -136,7 +142,7 @@
         .menu-btn.red {
             background: #dc3545;
         }
-        #linkBox {
+        #linkBox, #linkBoxWeb {
             margin-top: 25px;
             word-wrap: break-word;
             background: #fffafa;
@@ -147,12 +153,12 @@
             position: relative;
             border: 1px dashed #ff69b4;
         }
-        #linkBox p {
+        #linkBox p, #linkBoxWeb p {
             color: #ff1493;
             font-weight: bold;
             margin-bottom: 10px;
         }
-        #generatedLink {
+        #generatedLink, #generatedLinkWeb {
             font-family: 'Courier New', monospace;
             background-color: #ffe0f0;
             padding: 8px 12px;
@@ -161,7 +167,7 @@
             word-break: break-all;
             color: #8b0000;
         }
-        #copyButton {
+        #copyButton, #copyButtonWeb {
             background: #ff69b4;
             color: white;
             padding: 10px 15px;
@@ -172,7 +178,7 @@
             border-radius: 8px;
             box-shadow: none;
         }
-        #copyButton:hover {
+        #copyButton:hover, #copyButtonWeb:hover {
             background: #ff1493;
             transform: scale(1.05);
             animation: none;
@@ -270,6 +276,7 @@
     <span class="emoji" style="left: 5%; bottom: 10%;">❤️</span>
     <span class="emoji" style="right: 8%; bottom: 20%;">❤️</span>
     <span class="emoji" style="left: 30%; top: 5%;">❤️</span>
+
     <div class="container">
         <div id="mainMenu" class="menu-content active">
             <h1>Pilih Opsi Web</h1>
@@ -329,8 +336,9 @@
     </div>
     
     <script>
-        // Menggunakan window.location.origin agar URL otomatis menyesuaikan
-        const serverUrl = window.location.origin;
+        const serverOrigin = window.location.origin === 'file://' || window.location.origin === 'null' 
+                             ? 'http://tomiweb.duckdns.org:5000' 
+                             : window.location.origin;
 
         function showMenu(menuId) {
             document.querySelectorAll('.menu-content').forEach(el => el.classList.remove('active'));
@@ -382,7 +390,7 @@
             }
 
             try {
-                const response = await fetch(`${serverUrl}/upload-bucin`, {
+                const response = await fetch(`${serverOrigin}/upload-bucin`, {
                     method: 'POST',
                     body: formData
                 });
@@ -392,7 +400,7 @@
                     const musicUrl = data.musicUrl || '';
                     const bgSource = data.bgUrl || bgUrl || '';
 
-                    let generatedLink = `${serverUrl}/bucinweb.html?wa=${encodeURIComponent(waNumber)}`;
+                    let generatedLink = `${serverOrigin}/bucinweb.html?wa=${encodeURIComponent(waNumber)}`;
                     
                     if (musicUrl) {
                         generatedLink += `&music=${encodeURIComponent(musicUrl)}`;
@@ -457,14 +465,14 @@
             }
 
             try {
-                const response = await fetch(`${serverUrl}/upload-web`, {
+                const response = await fetch(`${serverOrigin}/upload-web`, {
                     method: 'POST',
                     body: formData
                 });
                 const data = await response.json();
 
                 if (data.status) {
-                    const generatedLink = `${serverUrl}/webs/${data.filename}`;
+                    const generatedLink = `${serverOrigin}/webs/${data.filename}`;
                     document.getElementById('generatedLinkWeb').textContent = generatedLink;
                     document.getElementById('linkBoxWeb').style.display = 'block';
                     showCustomAlert("Web kamu sudah siap! Link berhasil dibuat! ❤️");
