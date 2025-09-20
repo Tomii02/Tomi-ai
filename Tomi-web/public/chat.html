@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bella AI Chat</title>
   <script src="https://js.puter.com/v2/"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     body {
       margin: 0;
@@ -23,6 +24,25 @@
       display: flex;
       flex-direction: column;
       padding: 10px;
+    }
+    .back-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      background: #21262d;
+      color: #58a6ff;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .back-btn:hover {
+      background: #30363d;
+      transform: translateY(-2px);
     }
     .sidebar h2 {
       padding: 15px 10px;
@@ -286,7 +306,6 @@
         width: 100%;
         height: 100%;
         background-color: rgba(0,0,0,0.95);
-        display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
@@ -315,20 +334,23 @@
 </head>
 <body>
   <div class="sidebar">
+    <button class="back-btn" onclick="window.location.href='index.html'">
+      <i class="fas fa-arrow-left"></i> Kembali
+    </button>
     <h2>Sesi Chat</h2>
     <div id="sessionList" class="session-list"></div>
     <button class="new-session" onclick="newSession()">+ Sesi Baru</button>
   </div>
 
   <div class="chat-area">
-    <div class="top-bar"> Bella AI Chat </div>
+    <div class="top-bar">Bella AI Chat</div>
     <div id="chatBox" class="chat-box"></div>
     <div class="input-area">
       <div id="previewArea"></div>
       <div id="input-group">
         <input id="msgInput" type="text" placeholder="Tulis pesan atau kirim foto...">
         <input type="file" id="photoInput" accept="image/*" style="display:none;">
-        <button class="upload-btn" onclick="document.getElementById('photoInput').click()"></button>
+        <button class="upload-btn" onclick="document.getElementById('photoInput').click()"><i class="fas fa-image"></i></button>
         <button onclick="sendMsg()">Kirim</button>
       </div>
     </div>
@@ -370,7 +392,7 @@
             reader.onload = function(e) {
                 previewArea.innerHTML = `
                     <img src="${e.target.result}" alt="Pratinjau Foto">
-                    <span class="remove-photo-btn" onclick="removePhoto()">X</span>
+                    <span class="remove-photo-btn" onclick="removePhoto()">&times;</span>
                 `;
                 previewArea.style.display = 'flex';
             };
@@ -392,7 +414,7 @@
       div.classList.add("msg", sender);
       if (isImage) {
         if (isNsfw) {
-            div.innerText = " Konten NSFW tidak bisa ditampilkan.";
+            div.innerText = "⚠️ Konten NSFW tidak bisa ditampilkan.";
             div.style.background = "#ff5555";
             div.style.color = "white";
         } else {
@@ -432,7 +454,7 @@
 
     async function loadHistory() {
       chatBox.innerHTML = "";
-      addMsg(" Memuat riwayat...", "ai");
+      addMsg("⏳ Memuat riwayat...", "ai");
       try {
         const res = await fetch(`/history?nama=${encodeURIComponent(nama)}&session=${sessionId}`);
         const data = await res.json();
@@ -446,11 +468,11 @@
             addMsg(h.jawab, "ai");
           });
         } else {
-          addMsg(`Hai ${nama}! Aku Bella, AI buatan Tomii. Ada yang bisa aku bantu? `, "ai");
+          addMsg(`Hai ${nama}! Aku Bella, AI buatan Tomii. Ada yang bisa aku bantu? 👋`, "ai");
         }
       } catch (err) {
         chatBox.lastChild.remove();
-        addMsg(" Gagal load history: " + err.message, "ai");
+        addMsg("⚠️ Gagal load history: " + err.message, "ai");
       }
     }
 
@@ -462,7 +484,7 @@
 
       const currentSessionIndex = sessions.findIndex(s => s.id === sessionId);
       if (currentSessionIndex !== -1 && sessions[currentSessionIndex].name === "Sesi Baru") {
-        sessions[currentSessionIndex].name = text ? text.substring(0, 20) : "Foto ";
+        sessions[currentSessionIndex].name = text ? text.substring(0, 20) : "Foto 📸";
         localStorage.setItem(sessionsKey, JSON.stringify(sessions));
         renderSessions();
       }
@@ -475,7 +497,7 @@
           reader.onload = (e) => {
               const img = document.createElement('img');
               img.src = e.target.result;
-              img.classList.add('thumbnail');
+              img.classList.add("thumbnail");
               userMessageDiv.appendChild(img);
               chatBox.appendChild(userMessageDiv);
               chatBox.scrollTop = chatBox.scrollHeight;
@@ -500,7 +522,7 @@
         if (text) formData.append("content", text);
         
         if (photo) {
-            addMsg(" Memproses foto...", "ai");
+            addMsg("⏳ Memproses foto...", "ai");
             let visionDescription = null;
 
             try {
@@ -520,12 +542,12 @@
                 visionDescription = visionResponse.message;
 
                 if (visionDescription) {
-                    chatBox.lastChild.innerText = " Foto dianalisis dengan AI Vision!";
+                    chatBox.lastChild.innerText = "✨ Foto dianalisis dengan AI Vision!";
                     formData.append("visionDescription", visionDescription);
                 }
             } catch (error) {
-                console.error(" Error vision analysis:", error);
-                chatBox.lastChild.innerText = " Membaca teks di foto (fallback)...";
+                console.error("⚠️ Error vision analysis:", error);
+                chatBox.lastChild.innerText = "⏳ Membaca teks di foto (fallback)...";
             }
             
             formData.append("photo", photo);
@@ -545,11 +567,11 @@
             if (data.status) {
                 loadHistory(); 
             } else {
-                addMsg(" " + (data.message || "Gagal ambil jawaban AI"), "ai");
+                addMsg("⚠️ " + (data.message || "Gagal ambil jawaban AI"), "ai");
             }
         } catch (err) {
             chatBox.lastChild.remove();
-            addMsg(" Error koneksi: " + err.message, "ai");
+            addMsg("⚠️ Error koneksi: " + err.message, "ai");
         }
     }
 
@@ -592,7 +614,7 @@
 
         const deleteBtn = document.createElement("span");
         deleteBtn.className = "delete-btn";
-        deleteBtn.innerText = "";
+        deleteBtn.innerHTML = '<i class="fas fa-trash-alt"></i>';
         deleteBtn.onclick = (e) => {
           e.stopPropagation();
           deleteSession(s.id);
