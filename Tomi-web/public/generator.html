@@ -274,8 +274,7 @@
         <div id="mainMenu" class="menu-content active">
             <h1>Pilih Opsi Web</h1>
             <button class="menu-btn" onclick="showMenu('bucinMenu')">Bikin Web Bucin</button>
-            <button class="menu-btn blue" onclick="showMenu('uploadMenu')">Upload File HTML</button>
-            <button class="menu-btn red" onclick="showMenu('textMenu')">Ketik & Render HTML</button>
+            <button class="menu-btn blue" onclick="showMenu('uploadMenu')">Buat Web & Dapatkan Link</button>
         </div>
 
         <div id="bucinMenu" class="menu-content">
@@ -290,32 +289,32 @@
                 <input type="file" id="bgFileInput" accept="image/*,video/*">
                 <span class="file-upload-label" id="bgFileLabel">🖼️ Atau upload foto/video latar belakang!</span>
             </div>
-            <button id="generateButton">❤️ Buat Link! ❤️</button>
+            <button id="generateBucinButton">❤️ Buat Link!</button>
             <a href="https://wa.me/+6285281555650" id="devLink" target="_blank">Hubungi Developer! ❤️</a>
-            <div id="linkBox">
+            <div id="linkBoxBucin">
                 <p>Link bucinmu sudah jadi! Salin & kirim ke doi yaaa! ❤️</p>
-                <span id="generatedLink"></span>
-                <button id="copyButton">❤️ Salin Tautan Ini! ❤️</button>
+                <span id="generatedLinkBucin"></span>
+                <button id="copyButtonBucin">❤️ Salin Tautan Ini! ❤️</button>
             </div>
             <a href="#" id="backLink" onclick="showMenu('mainMenu'); return false;">Kembali</a>
         </div>
         
         <div id="uploadMenu" class="menu-content">
-            <h1>Upload File HTML</h1>
+            <h1>Buat Web & Dapatkan Link</h1>
+            <textarea id="htmlCode" placeholder="Atau tempel/ketik kode HTML di sini..."></textarea>
             <div class="file-upload-wrapper">
                 <input type="file" id="htmlFileInput" accept=".html,.txt">
-                <span class="file-upload-label" id="htmlFileLabel">Pilih file HTML atau TXT</span>
+                <span class="file-upload-label" id="htmlFileLabel">Pilih file HTML yang mau di-upload</span>
             </div>
-            <button id="openButton">Buka Web!</button>
+            <button id="generateWebButton">❤️ Dapatkan Link!</button>
+            <div id="linkBoxWeb">
+                <p>Link web kamu sudah siap! Salin & bagikan! ❤️</p>
+                <span id="generatedLinkWeb"></span>
+                <button id="copyButtonWeb">❤️ Salin Tautan Ini! ❤️</button>
+            </div>
             <a href="#" id="backLink" onclick="showMenu('mainMenu'); return false;">Kembali</a>
         </div>
         
-        <div id="textMenu" class="menu-content">
-            <h1>Ketik & Render HTML</h1>
-            <textarea id="htmlCode" placeholder="Tempel atau ketik kode HTML di sini..."></textarea>
-            <button id="renderButton">Lihat Hasilnya!</button>
-            <a href="#" id="backLink" onclick="showMenu('mainMenu'); return false;">Kembali</a>
-        </div>
     </div>
 
     <div class="watermark">
@@ -330,6 +329,9 @@
     </div>
     
     <script>
+        // Menggunakan window.location.origin agar URL otomatis menyesuaikan
+        const serverUrl = window.location.origin;
+
         function showMenu(menuId) {
             document.querySelectorAll('.menu-content').forEach(el => el.classList.remove('active'));
             document.getElementById(menuId).classList.add('active');
@@ -357,11 +359,62 @@
             document.getElementById('bgFileInput').value = '';
             document.getElementById('bgFileLabel').textContent = '🖼️ Atau upload foto/video latar belakang!';
         };
-        document.getElementById('generateButton').onclick = async function() {
-            showCustomAlert("Maaf, fitur ini tidak bisa berjalan tanpa server. Fitur ini hanya bisa berfungsi jika kamu mengunggahnya ke hosting atau VPS yang mendukung script backend!");
+        
+        document.getElementById('generateBucinButton').onclick = async function() {
+            const waNumber = document.getElementById('waInput').value.trim();
+            const musicFile = document.getElementById('musicInput').files[0];
+            const bgUrl = document.getElementById('bgUrlInput').value.trim();
+            const bgFile = document.getElementById('bgFileInput').files[0];
+
+            if (waNumber === "") {
+                showCustomAlert("Ups! Nomor WhatsApp-nya jangan dikosongin ya, nanti doi bingung! ❤️");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('wa', waNumber);
+
+            if (musicFile) {
+                formData.append('music', musicFile);
+            }
+            if (bgFile) {
+                formData.append('background', bgFile);
+            }
+
+            try {
+                const response = await fetch(`${serverUrl}/upload-bucin`, {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+
+                if (data.status) {
+                    const musicUrl = data.musicUrl || '';
+                    const bgSource = data.bgUrl || bgUrl || '';
+
+                    let generatedLink = `${serverUrl}/bucinweb.html?wa=${encodeURIComponent(waNumber)}`;
+                    
+                    if (musicUrl) {
+                        generatedLink += `&music=${encodeURIComponent(musicUrl)}`;
+                    }
+                    if (bgSource) {
+                        generatedLink += `&bg=${encodeURIComponent(bgSource)}`;
+                    }
+                    
+                    document.getElementById('generatedLinkBucin').textContent = generatedLink;
+                    document.getElementById('linkBoxBucin').style.display = 'block';
+                    showCustomAlert("Link bucinmu sudah siap! Jangan lupa kirim ke doi yaaa! ❤️");
+                } else {
+                    showCustomAlert("Gagal mengunggah file: " + data.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showCustomAlert("Terjadi kesalahan saat mengunggah file. Pastikan server kamu sudah berjalan!");
+            }
         };
-        document.getElementById('copyButton').onclick = function() {
-            const link = document.getElementById('generatedLink').textContent;
+
+        document.getElementById('copyButtonBucin').onclick = function() {
+            const link = document.getElementById('generatedLinkBucin').textContent;
             navigator.clipboard.writeText(link).then(() => {
                 showCustomAlert('Tautan berhasil disalin! Sekarang tinggal kirim ke si dia! ❤️');
             }).catch(err => {
@@ -370,51 +423,68 @@
             });
         };
         
-        // Script untuk menu Upload
+        // Script untuk menu Buat Web & Dapatkan Link
         document.getElementById('htmlFileInput').onchange = function(e) {
-            const fileName = e.target.files[0] ? e.target.files[0].name : 'Pilih file HTML atau TXT';
+            const fileName = e.target.files[0] ? e.target.files[0].name : 'Pilih file HTML yang mau di-upload';
             document.getElementById('htmlFileLabel').textContent = fileName;
+            document.getElementById('htmlCode').value = '';
         };
-        document.getElementById('openButton').onclick = function() {
-            const file = document.getElementById('htmlFileInput').files[0];
-            if (!file) {
-                showCustomAlert("Pilih file HTML dulu ya!");
+
+        document.getElementById('htmlCode').oninput = function() {
+            document.getElementById('htmlFileInput').value = '';
+            document.getElementById('htmlFileLabel').textContent = 'Pilih file HTML yang mau di-upload';
+        };
+
+        document.getElementById('generateWebButton').onclick = async function() {
+            let file = document.getElementById('htmlFileInput').files[0];
+            let htmlContent = document.getElementById('htmlCode').value;
+
+            if (!file && htmlContent.trim() === '') {
+                showCustomAlert("Pilih file atau ketik kode HTML dulu ya!");
                 return;
             }
-            if (file.size === 0) {
-                showCustomAlert("File kosong, tidak bisa dibuka.");
-                return;
+
+            const formData = new FormData();
+            let fileName;
+
+            if (file) {
+                fileName = file.name;
+                formData.append('file', file, fileName);
+            } else {
+                fileName = 'web_kustom.html';
+                const htmlBlob = new Blob([htmlContent], {type: 'text/html'});
+                formData.append('file', htmlBlob, fileName);
             }
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const htmlContent = e.target.result;
-                const newTab = window.open();
-                if (!newTab) {
-                    showCustomAlert("Tolong izinkan pop-up di browser kamu untuk membuka web ini! ❤️");
-                    return;
+
+            try {
+                const response = await fetch(`${serverUrl}/upload-web`, {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+
+                if (data.status) {
+                    const generatedLink = `${serverUrl}/webs/${data.filename}`;
+                    document.getElementById('generatedLinkWeb').textContent = generatedLink;
+                    document.getElementById('linkBoxWeb').style.display = 'block';
+                    showCustomAlert("Web kamu sudah siap! Link berhasil dibuat! ❤️");
+                } else {
+                    showCustomAlert("Gagal membuat link: " + data.message);
                 }
-                newTab.document.open();
-                newTab.document.write(htmlContent);
-                newTab.document.close();
-            };
-            reader.readAsText(file);
+            } catch (error) {
+                console.error('Error:', error);
+                showCustomAlert("Terjadi kesalahan saat mengirim ke server. Pastikan server kamu bisa menerima upload!");
+            }
         };
-        
-        // Script untuk menu Ketik & Render
-        document.getElementById('renderButton').onclick = function() {
-            const htmlContent = document.getElementById('htmlCode').value;
-            if (htmlContent.trim() === '') {
-                showCustomAlert("Tolong masukkan kode HTML dulu ya!");
-                return;
-            }
-            const newTab = window.open();
-            if (!newTab) {
-                showCustomAlert("Tolong izinkan pop-up di browser kamu untuk membuka web ini! ❤️");
-                return;
-            }
-            newTab.document.open();
-            newTab.document.write(htmlContent);
-            newTab.document.close();
+
+        document.getElementById('copyButtonWeb').onclick = function() {
+            const link = document.getElementById('generatedLinkWeb').textContent;
+            navigator.clipboard.writeText(link).then(() => {
+                showCustomAlert('Tautan berhasil disalin! Sekarang tinggal kirim ke siapa saja! ❤️');
+            }).catch(err => {
+                console.error('Gagal menyalin tautan: ', err);
+                showCustomAlert('Yah, gagal menyalin tautan. Coba salin manual ya! ❤️');
+            });
         };
     </script>
 </body>
