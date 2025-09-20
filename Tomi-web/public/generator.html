@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bikin Web Bucin !</title>
+    <title>Web Bucin & Uploader</title>
     <style>
         @keyframes pulse {
             0% { transform: scale(1); }
@@ -11,15 +11,9 @@
             100% { transform: scale(1); }
         }
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-10px);
-            }
-            60% {
-                transform: translateY(-5px);
-            }
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
         }
         @keyframes backgroundDance {
             0% { background-position: 0% 50%; }
@@ -101,7 +95,7 @@
             display: block;
             text-align: left;
         }
-        button, #devLink {
+        button, #devLink, .menu-btn {
             display: block;
             width: 100%;
             padding: 15px;
@@ -117,12 +111,12 @@
             text-decoration: none;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
-        button:hover, #devLink:hover {
+        button:hover, #devLink:hover, .menu-btn:hover {
             transform: translateY(-3px) scale(1.02);
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
             animation: pulse 0.8s infinite;
         }
-        #devLink {
+        #devLink, .menu-btn.blue {
             background: #007bff;
             margin-bottom: 15px;
         }
@@ -256,45 +250,77 @@
         #backLink:hover {
             transform: scale(1.1);
         }
+        .menu-content {
+            display: none;
+        }
+        .menu-content.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
-    <span class="emoji" style="left: 10%; top: 15%;"></span>
-    <span class="emoji" style="right: 12%; top: 25%;"></span>
-    <span class="emoji" style="left: 5%; bottom: 10%;"></span>
-    <span class="emoji" style="right: 8%; bottom: 20%;"></span>
-    <span class="emoji" style="left: 30%; top: 5%;"></span>
+    <span class="emoji" style="left: 10%; top: 15%;">❤️</span>
+    <span class="emoji" style="right: 12%; top: 25%;">❤️</span>
+    <span class="emoji" style="left: 5%; bottom: 10%;">❤️</span>
+    <span class="emoji" style="right: 8%; bottom: 20%;">❤️</span>
+    <span class="emoji" style="left: 30%; top: 5%;">❤️</span>
     <div class="container">
-        <h1> Bikin Web Bucinmu Sendiri! </h1>
-        <input type="tel" id="waInput" placeholder="Nomor WhatsApp lu (contoh: +6285281555650)">
-        <div class="file-upload-wrapper">
-            <input type="file" id="musicInput" accept="audio/*">
-            <span class="file-upload-label" id="musicLabel"> Pilih lagu kesukaan kalian!</span>
+        <div id="mainMenu" class="menu-content active">
+            <h1>Pilih Opsi Web</h1>
+            <button class="menu-btn" onclick="showMenu('bucinMenu')">Bikin Web Bucin</button>
+            <button class="menu-btn blue" onclick="showMenu('uploadMenu')">Upload File HTML</button>
         </div>
-        <input type="text" id="bgUrlInput" placeholder="URL latar belakang (.jpg, .png, .gif, .mp4, .webm)">
-        <div class="file-upload-wrapper">
-            <input type="file" id="bgFileInput" accept="image/*,video/*">
-            <span class="file-upload-label" id="bgFileLabel"> Atau upload foto/video latar belakang!</span>
+
+        <div id="bucinMenu" class="menu-content">
+            <h1>❤️ Bikin Web Bucinmu Sendiri! ❤️</h1>
+            <input type="tel" id="waInput" placeholder="Nomor WhatsApp lu (contoh: +6285281555650)">
+            <div class="file-upload-wrapper">
+                <input type="file" id="musicInput" accept="audio/*">
+                <span class="file-upload-label" id="musicLabel">🎵 Pilih lagu kesukaan kalian!</span>
+            </div>
+            <input type="text" id="bgUrlInput" placeholder="URL latar belakang (.jpg, .png, .gif, .mp4, .webm)">
+            <div class="file-upload-wrapper">
+                <input type="file" id="bgFileInput" accept="image/*,video/*">
+                <span class="file-upload-label" id="bgFileLabel">🖼️ Atau upload foto/video latar belakang!</span>
+            </div>
+            <button id="generateButton">❤️ Buat Link! ❤️</button>
+            <a href="https://wa.me/+6285281555650" id="devLink" target="_blank">Hubungi Developer! ❤️</a>
+            <div id="linkBox">
+                <p>Link bucinmu sudah jadi! Salin & kirim ke doi yaaa! ❤️</p>
+                <span id="generatedLink"></span>
+                <button id="copyButton">❤️ Salin Tautan Ini! ❤️</button>
+            </div>
+            <a href="#" id="backLink" onclick="showMenu('mainMenu'); return false;">Kembali</a>
         </div>
-        <button id="generateButton"> Buat Link! </button>
-        <a href="https://wa.me/+6285281555650" id="devLink" target="_blank">Hubungi Developer! </a>
-        <div id="linkBox">
-            <p>Link bucinmu sudah jadi! Salin & kirim ke doi yaaa! </p>
-            <span id="generatedLink"></span>
-            <button id="copyButton"> Salin Tautan Ini! </button>
+        
+        <div id="uploadMenu" class="menu-content">
+            <h1>Upload File HTML</h1>
+            <div class="file-upload-wrapper">
+                <input type="file" id="htmlFileInput" accept=".html">
+                <span class="file-upload-label" id="htmlFileLabel">Pilih file HTML yang mau di-upload</span>
+            </div>
+            <button id="openButton">Buka Web!</button>
+            <a href="#" id="backLink" onclick="showMenu('mainMenu'); return false;">Kembali</a>
         </div>
     </div>
+
     <div class="watermark">
-        Developer: @Tomii 
-        <a href="index.html" id="backLink">Kembali</a>
+        Developer: @Tomii
     </div>
+
     <div id="customAlert" class="custom-alert-overlay">
         <div class="custom-alert-box">
             <p id="alertMessage"></p>
-            <button onclick="hideCustomAlert()">OK, siap! </button>
+            <button onclick="hideCustomAlert()">OK, siap! ❤️</button>
         </div>
     </div>
+    
     <script>
+        function showMenu(menuId) {
+            document.querySelectorAll('.menu-content').forEach(el => el.classList.remove('active'));
+            document.getElementById(menuId).classList.add('active');
+        }
+
         function showCustomAlert(message) {
             document.getElementById('alertMessage').textContent = message;
             document.getElementById('customAlert').classList.add('show');
@@ -304,21 +330,19 @@
         }
 
         document.getElementById('musicInput').onchange = function(e) {
-            const fileName = e.target.files[0] ? e.target.files[0].name : ' Pilih lagu kesukaan kalian!';
+            const fileName = e.target.files[0] ? e.target.files[0].name : '🎵 Pilih lagu kesukaan kalian!';
             document.getElementById('musicLabel').textContent = fileName;
         };
 
         document.getElementById('bgFileInput').onchange = function(e) {
-            const fileName = e.target.files[0] ? e.target.files[0].name : ' Atau upload foto/video latar belakang!';
+            const fileName = e.target.files[0] ? e.target.files[0].name : '🖼️ Atau upload foto/video latar belakang!';
             document.getElementById('bgFileLabel').textContent = fileName;
-            // Clear URL input saat file diupload
             document.getElementById('bgUrlInput').value = '';
         };
 
         document.getElementById('bgUrlInput').oninput = function() {
-            // Clear file input saat URL diketik
             document.getElementById('bgFileInput').value = '';
-            document.getElementById('bgFileLabel').textContent = ' Atau upload foto/video latar belakang!';
+            document.getElementById('bgFileLabel').textContent = '🖼️ Atau upload foto/video latar belakang!';
         };
 
         document.getElementById('generateButton').onclick = async function() {
@@ -328,22 +352,16 @@
             const bgFile = document.getElementById('bgFileInput').files[0];
 
             if (waNumber === "") {
-                showCustomAlert("Ups! Nomor WhatsApp-nya jangan dikosongin ya, nanti doi bingung! ");
+                showCustomAlert("Ups! Nomor WhatsApp-nya jangan dikosongin ya, nanti doi bingung! ❤️");
                 return;
             }
 
             const formData = new FormData();
             formData.append('wa', waNumber);
 
-            let musicUrl = '';
-            let bgSource = '';
-
-            // Handle music upload
             if (musicFile) {
                 formData.append('music', musicFile);
             }
-
-            // Handle background upload
             if (bgFile) {
                 formData.append('background', bgFile);
             }
@@ -356,8 +374,8 @@
                 const data = await response.json();
 
                 if (data.status) {
-                    musicUrl = data.musicUrl || '';
-                    bgSource = data.bgUrl || bgUrl || '';
+                    const musicUrl = data.musicUrl || '';
+                    const bgSource = data.bgUrl || bgUrl || '';
 
                     let generatedLink = `${window.location.origin}/bucinweb.html?wa=${encodeURIComponent(waNumber)}`;
                     
@@ -371,24 +389,51 @@
                     
                     document.getElementById('generatedLink').textContent = generatedLink;
                     document.getElementById('linkBox').style.display = 'block';
-                    showCustomAlert("Link bucinmu sudah siap! Jangan lupa kirim ke doi yaaa! ");
+                    showCustomAlert("Link bucinmu sudah siap! Jangan lupa kirim ke doi yaaa! ❤️");
                 } else {
                     showCustomAlert("Gagal mengunggah file: " + data.message);
                 }
             } catch (error) {
                 console.error('Error:', error);
-                showCustomAlert("Terjadi kesalahan saat mengunggah file.");
+                showCustomAlert("Terjadi kesalahan saat mengunggah file. Pastikan server kamu sudah berjalan!");
             }
         };
 
         document.getElementById('copyButton').onclick = function() {
             const link = document.getElementById('generatedLink').textContent;
             navigator.clipboard.writeText(link).then(() => {
-                showCustomAlert('Tautan berhasil disalin! Sekarang tinggal kirim ke si dia! ');
+                showCustomAlert('Tautan berhasil disalin! Sekarang tinggal kirim ke si dia! ❤️');
             }).catch(err => {
                 console.error('Gagal menyalin tautan: ', err);
-                showCustomAlert('Yah, gagal menyalin tautan. Coba salin manual ya! ');
+                showCustomAlert('Yah, gagal menyalin tautan. Coba salin manual ya! ❤️');
             });
+        };
+        
+        // Halaman Upload HTML
+        document.getElementById('htmlFileInput').onchange = function(e) {
+            const fileName = e.target.files[0] ? e.target.files[0].name : 'Pilih file HTML yang mau di-upload';
+            document.getElementById('htmlFileLabel').textContent = fileName;
+        };
+
+        document.getElementById('openButton').onclick = function() {
+            const file = document.getElementById('htmlFileInput').files[0];
+            if (!file) {
+                showCustomAlert("Pilih file HTML dulu ya!");
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const htmlContent = e.target.result;
+                const newTab = window.open();
+                if (!newTab) {
+                    showCustomAlert("Tolong izinkan pop-up di browser kamu untuk membuka web ini! ❤️");
+                    return;
+                }
+                newTab.document.open();
+                newTab.document.write(htmlContent);
+                newTab.document.close();
+            };
+            reader.readAsText(file);
         };
     </script>
 </body>
